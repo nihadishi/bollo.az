@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import PhoneInput from "react-phone-number-input";
-
+import "./style.scss";
 const SignupPage = () => {
   const [phonenumber, setPhonenumber] = useState('');
   return (
-    <>
-      <div className="d-flex justify-content-center align-items-center bg-primary vh-100">
+    <div className="Signup">
+      <div className="d-flex justify-content-center align-items-center vh-100 opacity-80">
         <div className="bg-white p-3 rounded w-25">
           <form action="">
             <div className="mb-3">
@@ -17,6 +16,7 @@ const SignupPage = () => {
                 type="text"
                 placeholder="Enter FullName"
                 className="form-control rounded"
+                required
               />
             </div>
             <div className="mb-3">
@@ -105,6 +105,7 @@ const SignupPage = () => {
                 type="email"
                 placeholder="Enter Email"
                 className="form-control rounded"
+                required
               />
             </div>
             <div className="mb-3">
@@ -115,6 +116,7 @@ const SignupPage = () => {
                 type="password"
                 placeholder="Enter Password"
                 className="form-control rounded"
+                required
               />
             </div>
             <button className="btn btn-success w-100">
@@ -127,7 +129,7 @@ const SignupPage = () => {
           </form>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

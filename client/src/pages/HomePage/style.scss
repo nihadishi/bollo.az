@@ -1,0 +1,105 @@
+@import "../../assets/fonts/mixin.scss";
+@import "../../assets/fonts/fonts.scss";
+
+.Int{
+    background-image: url("./img/bg1.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center top;
+    width: 100%;
+    height: 100vh;
+    &-M{
+        width: 100%;
+        display: none;
+    }
+        &ro {
+            position: relative;
+            width: 85%;
+            height: 100%;
+            margin: 0 auto;
+            &-Nav {
+            padding: 27px 0;
+            max-height: 118px; //64 + 2*padding(27)
+            display: flex;
+            flex-direction: row;
+            @include CENTER;
+            justify-content: space-between;
+            &-Logo {
+                height: 100%;
+            }
+            &-Navbar {
+                justify-content: space-between;
+                &-ul {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                // gap: 82px;
+                gap: 6vw;
+                padding: 0 41px;
+                &-li {
+                    text-align: center;
+                    cursor: pointer;
+                    text-decoration: none;
+                    list-style-type: none;
+                    color: var(--text-10, #fff);
+                    font-size: 20px;
+                    font-weight: 500;
+                    line-height: 22px;
+                }
+                }
+            }
+            &-Contact {
+                text-align: center;
+                width: auto 129px;
+                height: auto 22px;
+                border: 27px;
+                background-color: #ffa217;
+                border-radius: 27px;
+                padding: 10px 24px;
+                cursor: pointer;
+                &-li {
+                text-decoration: none;
+                list-style-type: none;
+                color: var(--text-10, #fff);
+                font-size: 20px;
+                font-weight: 500;
+                line-height: 22px;
+                }
+            }
+            }
+
+            &-About {
+                position: absolute;
+                top: 45%;
+                width: 480px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                gap: 39px;
+                &-Text {
+                    color: var(--text-10, #fff);
+                    font-size: 36px;
+                    font-family: "POPPINS-SEMIBOLD";
+                    font-weight: 600;
+                    line-height: 45px;
+                }
+                &-Order {
+                    display: flex;
+                    padding: 14px 0;
+                    gap: 10px;
+                    &-button {
+                        width: 246.857px;
+                        height: 59.388px;
+                        border-radius: 27px;
+                        background: var(--button-500, #ffa217);
+                        color: var(--text-10, #fff);
+                        font-size: 20px;
+                        font-weight: 500;
+                        line-height: 22px;
+                        letter-spacing: -0.408px;
+                        border-style: none;
+                    }
+                }
+            }
+    }
+}

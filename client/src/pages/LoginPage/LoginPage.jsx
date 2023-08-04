@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './style.scss'
 const LoginPage = () => {
     return (
-        <>
-         <div className='d-flex justify-content-center align-items-center bg-primary vh-100'>
+        <div className='Login'>
+         <div className='d-flex justify-content-center align-items-center vh-100'>
           <div className="bg-white p-3 rounded w-25">
             <form action="">
               <div className="mb-3">
@@ -20,7 +21,7 @@ const LoginPage = () => {
             </form>
           </div>
          </div>
-        </>
+        </div>
       );
 }
 
