@@ -1,0 +1,28 @@
+ad 
+about
+yuklenme tarixi
+son istf tarixi
+rayon
+sifaris sayi
+ugurlu sifarisin faizi
+fermerid
+
+{
+    name:
+    email:
+    password:
+
+}
+
+{
+    ad:
+    sekil:
+    haqqinda:
+    yuklenme tarixi:
+    son istifade tarixi:
+    rayon:
+    sifaris sayi:
+    ugurlu sifaris sayi:
+    fermerid:
+
+}
