@@ -1,0 +1,89 @@
+.Foo {
+    background-color: #f1fcf3;
+    height: 582px;
+    width: 100%;
+    // margin-top: 130px;
+    padding: 36px 0 36px 0;
+    &ter {
+      width: 85%;
+      margin: 0 auto;
+      &-Contact {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: 1fr 2fr;
+  
+        &-Name {
+          grid-column-start: 1;
+          grid-column-end: 6;
+          color: var(--text-950, #161616);
+          font-size: 26px;
+          font-family: "POPPINS-BOLD";
+          font-style: normal;
+          font-weight: 600;
+          line-height: 31px;
+        }
+  
+        &-Left {
+          grid-area: 2/1/3/4;
+          & h3 {
+            padding-top: 34px;
+            color: var(--text-950, #161616);
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 31px;
+          }
+        }
+        &-Right {
+          grid-area: 2/4/3/6;
+          & h3 {
+            padding-top: 34px;
+            color: var(--text-950, #161616);
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 31px;
+            text-align: center;
+            & a{
+                text-decoration: none;
+                color: #150346;
+            }
+          }
+        }
+      }
+      &-Copyright {
+        padding-top: 121px;
+        &-Social {
+          width: 100%;
+          border-bottom: 1px solid black;
+          &-Imgs {
+            display: flex;
+            flex-direction: row;
+            gap: 40px;
+            padding: 12px 0 12px 0;
+          }
+        }
+        &-Copyright {
+          display: flex;
+          flex-direction: row;
+          padding: 34px 0 0px 0;
+          &-title {
+            color: var(--text-950, #161616);
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 31px;
+          }
+          &-name {
+            color: var(--text-950, #161616);
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 31px;
+            font-family: "POPPINS-THIN";
+          }
+        }
+      }
+    }
+  }
+  
