@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./style.scss";
 import axios from "axios";
+import toast from 'react-hot-toast'
 
 const SignupPage = () => {
+  const navigate = useNavigate()
   const [registerData, setregisterData] = useState({
     fullname:"",
     region:"",
@@ -11,14 +13,22 @@ const SignupPage = () => {
     email:"",
     password:""
 
-  })
+  });
   const registerUser = async (e) => {
     e.preventDefault();
     const {fullname, region, number, email, password} = registerData;
     try {
-      const {registerData} = await axios.post('/register',{
+      const {registerData} = await axios.post('register',{
         fullname, region, number, email, password
       })
+      if (registerData) {
+        setregisterData({});
+        toast.success("Login successful");
+        navigate('/login')
+      }
+      else{
+        toast.error('Please try again, Server may not work correctly')
+      }
     } catch (error) {
       console.log(error);
     }

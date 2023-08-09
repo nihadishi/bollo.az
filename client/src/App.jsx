@@ -13,7 +13,7 @@ import Footer from "./layouts/Footer/Footer";
 import { IsLoginProvider } from "./assets/context/isLoginContext";
 import { FavoriteProvider } from './assets/context/FavoriutesContext'
 import axios from 'axios';
-
+import { Toaster } from 'react-hot-toast';
 axios.defaults.baseURL = 'http://localhost:5000';
 axios.defaults.withCredentials = true; 
 
@@ -22,6 +22,8 @@ function App() {
  
   return (
       <IsLoginProvider>
+        
+        <Toaster position="bottom-right" toastOptions={{duration:2000}}/>
         <div className="App">
           <Routes>
             <Route path="/" element={<><Navbar /><HomePage /><Footer/></>} />
@@ -29,14 +31,14 @@ function App() {
             <Route path="/products" element={<><Navbar /><ProductsPage/><Footer/></>} />
             <Route path="/account" element={<><Navbar /><ProfilePage /><Footer/></>} />
             <Route path="/login" element={<><Navbar /><LoginPage /></>} />
-            <Route path="/signup" element={<><Navbar /><SignupPage /></>} />
+            <Route path="/register" element={<><Navbar /><SignupPage /></>} />
             <Route path="/liked" element={<><Navbar /><BasketPage /><Footer/></>} />
             <Route path="/about" element={<><Navbar /><AboutPage /><Footer/></>} />
             <Route path="*" element={<><Navbar /><ErrorPage /></>} />
           </Routes>
         </div>
       </IsLoginProvider>
-  );
+  )
 }
 
 export default App;

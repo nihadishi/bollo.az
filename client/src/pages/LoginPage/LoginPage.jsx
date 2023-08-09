@@ -48,7 +48,7 @@ const LoginPage = () => {
             </button>
             <p>Do you haven't account?</p>
             <Link
-              to="/signup"
+              to="/register"
               className="btn btn-default border w-100 bg-light"
             >
               Create account
