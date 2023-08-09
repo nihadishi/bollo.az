@@ -12,7 +12,8 @@ mongoose.connect(process.env.DB_URL)
 
 //middleware
 app.use(express.json());
-app.use('/', require('./src/routers/userRoutes'));
+// app.use(cors());
+app.use('/api', require('./src/routers/userRoutes'));
 
 app.listen(port,()=>{
     console.log(`${port} is running... app.js`);

@@ -18,16 +18,16 @@ const SignupPage = () => {
     e.preventDefault();
     const {fullname, region, number, email, password} = registerData;
     try {
-      const {registerData} = await axios.post('register',{
+      const {data} = await axios.post('register',{
         fullname, region, number, email, password
       })
-      if (registerData) {
+      if (data.error) {
+        toast.error(data.error)
+      }
+      else{
         setregisterData({});
         toast.success("Login successful");
         navigate('/login')
-      }
-      else{
-        toast.error('Please try again, Server may not work correctly')
       }
     } catch (error) {
       console.log(error);
@@ -61,10 +61,10 @@ const SignupPage = () => {
                 defaultChecked="0"
                 // value={registerData.region}
                 onChange={(e)=>{setregisterData({...registerData,region: e.target.value})}}
-                required
+                // required
                 defaultValue={4}
               >
-                <option className="form-control rounded" value="*">
+                <option className="form-control rounded" value="">
                   --Choose Your Region--
                 </option>
                 <option className="form-control rounded" value="Abşeron-Xızı">

@@ -14,7 +14,7 @@ import { IsLoginProvider } from "./assets/context/isLoginContext";
 import { FavoriteProvider } from './assets/context/FavoriutesContext'
 import axios from 'axios';
 import { Toaster } from 'react-hot-toast';
-axios.defaults.baseURL = 'http://localhost:5000';
+axios.defaults.baseURL = 'http://localhost:5000/api/';
 axios.defaults.withCredentials = true; 
 
 
