@@ -1,9 +1,10 @@
 import "./style.scss";
-import * as React from "react";
+import { useEffect } from "react";
 import Logo from "./img/bollo-logo.png";
 import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  const navigate = useNavigate();
   let prevScrollPos = window.pageYOffset;
   window.onscroll = function () {
     const navbar = document.querySelector(".Navbar");
@@ -17,8 +18,7 @@ const Navbar = () => {
 
     prevScrollPos = currentScrollPos;
   };
-
-  const navigate = useNavigate();
+  
   return (
     <div className="Navbar">
       <div className="Navbar-Nav">

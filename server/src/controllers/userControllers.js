@@ -3,11 +3,32 @@ const {hashPassword, comparePassword} = require('../auth/Auth.js')
 const test = (req, res) => {
   res.json("test is running working");
 };
+
+//login
 const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
-  } catch (error) {}
+
+    //Check user's existing
+    const user = await User.findOne({email})
+    if(!user){
+        return res.json({
+            error: 'No user aviable, please sign up'
+        })
+    }
+
+    //Check password
+    const compPassword = await comparePassword(password,user.password)
+    if(compPassword){
+        res.json('password match')
+    }
+  } catch (error) {
+    console.log(error);
+  }
 };
+
+
+//register
 const registerUser = async (req, res) => {
   try {
     const { fullname, region, number, email, password } = req.body;
@@ -38,7 +59,9 @@ const registerUser = async (req, res) => {
   } catch (error) {
   }
 };
+////////
 module.exports = {
   test,
   registerUser,
+  loginUser
 };
