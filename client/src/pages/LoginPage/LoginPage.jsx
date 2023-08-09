@@ -1,28 +1,63 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import './style.scss'
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import "./style.scss";
+import axios from "axios";
 const LoginPage = () => {
-    return (
-        <div className='Login'>
-         <div className='d-flex justify-content-center align-items-center vh-100'>
-          <div className="bg-white p-3 rounded w-25">
-            <form action="">
-              <div className="mb-3">
-                <label htmlFor="email"><strong>Email</strong></label>
-                <input type="email" placeholder='Enter Email' className='form-control rounded' />
-              </div>
-              <div className="mb-3">
-                <label htmlFor="password"><strong>Password</strong></label>
-                <input type="password" placeholder='Enter Password' className='form-control rounded' />
-              </div>
-              <button className='btn btn-success w-100'><strong>Log in</strong></button>
-              <p>Do you haven't account?</p>
-              <Link to="/signup" className='btn btn-default border w-100 bg-light'>Create account</Link>
-            </form>
-          </div>
-         </div>
+  const [loginData, setloginData] = useState({
+    email: "",
+    password: "",
+  });
+  function loginUser(e) {
+    e.preventDefault();
+    console.log(e);
+    axios.get("");
+  }
+  return (
+    <div className="Login">
+      <div className="d-flex justify-content-center align-items-center vh-100">
+        <div className="bg-white p-3 rounded w-25">
+          <form onSubmit={loginUser}>
+            <div className="mb-3">
+              <label htmlFor="email">
+                <strong>Email</strong>
+              </label>
+              <input
+                type="email"
+                placeholder="Enter Email"
+                className="form-control rounded"
+                value={loginData.email}
+                onChange={(e)=>{setloginData({...loginData,email: e.target.value})}}
+                required
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="password">
+                <strong>Password</strong>
+              </label>
+              <input
+                type="password"
+                placeholder="Enter Password"
+                className="form-control rounded"
+                value={loginData.password}
+                onChange={(e)=>{setloginData({...loginData,password: e.target.value})}}
+                required
+              />
+            </div>
+            <button className="btn btn-success w-100">
+              <strong>Log in</strong>
+            </button>
+            <p>Do you haven't account?</p>
+            <Link
+              to="/signup"
+              className="btn btn-default border w-100 bg-light"
+            >
+              Create account
+            </Link>
+          </form>
         </div>
-      );
-}
+      </div>
+    </div>
+  );
+};
 
-export default LoginPage
+export default LoginPage;

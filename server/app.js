@@ -1,12 +1,19 @@
 const express = require("express");
+const dotenv = require("dotenv").config();
+const cors = require("cors");
+const {mongoose}  = require("mongoose");
+const port = process.env.PORT || 5000;
 const app = express();
-require("dotenv").config();
 
-const port = process.env.PORT || 5001;
+//db
+mongoose.connect(process.env.DB_URL)
+.then(()=>console.log('Database connected... app.js'))
+.catch((err)=> console.log('Databse is not connected... app.js',err))
 
+//middleware
 app.use(express.json());
-app.use('/');
+app.use('/', require('./src/routers/userRoutes'));
 
 app.listen(port,()=>{
-    console.log(`${port} is running...`);
+    console.log(`${port} is running... app.js`);
 })

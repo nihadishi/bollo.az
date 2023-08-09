@@ -1,13 +1,33 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./style.scss";
+import axios from "axios";
+
 const SignupPage = () => {
-  const [phonenumber, setPhonenumber] = useState('');
+  const [registerData, setregisterData] = useState({
+    fullname:"",
+    region:"",
+    number:"",
+    email:"",
+    password:""
+
+  })
+  const registerUser = async (e) => {
+    e.preventDefault();
+    const {fullname, region, number, email, password} = registerData;
+    try {
+      const {registerData} = await axios.post('/register',{
+        fullname, region, number, email, password
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return (
     <div className="Signup">
       <div className="d-flex justify-content-center align-items-center vh-100 opacity-80">
         <div className="bg-white p-3 rounded w-25">
-          <form action="">
+          <form onSubmit={registerUser}>
             <div className="mb-3">
               <label htmlFor="name">
                 <strong>Full Name</strong>
@@ -16,6 +36,8 @@ const SignupPage = () => {
                 type="text"
                 placeholder="Enter FullName"
                 className="form-control rounded"
+                value={registerData.fullname}
+                onChange={(e)=>{setregisterData({...registerData,fullname: e.target.value})}}
                 required
               />
             </div>
@@ -27,72 +49,75 @@ const SignupPage = () => {
                 name="region"
                 className="form-control rounded"
                 defaultChecked="0"
+                // value={registerData.region}
+                onChange={(e)=>{setregisterData({...registerData,region: e.target.value})}}
                 required
+                defaultValue={4}
               >
-                <option className="form-control rounded" value="Sumqayit">
+                <option className="form-control rounded" value="*">
                   --Choose Your Region--
                 </option>
-                <option className="form-control rounded" value="Sumqayit">
+                <option className="form-control rounded" value="Abşeron-Xızı">
                   Abşeron-Xızı
                 </option>
-                <option className="form-control rounded" value="Baki">
+                <option className="form-control rounded" value="Bakı">
                   Bakı
                 </option>
-                <option className="form-control rounded" value="Mingechevir">
+                <option className="form-control rounded" value="Dağlıq Şirvan">
                   Dağlıq Şirvan
                 </option>
-                <option className="form-control rounded" value="Mingechevir">
+                <option className="form-control rounded" value="Gəncə-Daşkəsən">
                   Gəncə-Daşkəsən
                 </option>
-                <option className="form-control rounded" value="Mingechevir">
+                <option className="form-control rounded" value="Lənkəran-Astara">
                   Lənkəran-Astara
                 </option>
-                <option className="form-control rounded" value="Mingechevir">
+                <option className="form-control rounded" value="Mərkəzi Aran">
                   Mərkəzi Aran
                 </option>
-                <option className="form-control rounded" value="Mingechevir">
+                <option className="form-control rounded" value="Mil Muğan">
                   Mil Muğan
                 </option>
-                <option className="form-control rounded" value="Mingechevir">
+                <option className="form-control rounded" value="Naxçıvan">
                   Naxçıvan
                 </option>
-                <option className="form-control rounded" value="Mingechevir">
+                <option className="form-control rounded" value="Qarabağ">
                   Qarabağ
                 </option>
-                <option className="form-control rounded" value="Mingechevir">
+                <option className="form-control rounded" value="Qazax-Tovuz">
                   Qazax-Tovuz
                 </option>
-                <option className="form-control rounded" value="Gence">
+                <option className="form-control rounded" value="Quba-Xaçmaz">
                   Quba-Xaçmaz
                 </option>
-                <option className="form-control rounded" value="Mingechevir">
+                <option className="form-control rounded" value="Şəki-Zaqatala">
                   Şəki-Zaqatala
                 </option>
-                <option className="form-control rounded" value="Mingechevir">
+                <option className="form-control rounded" value="Şərqi Zəngəzur">
                   Şərqi Zəngəzur
                 </option>
-                <option className="form-control rounded" value="Lankaran">
+                <option className="form-control rounded" value="Şirvan-Salyan">
                   Şirvan-Salyan
                 </option>
               </select>
             </div>
-            <div class="mb-3">
-              <label for="phone" class="form-label">
+            <div className="mb-3">
+              <label htmlFor="phone" className="form-label">
                 <strong>Phone Number(xx-xxx-xx-xx)</strong>
               </label>
-              <div class="input-group">
-                <span class="input-group-text" id="basic-addon1">
+              <div className="input-group">
+                <span className="input-group-text" id="basic-addon1">
                   +994
                 </span>
                 <input
                   type="tel"
                   id="phone"
                   name="phone"
-                //   value={phonenumber}
-                  onChange={setPhonenumber}
-                  class="form-control"
+                  className="form-control"
                   placeholder="Enter phone number"
                   pattern="[0-9]{9}"
+                  value={registerData.number}
+                  onChange={(e)=>{setregisterData({...registerData,number: e.target.value})}}
                   required
                 />
               </div>
@@ -105,6 +130,8 @@ const SignupPage = () => {
                 type="email"
                 placeholder="Enter Email"
                 className="form-control rounded"
+                value={registerData.email}
+                onChange={(e)=>{setregisterData({...registerData,email: e.target.value})}}
                 required
               />
             </div>
@@ -116,6 +143,8 @@ const SignupPage = () => {
                 type="password"
                 placeholder="Enter Password"
                 className="form-control rounded"
+                value={registerData.password}
+                onChange={(e)=>{setregisterData({...registerData,password: e.target.value})}}
                 required
               />
             </div>
