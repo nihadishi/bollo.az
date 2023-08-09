@@ -3,19 +3,24 @@ const {Schema} = mongoose;
 const userSchema = new Schema({
   fullname:{
     type: String,
+    trim:true
   },
   region: {
     type: String,
+    trim:true
   },
   number: {
     type: String,
+    trim:true
   },
   email: {
     type: String,
-    unique: true
+    unique: true,
+    trim:true
   },
   password: {
     type: String,
+    trim:true
   },
   createdAt: { type: Date, default: Date.now },
 });

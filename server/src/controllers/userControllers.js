@@ -1,13 +1,13 @@
 const User = require("../models/userSchema.js");
-
+const {hashPassword, comparePassword} = require('../auth/Auth.js')
 const test = (req, res) => {
   res.json("test is running working");
 };
-// const loginUser = async (req, res) => {
-//   try {
-//     const { email, password } = req.body;
-//   } catch (error) {}
-// };
+const loginUser = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+  } catch (error) {}
+};
 const registerUser = async (req, res) => {
   try {
     const { fullname, region, number, email, password } = req.body;
@@ -25,13 +25,14 @@ const registerUser = async (req, res) => {
         error: "Email is taken already",
       });
     }
+    const hashedPassword = await hashPassword(password)
 
     const user = await User.create({
       fullname,
       region,
       number,
       email,
-      password,
+      password: hashedPassword,
     });
     return res.json(user).status(200);
   } catch (error) {
