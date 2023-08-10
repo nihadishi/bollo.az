@@ -33,11 +33,37 @@ const SignupPage = () => {
       console.log(error);
     }
   }
+
+  const [imagePreview, setImagePreview] = useState(null);
+  const handleImageUpload = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      const previrew = URL.createObjectURL(e.target.files[0])
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        console.log(imagePreview);
+        setImagePreview(previrew)
+      };
+      reader.readAsDataURL(e.target.files[0]);
+    }
+  };
   return (
     <div className="Signup">
       <div className="d-flex justify-content-center align-items-center vh-100 opacity-80">
         <div className="bg-white p-3 rounded w-25">
           <form onSubmit={registerUser}>
+            
+    {/* <div className="container">
+      <div className="avatar-upload">
+        <div className="avatar-edit">
+            <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg"  onChange={handleImageUpload}/>
+            <label htmlFor="imageUpload"></label>
+        </div>
+        {imagePreview && (
+        <div id="imagePreview"></div>)}
+        
+     </div>
+    </div> */}
+
             <div className="mb-3">
               <label htmlFor="name">
                 <strong>Full Name</strong>

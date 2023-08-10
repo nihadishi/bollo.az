@@ -70,21 +70,46 @@ const registerUser = async (req, res) => {
 ////////
 
 
-const getProfile = (req,res)=>{
+const getProfile = async(req,res)=>{
    const {token} = req.cookies
-   if(token){
-    jwt.verify(token, process.env.JWT_KEY,{}, (err,user)=>{
-        if(err) throw err;
-        res.json(user);
-    })
+   try {
+       if(token){
+        jwt.verify(token, process.env.JWT_KEY,{}, async(err,user)=>{
+            const send = await User.findOne({email:user.email}).select('-password')
+            console.log("back" ,user)
+            if(err) throw err;
+            res.json(send);
+        })
+        } 
+        else{
+            res.json(null);
+        }
     } 
-    else{
-        res.json(null);
+    catch (error) {
+    res.status(401).json({status:'fail',
+        message : 'Invalid token'});
+   }
+}
+
+const logoutProfile =async (req,res)=>{
+    try {
+        res.cookie('token','loggetout') ;
+
+        res.status(200).json(
+            {
+                status:'sucess' 
+            }
+        )
+    } catch (error) {
+        console.log(error);
     }
+
+
 }
 module.exports = {
   test,
   registerUser,
   loginUser,
-  getProfile
+  getProfile,
+  logoutProfile
 };
