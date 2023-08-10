@@ -2,6 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv").config();
 const cors = require("cors");
 const {mongoose}  = require("mongoose");
+const cookieParse = require("cookie-parser");
 const port = process.env.PORT || 5000;
 const app = express();
 
@@ -12,6 +13,9 @@ mongoose.connect(process.env.DB_URL)
 
 //middleware
 app.use(express.json());
+app.use(cookieParse());
+app.use(express.urlencoded({extended:false}));
+
 app.use('/api', require('./src/routers/userRoutes'));
 
 app.listen(port,()=>{

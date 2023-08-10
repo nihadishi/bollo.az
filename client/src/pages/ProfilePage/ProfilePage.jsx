@@ -1,25 +1,14 @@
 import { useNavigate } from "react-router-dom";
-import { useIsLogin } from "../../assets/context/isLoginContext";
-
+import { useContext } from "react";
+import { UserContext } from "../../assets/context/userContext";
 const ProfilePage = () => {
-  const navigate = useNavigate();
-  const { isLogin, setIsLogin } = useIsLogin();
-  const handleLoginToggle = () => {
-    setIsLogin(false);
-  };
-  return (
-    isLogin? <>
-    <div>
-      <h1>Profile</h1>
-      <p>Is User Logged In: {isLogin ? 'Yes' : 'No'}</p>
-      <button onClick={handleLoginToggle}>
-        {isLogin ? 'Log Out' : 'Log In'}
-      </button>
-    </div>
-    </>:
-    navigate('/login')
-    
-  );
+
+  const {user} = useContext(UserContext)
+  return(<>
+  <h1>Profile</h1>
+  {!!user &&(<h2>{user.fullname}</h2>) }
+  </>)
+  
 }
 
 export default ProfilePage

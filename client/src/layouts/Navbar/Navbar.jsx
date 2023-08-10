@@ -62,7 +62,7 @@ const Navbar = () => {
           <li
             className="Navbar-Nav-Contact-li"
             onClick={() => {
-              navigate("/account");
+              navigate("/profile");
             }}
           >
             My Account

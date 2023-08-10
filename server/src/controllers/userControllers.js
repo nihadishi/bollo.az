@@ -1,5 +1,6 @@
 const User = require("../models/userSchema.js");
-const {hashPassword, comparePassword} = require('../auth/Auth.js')
+const {hashPassword, comparePassword} = require('../auth/Auth.js');
+const jwt = require("jsonwebtoken");
 const test = (req, res) => {
   res.json("test is running working");
 };
@@ -20,13 +21,20 @@ const loginUser = async (req, res) => {
     //Check password
     const compPassword = await comparePassword(password,user.password)
     if(compPassword){
-        res.json('password match')
+        jwt.sign({email: user.email, id:user._id, fullname: user.fullname},process.env.JWT_KEY,{},(err,token)=>{
+            if(err) throw err;
+            res.cookie('token', token).json(user)
+        });
+    }
+    else{
+        res.json({
+            error: "Password is not same with changed token"
+        })
     }
   } catch (error) {
     console.log(error);
   }
 };
-
 
 //register
 const registerUser = async (req, res) => {
@@ -60,8 +68,23 @@ const registerUser = async (req, res) => {
   }
 };
 ////////
+
+
+const getProfile = (req,res)=>{
+   const {token} = req.cookies
+   if(token){
+    jwt.verify(token, process.env.JWT_KEY,{}, (err,user)=>{
+        if(err) throw err;
+        res.json(user);
+    })
+    } 
+    else{
+        res.json(null);
+    }
+}
 module.exports = {
   test,
   registerUser,
-  loginUser
+  loginUser,
+  getProfile
 };
