@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "./style.scss";
 import axios from "axios";
 import toast from 'react-hot-toast'
+import UploadImage from "../../assets/UploadImage/UploadImage";
 
 const SignupPage = () => {
   const navigate = useNavigate()
@@ -48,22 +49,11 @@ const SignupPage = () => {
   };
   return (
     <div className="Signup">
-      <div className="d-flex justify-content-center align-items-center vh-100 opacity-80">
-        <div className="bg-white p-3 rounded w-25">
+      <div className="d-flex justify-content-center align-items-end vh-100 opacity-80">
+        <div className="bg-white p-3 rounded w-50">
           <form onSubmit={registerUser}>
             
-    {/* <div className="container">
-      <div className="avatar-upload">
-        <div className="avatar-edit">
-            <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg"  onChange={handleImageUpload}/>
-            <label htmlFor="imageUpload"></label>
-        </div>
-        {imagePreview && (
-        <div id="imagePreview"></div>)}
-        
-     </div>
-    </div> */}
-
+            {/* <UploadImage/> */}
             <div className="mb-3">
               <label htmlFor="name">
                 <strong>Full Name</strong>
