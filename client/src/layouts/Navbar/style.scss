@@ -5,7 +5,7 @@
     transition: all 1s ease-in-out;
     z-index: 10;
     width: 100%;
-    background-color: #0000008a;
+    background-color: #ffffff;
     &-Nav {
         margin: 0 10%;
         padding: 10px 0;
@@ -17,6 +17,7 @@
         &-Logo {
             height: 100%;
             cursor: pointer;
+            scale: 1;
         }
         &-Navbar {
             display: flex;
@@ -36,7 +37,7 @@
                     cursor: pointer;
                     text-decoration: none;
                     list-style-type: none;
-                    color: var(--text-10, #fff);
+                    color: var(--text-10, #000000);
                     font-size: 20px;
                     font-weight: 500;
                     line-height: 22px;
@@ -48,8 +49,8 @@
             width: auto 129px;
             height: auto 22px;
             border: 27px;
-            background-color: #ffa217;
-            border-radius: 27px;
+            background-color: #00AC22;
+            border-radius: 11px;
             padding: 10px 24px;
             cursor: pointer;
             &-li {

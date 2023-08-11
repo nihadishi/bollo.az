@@ -2,58 +2,74 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./style.scss";
 import axios from "axios";
-import toast from 'react-hot-toast'
-import UploadImage from "../../assets/UploadImage/UploadImage";
+import toast from "react-hot-toast";
 
 const SignupPage = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [registerData, setregisterData] = useState({
-    fullname:"",
-    region:"",
-    number:"",
-    email:"",
-    password:""
-
+    image: "",
+    fullname: "",
+    region: "",
+    city: "",
+    number: "",
+    email: "",
+    password: "",
   });
   const registerUser = async (e) => {
     e.preventDefault();
-    const {fullname, region, number, email, password} = registerData;
+    const { image, fullname, region, city, number, email, password } = registerData;
     try {
-      const {data} = await axios.post('register',{
-        fullname, region, number, email, password
-      })
+      const { data } = await axios.post("register", {
+        image,
+        fullname,
+        region,
+        city,
+        number,
+        email,
+        password,
+      });
       if (data.error) {
-        toast.error(data.error)
-      }
-      else{
+        toast.error(data.error);
+      } else {
         setregisterData({});
         toast.success("Login successful");
-        navigate('/login')
+        navigate("/login");
       }
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const convertToBase64 = (q) =>{
+    let reader = new FileReader();
+    reader.readAsDataURL(q.target.files[0]);
+    reader.onload = () =>{
+      const result = reader.result
+      setregisterData({
+        ...registerData,
+        image: result,
+      });
+    }
+    reader.onerror = error =>{
+      console.log('error upload image', error);
+    }
+
   }
 
-  const [imagePreview, setImagePreview] = useState(null);
-  const handleImageUpload = (e) => {
-    if (e.target.files && e.target.files[0]) {
-      const previrew = URL.createObjectURL(e.target.files[0])
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        console.log(imagePreview);
-        setImagePreview(previrew)
-      };
-      reader.readAsDataURL(e.target.files[0]);
-    }
-  };
   return (
     <div className="Signup">
-      <div className="d-flex justify-content-center align-items-end vh-100 opacity-80">
+      <div className="d-flex justify-content-center align-items-center vh-100 opacity-80">
         <div className="bg-white p-3 rounded w-50">
           <form onSubmit={registerUser}>
-            
-            {/* <UploadImage/> */}
+          <div className="mb-3">
+              <input
+                accept="image/*"
+                type="file"
+                onChange={convertToBase64}                 
+                required
+                
+              />
+            </div>
             <div className="mb-3">
               <label htmlFor="name">
                 <strong>Full Name</strong>
@@ -63,7 +79,12 @@ const SignupPage = () => {
                 placeholder="Enter FullName"
                 className="form-control rounded"
                 value={registerData.fullname}
-                onChange={(e)=>{setregisterData({...registerData,fullname: e.target.value})}}
+                onChange={(e) => {
+                  setregisterData({
+                    ...registerData,
+                    fullname: e.target.value,
+                  });
+                }}
                 required
               />
             </div>
@@ -75,9 +96,9 @@ const SignupPage = () => {
                 name="region"
                 className="form-control rounded"
                 defaultChecked="0"
-                // value={registerData.region}
-                onChange={(e)=>{setregisterData({...registerData,region: e.target.value})}}
-                // required
+                onChange={(e) => {
+                  setregisterData({ ...registerData, region: e.target.value });
+                }}
                 defaultValue={4}
               >
                 <option className="form-control rounded" value="">
@@ -95,7 +116,10 @@ const SignupPage = () => {
                 <option className="form-control rounded" value="Gəncə-Daşkəsən">
                   Gəncə-Daşkəsən
                 </option>
-                <option className="form-control rounded" value="Lənkəran-Astara">
+                <option
+                  className="form-control rounded"
+                  value="Lənkəran-Astara"
+                >
                   Lənkəran-Astara
                 </option>
                 <option className="form-control rounded" value="Mərkəzi Aran">
@@ -128,6 +152,24 @@ const SignupPage = () => {
               </select>
             </div>
             <div className="mb-3">
+              <label htmlFor="city">
+                <strong>City</strong>
+              </label>
+              <input
+                type="text"
+                placeholder="Enter your current city"
+                className="form-control rounded"
+                value={registerData.city}
+                onChange={(e) => {
+                  setregisterData({
+                    ...registerData,
+                    city: e.target.value,
+                  });
+                }}
+                required
+              />
+            </div>
+            <div className="mb-3">
               <label htmlFor="phone" className="form-label">
                 <strong>Phone Number(xx-xxx-xx-xx)</strong>
               </label>
@@ -143,7 +185,12 @@ const SignupPage = () => {
                   placeholder="Enter phone number"
                   pattern="[0-9]{9}"
                   value={registerData.number}
-                  onChange={(e)=>{setregisterData({...registerData,number: e.target.value})}}
+                  onChange={(e) => {
+                    setregisterData({
+                      ...registerData,
+                      number: e.target.value,
+                    });
+                  }}
                   required
                 />
               </div>
@@ -157,7 +204,9 @@ const SignupPage = () => {
                 placeholder="Enter Email"
                 className="form-control rounded"
                 value={registerData.email}
-                onChange={(e)=>{setregisterData({...registerData,email: e.target.value})}}
+                onChange={(e) => {
+                  setregisterData({ ...registerData, email: e.target.value });
+                }}
                 required
               />
             </div>
@@ -170,7 +219,12 @@ const SignupPage = () => {
                 placeholder="Enter Password"
                 className="form-control rounded"
                 value={registerData.password}
-                onChange={(e)=>{setregisterData({...registerData,password: e.target.value})}}
+                onChange={(e) => {
+                  setregisterData({
+                    ...registerData,
+                    password: e.target.value,
+                  });
+                }}
                 required
               />
             </div>
@@ -186,6 +240,6 @@ const SignupPage = () => {
       </div>
     </div>
   );
-};
+  };
 
 export default SignupPage;

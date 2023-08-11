@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import "./style.scss"
 import tomato from "./img/sampletomato.jpeg"
-import addicon from "./img/addicon.gif"
+import addicon from "./img/add-icon.png"
 import { FavoriutesContext } from '../../assets/context/FavoriutesContext'
 const ProductsPage = () => {
   ////

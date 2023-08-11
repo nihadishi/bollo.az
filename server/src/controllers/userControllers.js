@@ -39,8 +39,8 @@ const loginUser = async (req, res) => {
 //register
 const registerUser = async (req, res) => {
   try {
-    const { fullname, region, number, email, password } = req.body;
-    if (!(fullname && region && number && email && password)) {
+    const {image, fullname, region, city, number, email, password } = req.body;
+    if (!(image && fullname && region && city && number && email && password)) {
       return  res.json({
           error: "Invalid Input",
         })
@@ -57,8 +57,10 @@ const registerUser = async (req, res) => {
     const hashedPassword = await hashPassword(password)
 
     const user = await User.create({
+      image,
       fullname,
       region,
+      city,
       number,
       email,
       password: hashedPassword,
@@ -93,7 +95,7 @@ const getProfile = async(req,res)=>{
 
 const logoutProfile =async (req,res)=>{
     try {
-        res.cookie('token','loggetout') ;
+        res.cookie('token','') ;
 
         res.status(200).json(
             {

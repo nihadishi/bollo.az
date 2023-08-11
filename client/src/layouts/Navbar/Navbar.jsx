@@ -1,9 +1,12 @@
 import "./style.scss";
-import { useEffect } from "react";
-import Logo from "./img/bollo-logo.png";
+import { useContext, useEffect } from "react";
+import Logo from "./img/bollo-logo-gr.png";
 import { useNavigate } from "react-router-dom";
-
+import shopicon from "./img/shop-icon.gif"
+import { UserContext } from "../../assets/context/userContext";
 const Navbar = () => {
+  const {user} = useContext(UserContext)
+
   const navigate = useNavigate();
   let prevScrollPos = window.pageYOffset;
   window.onscroll = function () {
@@ -28,7 +31,7 @@ const Navbar = () => {
             navigate("/");
           }}
         >
-          <img src={Logo} alt="Bollo" />
+          <img src={Logo} alt="Bollo" width={"180px"} />
         </div>
         <div className="Navbar-Nav-Navbar">
           <ul className="Navbar-Nav-Navbar-ul">
@@ -43,31 +46,35 @@ const Navbar = () => {
             <li
               className="Navbar-Nav-Navbar-ul-li"
               onClick={() => {
-                navigate("/liked");
-              }}
-            >
-              Liked
-            </li>
-            <li
-              className="Navbar-Nav-Navbar-ul-li"
-              onClick={() => {
                 navigate("/about");
               }}
             >
               About us
             </li>
+            <li
+              className="Navbar-Nav-Navbar-ul-li"
+              onClick={() => {
+                navigate("/liked");
+              }}
+            >
+              <img src={shopicon} alt="Liked" />
+            </li>
           </ul>
         </div>
         <div className="Navbar-Nav-Contact">
+          {/* <img src={user.photo} alt="dfghjklkjhg" /> */}
           <li
             className="Navbar-Nav-Contact-li"
             onClick={() => {
               navigate("/profile");
             }}
+            
           >
             My Account
           </li>
+         
         </div>
+      
       </div>
     </div>
   );

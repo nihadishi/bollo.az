@@ -2,7 +2,7 @@ import React from 'react'
 
 const ErrorPage = () => {
   return (
-    <div>ErrorPage</div>
+    <div className='d-flex justify-content-center align-items-center vw-100 vh-100 h1'>Not Found</div>
   )
 }
 

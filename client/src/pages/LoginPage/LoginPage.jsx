@@ -4,6 +4,7 @@ import "./style.scss";
 import axios from "axios";
 import toast from 'react-hot-toast';
 import { UserContext } from "../../assets/context/userContext";
+import nouser from "./img/OIP.jpeg"
 
 const LoginPage = () => {
   const navigate = useNavigate()
@@ -39,6 +40,9 @@ const LoginPage = () => {
       <div className="d-flex justify-content-center align-items-center vh-100">
         <div className="bg-white p-3 rounded w-25">
           <form onSubmit={loginUser}>
+            <div className="mb-3 d-flex justify-content-center">
+                  <img src={nouser} alt="Avatar" className="w-50 h-50  nouser" />      
+            </div>
             <div className="mb-3">
               <label htmlFor="email">
                 <strong>Email</strong>
@@ -47,7 +51,7 @@ const LoginPage = () => {
                 type="email"
                 placeholder="Enter Email"
                 className="form-control rounded"
-                value={loginData.email}
+                value={loginData?.email}
                 onChange={(e)=>{setloginData({...loginData,email: e.target.value})}}
                 required
               />
@@ -60,7 +64,7 @@ const LoginPage = () => {
                 type="password"
                 placeholder="Enter Password"
                 className="form-control rounded"
-                value={loginData.password}
+                value={loginData?.password}
                 onChange={(e)=>{setloginData({...loginData,password: e.target.value})}}
                 required
               />

@@ -16,6 +16,9 @@ export function UserContextProvider({children}) {
             }).catch(error =>{}
              )
       }
+      else{
+        user.photo = '../../pages/LoginPage/img/OIP.jpeg'
+      }
     }, [])
     return(
         <UserContext.Provider value={{user, setUser}}>

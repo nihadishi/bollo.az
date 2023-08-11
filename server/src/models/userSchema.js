@@ -1,11 +1,19 @@
 const mongoose = require("mongoose");
 const {Schema} = mongoose;
 const userSchema = new Schema({
+  image:{
+    type: String,
+    trim:true
+  },
   fullname:{
     type: String,
     trim:true
   },
   region: {
+    type: String,
+    trim:true
+  },
+  city: {
     type: String,
     trim:true
   },
