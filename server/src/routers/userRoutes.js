@@ -1,24 +1,20 @@
 const express = require("express");
 const router = express.Router();
-const cors = require("cors");
 const {
   test,
   registerUser,
   loginUser,
   getProfile,
-  logoutProfile
+  logoutProfile,
+  uploadUserImage
 } = require("../controllers/userControllers");
 
-router.use(
-  cors({
-    credentials: true,
-    origin: "http://localhost:3000",
-  })
-);
+
 
 // router.get("/", test);
-router.post("/register", registerUser);
+router.post("/register", uploadUserImage, registerUser);
 router.post("/login", loginUser);
 router.post("/logout",logoutProfile);
 router.get("/profile", getProfile);
+router.put("profile/:id")
 module.exports = router;

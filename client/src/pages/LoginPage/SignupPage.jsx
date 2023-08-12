@@ -17,17 +17,17 @@ const SignupPage = () => {
   });
   const registerUser = async (e) => {
     e.preventDefault();
-    let formData = new FormData(e.currentTarget);
-    formData.append('image', registerData.image);
-    formData.append('fullname', registerData.fullname);
-    formData.append('region', registerData.region);
-    formData.append('city', registerData.city);
-    formData.append('number', registerData.number);
-    formData.append('email', registerData.email);
-    formData.append('password', registerData.password);
+    let formData = new FormData();
+    formData.append("image", registerData.image);
+    formData.append("fullname", registerData.fullname);
+    formData.append("region", registerData.region);
+    formData.append("city", registerData.city);
+    formData.append("number", registerData.number);
+    formData.append("email", registerData.email);
+    formData.append("password", registerData.password);
 
     try {
-      const { data } = await axios.post("register",{formData},{
+      const { data } = await axios.post("register", formData, {
         headers: {
           "Content-Type": "multipart/form-data", // Set proper content type for file upload
         },
@@ -48,30 +48,85 @@ const SignupPage = () => {
         navigate("/login");
       }
     } catch (error) {
-      console.log(error);
+      console.log(error); //
     }
   };
+    const [dragging, setDragging] = useState(false);
+    const [hasImage, setHasImage] = useState(false);
+    const [imageURL, setImageURL] = useState('');
+  
+    const handleDragOver = (e) => {
+      e.preventDefault();
+      setDragging(true);
+    };
+  
+    const handleDragLeave = () => {
+      setDragging(false);
+    };
+  
+    const handleDrop = (e) => {
+      e.preventDefault();
+      setDragging(false);
+  
+      const file = e.dataTransfer.files[0];
+      const reader = new FileReader();
+  
+      reader.readAsDataURL(file);
+      reader.onload = (e) => {
+        setImageURL(reader.result);
+        setHasImage(true);
+      };
+    };
+  
+    const handleFileChange = (e) => {
+       
+      setregisterData({
+        ...registerData,
+        image: e.target.files[0],
+      });
+      const file = e.target.files[0];
+      const reader = new FileReader();
+  
+      reader.readAsDataURL(file);
+      reader.onload = (e) => {
+        setImageURL(reader.result);
+        setHasImage(true);
+      };
+    };
+  
+    const handleClick = () => {
+      document.getElementById('mediaFile').click();
+    };
+  
 
   return (
     <div className="Signup">
-      <div className="d-flex justify-content-center align-items-center vh-100 opacity-80">
-        <div className="bg-white p-3 rounded w-50">
+      <div className="d-flex justify-content-center align-items-center vh-100 opacity-80 Signup-in">
+        <div className="bg-white p-3 rounded w-50 " >
           <form onSubmit={registerUser} encType="multipart/form-data">
-          <div className="mb-3">
+              <div
+                id="profile"
+                className={`profile-image ${dragging ? "dragging" : ""} ${
+                  hasImage ? "hasImage" : ""
+                }`}
+                onDragOver={handleDragOver}
+                onDragLeave={handleDragLeave}
+                onDrop={handleDrop}
+                onClick={handleClick}
+                style={{ backgroundImage: hasImage ? `url(${imageURL})` : "" }}
+              >
+                <div class="dashes"></div>
+                <label>{hasImage?"":"Upload your profile photo"}</label>
+              </div>
               <input
                 accept="image/*"
                 type="file"
                 name="image"
-                onChange={(e) => {
-                  setregisterData({
-                    ...registerData,
-                    image: e.target.files[0],
-                  })
-                } }                
+                id="mediaFile"
+                style={{ display: 'none' }}
+                onChange={handleFileChange}
                 required
-                
               />
-            </div>
             <div className="mb-3">
               <label htmlFor="name">
                 <strong>Full Name</strong>
@@ -246,6 +301,6 @@ const SignupPage = () => {
       </div>
     </div>
   );
-  };
+};
 
 export default SignupPage;

@@ -21,12 +21,12 @@ function App() {
     <UserContextProvider>
       <Toaster position="bottom-right" toastOptions={{ duration: 2000 }} />
       <div className="App">
+        <Navbar/>
         <Routes>
           <Route
             path="/"
             element={
               <>
-                <Navbar />
                 <HomePage />
                 <Footer />
               </>
@@ -36,7 +36,6 @@ function App() {
             path="/home"
             element={
               <>
-                <Navbar />
                 <HomePage />
                 <Footer />
               </>
@@ -46,7 +45,6 @@ function App() {
             path="/about"
             element={
               <>
-                <Navbar />
                 <AboutPage />
                 <Footer />
               </>
@@ -56,7 +54,6 @@ function App() {
             path="/products"
             element={
               <>
-                <Navbar />
                 <ProductsPage />
                 <Footer />
               </>
@@ -66,7 +63,6 @@ function App() {
             path="/liked"
             element={
               <>
-                <Navbar />
                 <BasketPage />
                 <Footer />
               </>
@@ -76,7 +72,6 @@ function App() {
             path="/login"
             element={
               <>
-                <Navbar />
                 <LoginPage />
               </>
             }
@@ -85,7 +80,6 @@ function App() {
             path="/register"
             element={
               <>
-                <Navbar />
                 <SignupPage />
               </>
             }
@@ -94,7 +88,6 @@ function App() {
             path="/profile"
             element={
               <>
-                <Navbar />
                 <ProfilePage />
                 <Footer />
               </>
@@ -104,7 +97,6 @@ function App() {
             path="*"
             element={
               <>
-                <Navbar />
                 <ErrorPage />
               </>
             }

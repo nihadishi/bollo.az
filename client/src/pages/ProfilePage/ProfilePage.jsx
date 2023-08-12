@@ -2,6 +2,8 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import React from "react";
 import { UserContext } from "../../assets/context/userContext";
+// import profileImageRoute from "../../../../server/images/profilephotos"
+import defaultProfilePhoto from "../../assets/UploadImage/img/OIP.jpeg"
 import axios from "axios";
 import "./style.scss";
 import {
@@ -42,7 +44,9 @@ const ProfilePage = () => {
     city: user?.city || "",
     email: user?.email || "",
     number: user?.number || "",
+    id: user?._id
   });
+  const profileImage = "http://localhost:5000/profilephotos/" + user?.image
   useEffect(() => {
     const randomImage = () => {
       const randomNumber = Math.floor(Math.random() * 6);
@@ -58,7 +62,7 @@ const ProfilePage = () => {
 
   const handleSaveClick = async () => {
     try {
-      await axios.post("/update-user", editedUser);
+      await axios.put("/profile", editedUser);
       setEditing(false);
     } catch (error) {
       console.log(error);
@@ -78,15 +82,12 @@ const ProfilePage = () => {
   };
   
   const toggleShow = () => setBasicModal(!basicModal);
-  
-  const params = useParams();
-  console.log('params',params);
   if (user) {
     return (
       <div className="gradient-custom-2 profile">
         <MDBContainer className="py-5 h-100 w-100 ">
           <MDBRow className="justify-content-center align-items-center h-100 ">
-            {/*  */}
+            {/* edit your data */}
             <div className="d-flex justify-content-between align-items-center text-center py-1 margi">
               {editing ? (
                 <>
@@ -137,15 +138,7 @@ const ProfilePage = () => {
                     Save
                   </MDBBtn>
                 </>
-              ) : (
-                <MDBBtn
-                  outline
-                  color="dark"
-                  style={{ height: "36px", overflow: "visible" }}
-                  onClick={handleEditClick}
-                >
-                  Edit profile
-                </MDBBtn>
+              ) : (<></>
               )}
             </div>
             {/*  */}
@@ -165,10 +158,10 @@ const ProfilePage = () => {
                     style={{ width: "150px" }}
                   >
                     <MDBCardImage
-                      src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
-                      alt="Generic placeholder image"
+                      src={user.image? profileImage:defaultProfilePhoto}
+                      alt="stdfyugihdfghjkhgfdghjkhgfdshjkn"
                       className="mt-4 mb-2 img-thumbnail"
-                      fluid
+                      // fluid
                       style={{ width: "150px", zIndex: "1" }}
                     />
                   </div>
@@ -189,7 +182,7 @@ const ProfilePage = () => {
                     <MDBModal
                       show={basicModal}
                       setShow={setBasicModal}
-                      tabIndex="-1"
+                      tabIndex="1"
                     >
                       <MDBModalDialog>
                         <MDBModalContent>
@@ -235,6 +228,7 @@ const ProfilePage = () => {
                         color="dark"
                         style={{ height: "36px", overflow: "visible" }}
                         onClick={handleEditClick}
+                        tabIndex='2'
                       >
                         Edit profile
                       </MDBBtn>
@@ -256,7 +250,7 @@ const ProfilePage = () => {
                 <MDBCardBody className="text-black p-4">
                   <div className="mb-5">
                     <p className="lead fw-normal mb-1">About</p>
-                    <div className="p-4" style={{ backgroundColor: "#f8f9fa" }}>
+                    <div className="p-4" style={{ backgroundColor: "#f2f4f5" }}>
                       <MDBCardText className="font-italic mb-1">
                         Mobile Number: (+994){user?.number}
                       </MDBCardText>
@@ -265,6 +259,9 @@ const ProfilePage = () => {
                       </MDBCardText>
                     </div>
                   </div>
+                  <MDBCardText className="lead fw-normal m-5">
+                  <button className="addbutton">Add your product</button>
+                    </MDBCardText>
                   <div className="d-flex justify-content-between align-items-center mb-4">
                     <MDBCardText className="lead fw-normal mb-0">
                       Recent Products
@@ -273,7 +270,7 @@ const ProfilePage = () => {
                       <Link to="/products">Show all</Link>
                     </MDBCardText>
                   </div>
-                  <MDBRow>
+                  <MDBRow className="g-2">
                     <MDBCol className="mb-2">
                       <MDBCardImage
                         src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(112).webp"
