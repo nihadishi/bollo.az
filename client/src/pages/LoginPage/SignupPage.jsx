@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 const SignupPage = () => {
   const navigate = useNavigate();
   const [registerData, setregisterData] = useState({
-    image: "",
+    image: null,
     fullname: "",
     region: "",
     city: "",
@@ -17,21 +17,33 @@ const SignupPage = () => {
   });
   const registerUser = async (e) => {
     e.preventDefault();
-    const { image, fullname, region, city, number, email, password } = registerData;
+    let formData = new FormData(e.currentTarget);
+    formData.append('image', registerData.image);
+    formData.append('fullname', registerData.fullname);
+    formData.append('region', registerData.region);
+    formData.append('city', registerData.city);
+    formData.append('number', registerData.number);
+    formData.append('email', registerData.email);
+    formData.append('password', registerData.password);
+
     try {
-      const { data } = await axios.post("register", {
-        image,
-        fullname,
-        region,
-        city,
-        number,
-        email,
-        password,
+      const { data } = await axios.post("register",{formData},{
+        headers: {
+          "Content-Type": "multipart/form-data", // Set proper content type for file upload
+        },
       });
       if (data.error) {
         toast.error(data.error);
       } else {
-        setregisterData({});
+        setregisterData({
+          image: null,
+          fullname: "",
+          region: "",
+          city: "",
+          number: "",
+          email: "",
+          password: "",
+        });
         toast.success("Login successful");
         navigate("/login");
       }
@@ -40,32 +52,22 @@ const SignupPage = () => {
     }
   };
 
-  const convertToBase64 = (q) =>{
-    let reader = new FileReader();
-    reader.readAsDataURL(q.target.files[0]);
-    reader.onload = () =>{
-      const result = reader.result
-      setregisterData({
-        ...registerData,
-        image: result,
-      });
-    }
-    reader.onerror = error =>{
-      console.log('error upload image', error);
-    }
-
-  }
-
   return (
     <div className="Signup">
       <div className="d-flex justify-content-center align-items-center vh-100 opacity-80">
         <div className="bg-white p-3 rounded w-50">
-          <form onSubmit={registerUser}>
+          <form onSubmit={registerUser} encType="multipart/form-data">
           <div className="mb-3">
               <input
                 accept="image/*"
                 type="file"
-                onChange={convertToBase64}                 
+                name="image"
+                onChange={(e) => {
+                  setregisterData({
+                    ...registerData,
+                    image: e.target.files[0],
+                  })
+                } }                
                 required
                 
               />
@@ -78,6 +80,7 @@ const SignupPage = () => {
                 type="text"
                 placeholder="Enter FullName"
                 className="form-control rounded"
+                name="fullname"
                 value={registerData.fullname}
                 onChange={(e) => {
                   setregisterData({
@@ -159,6 +162,7 @@ const SignupPage = () => {
                 type="text"
                 placeholder="Enter your current city"
                 className="form-control rounded"
+                name="city"
                 value={registerData.city}
                 onChange={(e) => {
                   setregisterData({
@@ -203,6 +207,7 @@ const SignupPage = () => {
                 type="email"
                 placeholder="Enter Email"
                 className="form-control rounded"
+                name="email"
                 value={registerData.email}
                 onChange={(e) => {
                   setregisterData({ ...registerData, email: e.target.value });
@@ -218,6 +223,7 @@ const SignupPage = () => {
                 type="password"
                 placeholder="Enter Password"
                 className="form-control rounded"
+                name="password"
                 value={registerData.password}
                 onChange={(e) => {
                   setregisterData({

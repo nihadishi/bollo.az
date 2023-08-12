@@ -3,7 +3,6 @@ const {Schema} = mongoose;
 const userSchema = new Schema({
   image:{
     type: String,
-    trim:true
   },
   fullname:{
     type: String,

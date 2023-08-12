@@ -1,6 +1,8 @@
 const User = require("../models/userSchema.js");
 const {hashPassword, comparePassword} = require('../auth/Auth.js');
 const jwt = require("jsonwebtoken");
+const multer = require("multer");
+const path = require("path")
 const test = (req, res) => {
   res.json("test is running working");
 };
@@ -35,13 +37,27 @@ const loginUser = async (req, res) => {
     console.log(error);
   }
 };
+const storage = multer.diskStorage({
+  destination: (req,file,cb) =>{
+    console.log(req.body);
+   return cb(null,'../../images/profilephotos')
+  },
+  filename: (req,file,cb) =>{
+    console.log(file);
+    return cb(null, Date.now() + path.extname(file.originalname))
+  }
+})
+const upload = multer({ storage: storage });
 
 //register
+
 const registerUser = async (req, res) => {
   try {
-    const {image, fullname, region, city, number, email, password } = req.body;
-    if (!(image && fullname && region && city && number && email && password)) {
-      return  res.json({
+    const {fullname, region, city, number, email, password } = req.body;
+    console.log(req.body);
+    if (!(
+      fullname && region && city && number && email && password)) {
+        return  res.json({
           error: "Invalid Input",
         })
         .status(400);
@@ -57,7 +73,7 @@ const registerUser = async (req, res) => {
     const hashedPassword = await hashPassword(password)
 
     const user = await User.create({
-      image,
+      image: req.file.filename,
       fullname,
       region,
       city,
@@ -67,6 +83,7 @@ const registerUser = async (req, res) => {
     });
     return res.json(user).status(200);
   } catch (error) {
+    console.log(error);
   }
 };
 ////////
