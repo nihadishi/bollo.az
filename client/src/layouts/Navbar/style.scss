@@ -1,66 +1,67 @@
 @import "../../assets/fonts/fonts.scss";
 @import "../../assets/fonts/mixin.scss";
-.Navbar{
-    position: fixed;
-    transition: all 1s ease-in-out;
-    z-index: 10;
-    width: 100%;
-    background-color: #ffffff;
-    &-Nav {
-        margin: 0 10%;
-        padding: 10px 0;
-        max-height: 80px; //64 + 2*padding(27)
+.Navbar {
+  position: fixed;
+  transition: top 1s ease-in-out;
+  z-index: 10;
+  width: 100vw;
+  min-width: 100vw;
+  background-color: #ffffff;
+  &-Nav {
+    margin: 0 10%;
+    padding: 10px 0;
+    max-height: 80px; //64 + 2*padding(27)
+    display: flex;
+    flex-direction: row;
+    @include CENTER;
+    justify-content: space-between;
+    &-Logo {
+      height: 100%;
+      cursor: pointer;
+      scale: 1;
+    }
+    &-Navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      &-ul {
         display: flex;
         flex-direction: row;
-        @include CENTER;
         justify-content: space-between;
-        &-Logo {
-            height: 100%;
-            cursor: pointer;
-            scale: 1;
+        align-items: center;
+        height: 100%;
+        margin: auto;
+        // gap: 82px;
+        gap: 8vw;
+        &-li {
+          text-align: center;
+          cursor: pointer;
+          text-decoration: none;
+          list-style-type: none;
+          color: var(--text-10, #000000);
+          font-size: 20px;
+          font-weight: 500;
+          line-height: 22px;
         }
-        &-Navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-                &-ul {
-                display: flex;
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: center;
-                height: 100%;
-                margin: auto;
-                // gap: 82px;
-                gap: 8vw;
-                &-li {
-                    text-align: center;
-                    cursor: pointer;
-                    text-decoration: none;
-                    list-style-type: none;
-                    color: var(--text-10, #000000);
-                    font-size: 20px;
-                    font-weight: 500;
-                    line-height: 22px;
-                }
-            }
-        }
-        &-Contact {
-            text-align: center;
-            width: auto 129px;
-            height: auto 22px;
-            border: 27px;
-            background-color: #00AC22;
-            border-radius: 11px;
-            padding: 10px 24px;
-            cursor: pointer;
-            &-li {
-            text-decoration: none;
-            list-style-type: none;
-            color: var(--text-10, #fff);
-            font-size: 20px;
-            font-weight: 500;
-            line-height: 22px;
-            }
-        }
-        }
+      }
+    }
+    &-Contact {
+      text-align: center;
+      width: auto 129px;
+      height: auto 22px;
+      border: 27px;
+      background-color: #00ac22;
+      border-radius: 11px;
+      padding: 10px 24px;
+      cursor: pointer;
+      &-li {
+        text-decoration: none;
+        list-style-type: none;
+        color: var(--text-10, #fff);
+        font-size: 20px;
+        font-weight: 500;
+        line-height: 22px;
+      }
+    }
+  }
 }
