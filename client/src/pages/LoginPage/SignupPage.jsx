@@ -59,11 +59,9 @@ const SignupPage = () => {
       e.preventDefault();
       setDragging(true);
     };
-  
     const handleDragLeave = () => {
       setDragging(false);
     };
-  
     const handleDrop = (e) => {
       e.preventDefault();
       setDragging(false);
@@ -77,16 +75,13 @@ const SignupPage = () => {
         setHasImage(true);
       };
     };
-  
-    const handleFileChange = (e) => {
-       
+    const handleFileChange = (e) => {     
       setregisterData({
         ...registerData,
         image: e.target.files[0],
       });
       const file = e.target.files[0];
       const reader = new FileReader();
-  
       reader.readAsDataURL(file);
       reader.onload = (e) => {
         setImageURL(reader.result);

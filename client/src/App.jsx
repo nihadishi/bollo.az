@@ -14,7 +14,7 @@ import axios from "axios";
 import { Toaster } from "react-hot-toast";
 import { UserContextProvider } from "./assets/context/userContext";
 import Addproduct from "./layouts/Addproduct/Addproduct";
-axios.defaults.baseURL = "http://localhost:5000/api/";
+axios.defaults.baseURL = "http://localhost:5000/api/user";
 axios.defaults.withCredentials = true;
 
 function App() {

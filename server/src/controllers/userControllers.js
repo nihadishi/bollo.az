@@ -52,13 +52,11 @@ const upload = multer({ storage: storage });
 
 const uploadUserImage = upload.single('image')
 //register
-
 const registerUser = async (req, res) => {
   try {
-
-    
     const { fullname, region, city, number, email, password } = req.body;
     console.log("BODY", req.body);
+    console.log(req.file);
     if (!(
       fullname && region && city && number && email && password)) {
       return res.json({
@@ -91,8 +89,6 @@ const registerUser = async (req, res) => {
   }
 };
 ////////
-
-
 const getProfile = async (req, res) => {
   const { token } = req.cookies
   try {

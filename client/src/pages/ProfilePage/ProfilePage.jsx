@@ -109,52 +109,56 @@ const ProfilePage = () => {
                 {editing ? (
                   <>
                     <MDBCardText>
-
-                    <MDBInputGroup>
-                      <input
-                        className="form-control"
-                        type="file"
-                        id="inputGroupFile02"
-                      />
-                    <input
-                      type="text"
-                      value={editedUser.fullname}
-                      onChange={(e) =>
-                        setEditedUser({
-                          ...editedUser,
-                          fullname: e.target.value,
-                        })
-                      }
-                    />
-                    <input
-                      type="text"
-                      value={editedUser.city}
-                      onChange={(e) =>
-                        setEditedUser({ ...editedUser, city: e.target.value })
-                      }
-                    />
-                    <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      className="form-control"
-                      placeholder="Enter phone number"
-                      pattern="[0-9]{9}"
-                      value={editedUser.number}
-                      onChange={(e) =>
-                        setEditedUser({ ...editedUser, number: e.target.value })
-                      }
-                    />
-                    <MDBBtn
-                      outline
-                      color="danger"
-                      style={{ height: "36px", overflow: "visible" }}
-                      onClick={handleEditSave}
-                    >
-                      Save
-                    </MDBBtn>
-                    </MDBInputGroup>
-
+                      <MDBInputGroup>
+                        <input
+                          className="form-control"
+                          type="file"
+                          id="inputGroupFile02"
+                        />
+                        <input
+                          type="text"
+                          value={editedUser.fullname}
+                          onChange={(e) =>
+                            setEditedUser({
+                              ...editedUser,
+                              fullname: e.target.value,
+                            })
+                          }
+                        />
+                        <input
+                          type="text"
+                          value={editedUser.city}
+                          onChange={(e) =>
+                            setEditedUser({
+                              ...editedUser,
+                              city: e.target.value,
+                            })
+                          }
+                        />
+                        <input
+                          type="tel"
+                          id="phone"
+                          name="phone"
+                          className="form-control"
+                          placeholder="Enter phone number"
+                          pattern="[0-9]{9}"
+                          value={editedUser.number}
+                          onChange={(e) =>
+                            setEditedUser({
+                              ...editedUser,
+                              number: e.target.value,
+                            })
+                          }
+                        />
+                        <MDBBtn
+                          outline
+                          color="danger"
+                          style={{ height: "36px", overflow: "visible" }}
+                          onClick={handleEditSave}
+                        >
+                          Save
+                        </MDBBtn>
+                      </MDBInputGroup>
                     </MDBCardText>
                   </>
                 ) : (
@@ -274,7 +278,7 @@ const ProfilePage = () => {
                       <p className="lead fw-normal mb-1">About</p>
                       <div
                         className="p-4"
-                        style={{ backgroundColor: "#f2f4f5" }}
+                        style={{ backgroundColor: "#F8F9FA" }}
                       >
                         <MDBCardText className="font-italic mb-1">
                           Mobile Number: (+994){user?.number}
