@@ -13,6 +13,7 @@ import Footer from "./layouts/Footer/Footer";
 import axios from "axios";
 import { Toaster } from "react-hot-toast";
 import { UserContextProvider } from "./assets/context/userContext";
+import Addproduct from "./layouts/Addproduct/Addproduct";
 axios.defaults.baseURL = "http://localhost:5000/api/";
 axios.defaults.withCredentials = true;
 
@@ -88,6 +89,12 @@ function App() {
             path="/profile"
             element={
                 <ProfilePage />
+            }
+          />
+          <Route
+            path="/mirta"
+            element={
+                <Addproduct/>
             }
           />
           <Route
