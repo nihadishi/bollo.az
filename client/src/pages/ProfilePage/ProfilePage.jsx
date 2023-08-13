@@ -5,6 +5,7 @@ import { UserContext } from "../../assets/context/userContext";
 // import profileImageRoute from "../../../../server/images/profilephotos"
 import defaultProfilePhoto from "../../assets/UploadImage/img/OIP.jpeg"
 import axios from "axios";
+import toast from "react-hot-toast";
 import "./style.scss";
 import {
   MDBCol,
@@ -31,22 +32,23 @@ import bg3 from "./img/bgrandom/3.jpg";
 import bg4 from "./img/bgrandom/4.jpg";
 import bg5 from "./img/bgrandom/5.jpg";
 import bg6 from "./img/bgrandom/6.jpg";
+import Loading from "../../layouts/Loading/Loading";
+import Footer from "../../layouts/Footer/Footer";
 
 const ProfilePage = () => {
-  const { user, setUser } = useContext(UserContext);
+  const { user, setUser,loading,setLoading } = useContext(UserContext);
   const navigate = useNavigate();
   const [basicModal, setBasicModal] = useState(false);
   const [backgroundImage, setBackgroundImage] = useState("");
   const [editing, setEditing] = useState(false);
+  const profileImage = "http://localhost:5000/profilephotos/" + user?.image
   const [editedUser, setEditedUser] = useState({
     fullname: user?.fullname || "",
     region: user?.region || "",
     city: user?.city || "",
     email: user?.email || "",
     number: user?.number || "",
-    id: user?._id
   });
-  const profileImage = "http://localhost:5000/profilephotos/" + user?.image
   useEffect(() => {
     const randomImage = () => {
       const randomNumber = Math.floor(Math.random() * 6);
@@ -55,19 +57,27 @@ const ProfilePage = () => {
     };
     randomImage();
   }, []);
+  useEffect(() => {
+    // Burada 2 saniyelik bir gecikme ile loading durumunu false yapabilirsiniz
+    const timeout = setTimeout(() => {
+      setLoading(false);
+    }, 400)});
 
-  const handleEditClick = () => {
-    setEditing(true);
+  const handleEditClick = (e) => {
+    setEditing(!editing);
   };
 
-  const handleSaveClick = async () => {
+  const handleEditSave = async () => {
+    const userID = user?.id;
     try {
-      await axios.put("/profile", editedUser);
+      await axios.put(`profile/${userID}`, editedUser);
       setEditing(false);
+      toast.success('You edited profile successfully')
+      window.location.reload();
     } catch (error) {
       console.log(error);
-      alert('Please try again')
       setEditing(false);
+      toast.error('Please check your connection and try again');
     }
   };
 
@@ -82,8 +92,9 @@ const ProfilePage = () => {
   };
   
   const toggleShow = () => setBasicModal(!basicModal);
-  if (user) {
-    return (
+  console.log(user);
+  if (!loading) {
+    return (<>
       <div className="gradient-custom-2 profile">
         <MDBContainer className="py-5 h-100 w-100 ">
           <MDBRow className="justify-content-center align-items-center h-100 ">
@@ -133,7 +144,7 @@ const ProfilePage = () => {
                     outline
                     color="danger"
                     style={{ height: "36px", overflow: "visible" }}
-                    onClick={handleSaveClick}
+                    onClick={handleEditSave}
                   >
                     Save
                   </MDBBtn>
@@ -158,7 +169,7 @@ const ProfilePage = () => {
                     style={{ width: "150px" }}
                   >
                     <MDBCardImage
-                      src={user.image? profileImage:defaultProfilePhoto}
+                      src={user?.image? profileImage:defaultProfilePhoto}
                       alt="stdfyugihdfghjkhgfdghjkhgfdshjkn"
                       className="mt-4 mb-2 img-thumbnail"
                       // fluid
@@ -167,7 +178,7 @@ const ProfilePage = () => {
                   </div>
                   <div className="ms-3" style={{ marginTop: "90px" }}>
                     <MDBTypography tag="h2">{user?.fullname}</MDBTypography>
-                    <MDBCardText tag="h4">({user.city}) {user?.region}</MDBCardText>
+                    <MDBCardText tag="h4">({user?.city}) {user?.region}</MDBCardText>
                   </div>
 
                   {/* logout */}
@@ -308,9 +319,12 @@ const ProfilePage = () => {
           </MDBRow>
         </MDBContainer>
       </div>
+      <Footer/>
+      </>
     );
   } else {
-    return navigate("/login");
+    // return navigate("/login");
+    return(<Loading/>)
   }
 };
 

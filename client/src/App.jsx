@@ -87,10 +87,7 @@ function App() {
           <Route
             path="/profile"
             element={
-              <>
                 <ProfilePage />
-                <Footer />
-              </>
             }
           />
           <Route

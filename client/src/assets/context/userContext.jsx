@@ -5,6 +5,7 @@ export const UserContext = createContext({})
 
 export function UserContextProvider({children}) {
     const [user,setUser] = useState(null);
+    const [loading,setLoading] = useState(true);
 
     
     useEffect(() => {
@@ -19,9 +20,9 @@ export function UserContextProvider({children}) {
       // else{
       //   user.photo = '../../pages/LoginPage/img/OIP.jpeg'
       // }
-    }, [])
+    }, [user])
     return(
-        <UserContext.Provider value={{user, setUser}}>
+        <UserContext.Provider value={{user,setUser,loading,setLoading}}>
             {children}
         </UserContext.Provider>
     )

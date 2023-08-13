@@ -62,7 +62,7 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="Navbar-Nav-Contact">
-          {/* <img src={user.photo} alt="dfghjklkjhg" /> */}
+          {/* <img src={user?.image} alt="dfghjklkjhg" /> */}
           <li
             className="Navbar-Nav-Contact-li"
             onClick={() => {

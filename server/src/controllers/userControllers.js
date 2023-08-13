@@ -116,6 +116,40 @@ const getProfile = async (req, res) => {
   }
 }
 
+const updateProfile = async (req,res) =>{
+  const { token } = req.cookies;
+  try {
+    console.log(token);
+    if (token) {
+      jwt.verify(token, process.env.JWT_KEY, {}, async (err, user) => {
+        if (err) {
+          return res.status(401).json({
+            status: 'fail',
+            message: 'Invalid token'
+          });
+        }
+
+        const userId = user.id;
+        const { fullname, city,number } = req.body;
+        const updatedUser = await User.findByIdAndUpdate(
+          userId,
+          { fullname, city, number },
+          { new: true } 
+        ).select('-password');
+
+        res.status(200).json(updatedUser);
+      });
+    } 
+    else {
+      res.status(401).json({
+        status: 'fail',
+        message: 'Token not found'
+      });
+    }
+  } catch (error) {
+    res.status(500).json({ error: 'An error occurred' });
+  }
+};
 const logoutProfile = async (req, res) => {
   try {
     res.cookie('token', '');
@@ -137,5 +171,6 @@ module.exports = {
   loginUser,
   getProfile,
   logoutProfile,
-  uploadUserImage
+  uploadUserImage,
+  updateProfile
 };
