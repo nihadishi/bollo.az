@@ -1,44 +1,50 @@
 const mongoose = require("mongoose");
-const {Schema} = mongoose;
+const { Schema } = mongoose;
+
 const productSchema = new Schema({
-  productimage:{
+  productimage: {
+    type: String,
+    unique: false,
+  },
+  productname: {
     type: String,
   },
-  productname:{
+  productdescription: {
     type: String,
   },
-  productdescription:{
+  fullname: {
     type: String,
-  },
-  fullname:{
-    type: String,
-    trim:true
+    unique: false,
+    trim: true,
   },
   region: {
     type: String,
-    trim:true
+    unique: false,
+    trim: true,
   },
   city: {
     type: String,
-    trim:true
+    unique: false,
+    trim: true,
   },
   number: {
     type: String,
-    trim:true
+    unique: false,
+    trim: true,
   },
   email: {
     type: String,
-    unique: true,
-    trim:true
+    unique: false,
+    trim: true,
   },
   userid: {
     type: String,
-    trim:true
+    unique: false,
+    trim: true,
   },
   createdAt: { type: Date, default: Date.now },
 });
 
 const ProductModel = mongoose.model("Product", productSchema);
-
 
 module.exports = ProductModel;

@@ -183,7 +183,7 @@ const ProfilePage = () => {
                     >
                       <MDBCardImage
                         src={user?.image ? profileImage : defaultProfilePhoto}
-                        alt="stdfyugihdfghjkhgfdghjkhgfdshjkn"
+                        alt="Image"
                         className="mt-4 mb-2 img-thumbnail"
                         // fluid
                         style={{ width: "150px", zIndex: "1" }}

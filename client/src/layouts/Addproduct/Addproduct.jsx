@@ -3,8 +3,10 @@ import "./style.scss";
 import { UserContext } from "../../assets/context/userContext";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const MultiStepForm = () => {
+  const navigate = useNavigate();
   const { user, setUser, loading, setLoading } = useContext(UserContext);
   const [step, setStep] = useState(1);
   const [isFormOpen, setIsFormOpen] = useState(true);
@@ -85,6 +87,7 @@ const MultiStepForm = () => {
           id: user._id,
         });
         toast.success("Product added")
+        navigate('/home')
       }
     } 
     catch (error) {
@@ -177,9 +180,9 @@ const MultiStepForm = () => {
                   </div>
                 )}
                 <div className="buttons">
-                  {step === 1 && <button onClick={handleCancel}>Cancel</button>}
-                  {step > 1 && <button onClick={handleBack}>Back</button>}
-                  {step < 3 && <button onClick={handleNext}>Next</button>}
+                  {step === 1 && <button type="button" onClick={handleCancel}>Cancel</button>}
+                  {step > 1 && <button type="button" onClick={handleBack}>Back</button>}
+                  {step < 3 && <button type="button" onClick={handleNext}>Next</button>}
                   {step === 3 && <button type="submit">Submit</button>}
                 </div>
               </form>
