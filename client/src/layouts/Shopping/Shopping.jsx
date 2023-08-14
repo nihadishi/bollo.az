@@ -8,29 +8,39 @@ import minus from "./img/-.png";
 import emptybasket from "./img/emptybasket.jpg";
 import deleteicon from "./img/delete.svg";
 const Shopping = () => {
-  const { openShopping, setOpenShopping, shoppingItems, setShoppingItems,shoppingItemsCount, setShoppingItemsCount } =
+  const { openShopping, setOpenShopping, shoppingItems, setShoppingItems } =
     useContext(ShoppingContext);
 
   const handleRemoveProduct = (productId) => {
     const updatedShoppingItems = shoppingItems.filter(
       (item) => item._id !== productId
     );
+    const updatedUpdateCount = { ...updateCount };
+    delete updatedUpdateCount[productId];
+    setUpdateCount(updatedUpdateCount);
+    
     setShoppingItems(updatedShoppingItems);
+    localStorage.setItem("shoppingItems", JSON.stringify(updatedShoppingItems));
+    localStorage.setItem("updateCount", JSON.stringify(updatedUpdateCount));
   };
 
-///////////////////////////////////
-  const [updateCount, setUpdateCount] = useState({}); // Ürün sayacını saklamak için state
-  useEffect(() => {
+  ///////////////////////// local storage
+  const [updateCount, setUpdateCount] = useState(() => {
     const storedCount = localStorage.getItem("updateCount");
     if (storedCount) {
-      setUpdateCount(JSON.parse(storedCount));
+      return JSON.parse(storedCount);
     }
-  }, []);
-  
-  // Sayacın localStorage'e kaydedilmesi
+    return {};
+  });
+
   useEffect(() => {
     localStorage.setItem("updateCount", JSON.stringify(updateCount));
   }, [updateCount]);
+  useEffect(() => {
+    localStorage.setItem("shoppingItems", JSON.stringify(shoppingItems));
+  }, [shoppingItems]);
+  ////////////////////////
+
   const handleUpdateCount = (productId, action) => {
     const updatedCount = { ...updateCount }; // Güncellenmiş sayacı kopyala
     if (action === "plus") {
@@ -39,14 +49,16 @@ const Shopping = () => {
       updatedCount[productId] = (updatedCount[productId] || 2) - 1;
     }
     setUpdateCount(updatedCount);
+    localStorage.setItem("updateCount", JSON.stringify(updatedCount));
   };
-////////////////////////
   const totalPrice = shoppingItems
     .slice(1)
     .reduce(
-    (sum, product) =>
-    sum + parseFloat(product.productprice) * (updateCount[product._id] || 1),
-  0)
+      (sum, product) =>
+        sum +
+        parseFloat(product.productprice) * (updateCount[product._id] || 1),
+      0
+    )
     .toFixed(2);
   console.log(updateCount);
 
@@ -57,7 +69,7 @@ const Shopping = () => {
           <div className="Shopping-Name-Name-main">Shopping bag</div>
           <div className="Shopping-Name-Name-count">
             {shoppingItems.length - 1 > 0 ? (
-              <>{shoppingItems.length - 1} items</>
+              <>({shoppingItems.length - 1} items)</>
             ) : (
               <></>
             )}
@@ -103,16 +115,20 @@ const Shopping = () => {
                           <div className="Shopping-Detail-Cards-Card-About-Detail-CountDel-count">
                             <div
                               className="Shopping-Detail-Cards-Card-About-Detail-CountDel-count-m"
-                                onClick={() => handleUpdateCount(product._id, "minus")}
+                              onClick={() =>
+                                handleUpdateCount(product._id, "minus")
+                              }
                             >
                               -
                             </div>
                             <div className="Shopping-Detail-Cards-Card-About-Detail-CountDel-count-n">
-                            {updateCount[product._id] || 1}
+                              {updateCount[product._id] || 1}
                             </div>
                             <div
                               className="Shopping-Detail-Cards-Card-About-Detail-CountDel-count-p"
-                              onClick={() => handleUpdateCount(product._id, "plus")}
+                              onClick={() =>
+                                handleUpdateCount(product._id, "plus")
+                              }
                             >
                               +
                             </div>

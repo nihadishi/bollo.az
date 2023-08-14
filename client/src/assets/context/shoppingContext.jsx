@@ -1,18 +1,22 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
-export const ShoppingContext = createContext({})
+export const ShoppingContext = createContext({});
 
-export function ShoppingContextProvider({children}) {
-    const [openShopping, setOpenShopping] = useState(false);
-    const [shoppingItems,setShoppingItems] = useState([{}]);
-    const [shoppingItemsCount,setShoppingItemsCount] = useState([{}]);
-    // setShoppingItems(shoppingItems.splice(0,1))
+export function ShoppingContextProvider({ children }) {
+  const [openShopping, setOpenShopping] = useState(false);
+  const [shoppingItems, setShoppingItems] = useState(()=>{
+    const storedItems = localStorage.getItem("shoppingItems");
+    if(storedItems){
+        return JSON.parse(storedItems);
+    }
+    return [{}];
 
-
-    return(
-        <ShoppingContext.Provider value={{openShopping,setOpenShopping,shoppingItems,setShoppingItems,shoppingItemsCount,setShoppingItemsCount}}>
-            {children}
-        </ShoppingContext.Provider>
-    )
-    
+  });
+  return (
+    <ShoppingContext.Provider
+      value={{ openShopping, setOpenShopping, shoppingItems, setShoppingItems }}
+    >
+      {children}
+    </ShoppingContext.Provider>
+  );
 }

@@ -182,7 +182,7 @@ const MultiStepForm = () => {
                     </select>
 
                     <label>Product Category</label>
-                    {/* <select name="productcategory" className="selectinput" onChange={(e) =>
+                    <select name="productcategory" className="selectinput" onChange={(e) =>
                         setaddproductData({
                           ...addproductdata,
                           productcategory: e.target.value,
@@ -194,7 +194,7 @@ const MultiStepForm = () => {
                       <option value="Delikatessen">Delikatessen</option>
                       <option value="Savoury Grocery">Savoury Grocery</option>
                       <option value="Meat & Poultry">Meat & Poultry</option>
-                    </select> */}
+                    </select>
                     <select name="producttype" className="selectinput" onChange={(e) =>
                         setaddproductData({
                           ...addproductdata,
