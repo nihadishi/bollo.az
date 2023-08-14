@@ -79,6 +79,10 @@ const MultiStepForm = () => {
           productimage: null,
           productname: "",
           productdescription: "",
+          productprice: "",
+          productunit: "",
+          productcategory:"",
+          producttype:"",
           fullname: user.fullname,
           region: user.region,
           city: user.city,
@@ -96,6 +100,7 @@ const MultiStepForm = () => {
       console.log(error);
     }
   };
+  console.log(addproductdata);
   return (
     <>
       {isFormOpen ? (
@@ -138,6 +143,53 @@ const MultiStepForm = () => {
                       }
                       required
                     />
+                    <label>Product Price</label>
+                    <input
+                    type="number"
+                      placeholder="Description"
+                      value={addproductdata.productprice}
+                      onChange={(e) =>
+                        setaddproductData({
+                          ...addproductdata,
+                          productprice: e.target.value,
+                        })
+                      }
+                      required
+                    />
+                    <select className="selectinput" name="productunit" onChange={(e) =>
+                        setaddproductData({
+                          ...addproductdata,
+                          productunit: e.target.value,
+                        })}>
+                      <option value="kg">₼/kg</option>
+                      <option value="gr">₼/gr</option>
+                      <option value="ton">₼/ton</option>
+                      <option value="l">₼/l</option>
+                      <option value="ml">₼/ml</option>
+                    </select>
+                    <label>Product Category</label>
+                    
+                    <select name="productcategory" className="selectinput" onChange={(e) =>
+                        setaddproductData({
+                          ...addproductdata,
+                          productcategory: e.target.value,
+                        })}>
+                      <option value="kg">Fruits & Vegetables</option>
+                      <option value="gr">Bakery & Pastry</option>
+                      <option value="gr">Dairy & Eggs</option>
+                      <option value="ton">Delikatessen</option>
+                      <option value="l">Savoury Grocery</option>
+                      <option value="ml">Meat & Poultry</option>
+                    </select>
+                    <select name="productunit" className="selectinput" onChange={(e) =>
+                        setaddproductData({
+                          ...addproductdata,
+                          producttype: e.target.value,
+                        })}>
+                      <option value="fresh">Fresh</option>
+                      <option value="greenhouse">Greenhouse</option>
+                      <option value="other">Other</option>
+                    </select>
                   </div>
                 )}
                 {step === 2 && (

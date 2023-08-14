@@ -39,8 +39,8 @@ const ProductsPage = () => {
         {products.map((product) => (
           <div className="Products-Product" key={product._id}>
             <div className="Products-Product-SaleLike">
-              <div className="Products-Product-SaleLike-Sale">20% OFF</div>
-              <div className="Products-Product-SaleLike-Like">{/* Burada bir şeyler olması gerekiyor */}</div>
+              <div className="Products-Product-SaleLike-Sale">Fresh or Parnik</div>
+              {/* <div className="Products-Product-SaleLike-Like">Burada bir şeyler olması gerekiyor</div> */}
             </div>
             <div className="Products-Product-Photo">
               <img src={`http://localhost:5000/products/${product.productimage}`} alt={product.productname} />
@@ -48,8 +48,9 @@ const ProductsPage = () => {
             <div className="Products-Product-About">
               <div className="Products-Product-About-S">
                 <div className="Products-Product-About-S-Name">{product.productname}</div>
+                <div className="Products-Product-About-S-City">{product.city}</div>
                 <div className="Products-Product-About-S-Price">20$</div>
-                <div className="Products-Product-About-S-Rating">5 5 5 5 5</div>
+                {/* <div className="Products-Product-About-S-Rating">5 5 5 5 5</div> */}
               </div>
               <div className="Products-Product-About-L">
                 <img src={addicon} alt="+" />
