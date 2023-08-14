@@ -36,10 +36,8 @@ const ProductsPage = () => {
     const index = updatedShoppingItems.findIndex(item => item._id === product._id);
   
     if (index !== -1) {
-      // Ürün zaten sepet içinde, çıkar
       updatedShoppingItems.splice(index, 1);
     } else {
-      // Ürün sepette yok, ekle
       updatedShoppingItems.push(product);
     }
   
