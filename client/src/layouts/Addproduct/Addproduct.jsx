@@ -14,6 +14,10 @@ const MultiStepForm = () => {
     productimage: null,
     productname: "",
     productdescription: "",
+    productprice: "",
+    productunit: "",
+    productcategory:"",
+    producttype:"",
     fullname: user.fullname,
     region: user.region,
     city: user.city,
@@ -58,6 +62,10 @@ const MultiStepForm = () => {
     formData.append("productimage", addproductdata.productimage);
     formData.append("productname", addproductdata.productname);
     formData.append("productdescription", addproductdata.productdescription);
+    formData.append("productprice", addproductdata.productprice);
+    formData.append("productunit", addproductdata.productunit);
+    formData.append("productcategory", addproductdata.productcategory);
+    formData.append("producttype", addproductdata.producttype);
     formData.append("fullname", addproductdata.fullname);
     formData.append("region", addproductdata.region);
     formData.append("city", addproductdata.city);
@@ -91,7 +99,7 @@ const MultiStepForm = () => {
           id: user._id,
         });
         toast.success("Product added")
-        navigate('/home')
+        navigate('/products')
       }
     } 
     catch (error) {
@@ -111,13 +119,15 @@ const MultiStepForm = () => {
               <form encType="multipart/form-data" onSubmit={addProduct}>
                 {step === 1 && (
                   <div className="step">
-                    <h2>Step 1: Add Product</h2>
+                    <h2>Step 1: Add Product Details</h2>
+
                     <label>Product Photo</label>
                     <input
                       type="file"
                       accept="image/*"
                       onChange={handleFileChange}
                     />
+
                     <label>Product Name</label>
                     <input
                       type="text"
@@ -143,10 +153,11 @@ const MultiStepForm = () => {
                       }
                       required
                     />
+
                     <label>Product Price</label>
                     <input
                     type="number"
-                      placeholder="Description"
+                      placeholder="Price (AZN)"
                       value={addproductdata.productprice}
                       onChange={(e) =>
                         setaddproductData({
@@ -161,34 +172,38 @@ const MultiStepForm = () => {
                           ...addproductdata,
                           productunit: e.target.value,
                         })}>
-                      <option value="kg">₼/kg</option>
-                      <option value="gr">₼/gr</option>
-                      <option value="ton">₼/ton</option>
-                      <option value="l">₼/l</option>
-                      <option value="ml">₼/ml</option>
+                      <option value="">--CHOOSE--</option>
+                      <option value="AZN/kg">AZN/kg</option>
+                      <option value="AZN/gr">AZN/gr</option>
+                      <option value="AZN/ton">AZN/ton</option>
+                      <option value="AZN/l">AZN/l</option>
+                      <option value="AZN/ml">AZN/ml</option>
+                      <option value="AZN/piece">AZN/piece</option>
                     </select>
+
                     <label>Product Category</label>
-                    
-                    <select name="productcategory" className="selectinput" onChange={(e) =>
+                    {/* <select name="productcategory" className="selectinput" onChange={(e) =>
                         setaddproductData({
                           ...addproductdata,
                           productcategory: e.target.value,
                         })}>
-                      <option value="kg">Fruits & Vegetables</option>
-                      <option value="gr">Bakery & Pastry</option>
-                      <option value="gr">Dairy & Eggs</option>
-                      <option value="ton">Delikatessen</option>
-                      <option value="l">Savoury Grocery</option>
-                      <option value="ml">Meat & Poultry</option>
-                    </select>
-                    <select name="productunit" className="selectinput" onChange={(e) =>
+                      <option value="">--CHOOSE--</option>
+                      <option value="Fruits & Vegetables">Fruits & Vegetables</option>
+                      <option value="Bakery & Pastry">Bakery & Pastry</option>
+                      <option value="Dairy & Eggs">Dairy & Eggs</option>
+                      <option value="Delikatessen">Delikatessen</option>
+                      <option value="Savoury Grocery">Savoury Grocery</option>
+                      <option value="Meat & Poultry">Meat & Poultry</option>
+                    </select> */}
+                    <select name="producttype" className="selectinput" onChange={(e) =>
                         setaddproductData({
                           ...addproductdata,
                           producttype: e.target.value,
                         })}>
-                      <option value="fresh">Fresh</option>
-                      <option value="greenhouse">Greenhouse</option>
-                      <option value="other">Other</option>
+                      <option value="">--CHOOSE--</option>
+                      <option value="Fresh">Fresh</option>
+                      <option value="Greenhouse">Greenhouse</option>
+                      <option value="Other">Other</option>
                     </select>
                   </div>
                 )}
@@ -221,14 +236,14 @@ const MultiStepForm = () => {
                 {step === 3 && (
                   <div className="step">
                     <h2>Step 3: Review and Submit</h2>
-                    <div>Photo: {addproductdata.productimage.name}</div>
-                    <div>Name: {addproductdata.productname}</div>
-                    <div>Description: {addproductdata.productdescription}</div>
-                    <div>Seller: {addproductdata.fullname}</div>
-                    <div>Region: {addproductdata.region}</div>
-                    <div>City: {addproductdata.city}</div>
-                    <div>Email: {addproductdata.email}</div>
-                    <div>Number: {`+994${addproductdata.number}`}</div>
+                    <div>Photo: {addproductdata?.productimage?.name}</div>
+                    <div>Name: {addproductdata?.productname}</div>
+                    <div>Description: {addproductdata?.productdescription}</div>
+                    <div>Seller: {addproductdata?.fullname}</div>
+                    <div>Region: {addproductdata?.region}</div>
+                    <div>City: {addproductdata?.city}</div>
+                    <div>Email: {addproductdata?.email}</div>
+                    <div>Number: {`+994${addproductdata?.number}`}</div>
                   </div>
                 )}
                 <div className="buttons">

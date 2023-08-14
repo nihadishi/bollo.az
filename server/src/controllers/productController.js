@@ -20,6 +20,10 @@ const addProduct = async (req, res) => {
     const {
       productname,
       productdescription,
+      productprice,
+      productunit,
+      productcategory,
+      producttype,
       fullname,
       region,
       city,
@@ -32,6 +36,10 @@ const addProduct = async (req, res) => {
       !(
         productname &&
         productdescription &&
+        productprice &&
+        productunit &&
+        productcategory &&
+        producttype &&
         fullname &&
         region &&
         city &&
@@ -50,6 +58,10 @@ const addProduct = async (req, res) => {
       productimage: req.file.filename,
       productname,
       productdescription,
+      productprice,
+      productunit,
+      productcategory,
+      producttype,
       fullname,
       region,
       city,

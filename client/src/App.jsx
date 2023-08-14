@@ -14,15 +14,19 @@ import axios from "axios";
 import { Toaster } from "react-hot-toast";
 import { UserContextProvider } from "./assets/context/userContext";
 import Addproduct from "./layouts/Addproduct/Addproduct";
+import {ShoppingContextProvider } from "./assets/context/shoppingContext";
+import Shopping from "./layouts/Shopping/Shopping";
 axios.defaults.baseURL = "http://localhost:5000/api/user";
 axios.defaults.withCredentials = true;
 
 function App() {
   return (
+    <ShoppingContextProvider>
     <UserContextProvider>
       <Toaster position="bottom-right" toastOptions={{ duration: 2000 }} />
       <div className="App">
         <Navbar/>
+        <Shopping/>
         <Routes>
           <Route
             path="/"
@@ -108,6 +112,7 @@ function App() {
         </Routes>
       </div>
     </UserContextProvider>
+    </ShoppingContextProvider>
   );
 }
 

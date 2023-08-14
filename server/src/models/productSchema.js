@@ -12,6 +12,18 @@ const productSchema = new Schema({
   productdescription: {
     type: String,
   },
+  productprice:{
+    type: String,
+  },
+  productunit:{
+    type: String,
+  },
+  productcategory:{
+    type: String,
+  },
+  producttype:{
+    type: String,
+  },
   fullname: {
     type: String,
     unique: false,

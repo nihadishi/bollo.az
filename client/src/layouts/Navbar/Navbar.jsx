@@ -1,12 +1,13 @@
 import "./style.scss";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import Logo from "./img/bollo-logo-gr.png";
 import { useNavigate } from "react-router-dom";
 import shopicon from "./img/shop-icon.gif"
 import { UserContext } from "../../assets/context/userContext";
+import { ShoppingContext } from "../../assets/context/shoppingContext";
 const Navbar = () => {
   const {user} = useContext(UserContext)
-
+  const {openShopping,setOpenShopping} = useContext(ShoppingContext)
   const navigate = useNavigate();
   let prevScrollPos = window.pageYOffset;
   window.onscroll = function () {
@@ -21,7 +22,7 @@ const Navbar = () => {
 
     prevScrollPos = currentScrollPos;
   };
-  
+  console.log(openShopping);
   return (
     <div className="Navbar">
       <div className="Navbar-Nav">
@@ -53,8 +54,8 @@ const Navbar = () => {
             </li>
             <li
               className="Navbar-Nav-Navbar-ul-li"
-              onClick={() => {
-                navigate("/liked");
+              onClick={()=>{
+                setOpenShopping(!openShopping);
               }}
             >
               <img src={shopicon} alt="Liked" />
@@ -68,7 +69,6 @@ const Navbar = () => {
             onClick={() => {
               navigate("/profile");
             }}
-            
           >
             My Account
           </li>
