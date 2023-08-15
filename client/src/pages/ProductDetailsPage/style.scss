@@ -102,6 +102,86 @@
       }
     }
   }
+  &-similar {
+    height: 200px;
+    &-detail {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 95%;
+      height: 100%;
+      margin: 0 auto;
+      padding: 0 3%;
+      background-color: #ffffff;
+        &:hover{
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+      &-l {
+        height: 80%;
+        width: 70%;
+        display: flex;
+        flex-direction: row;
+        gap: 10%;
+
+        &-img {
+          max-height: 192px;
+          max-width: 192px;
+          min-height: 152px;
+          min-width: 152px;
+          border: 0.3px solid #ececec;
+          border-radius: 10px;
+          overflow: hidden;
+          & img {
+            width: 100%;
+            height: 100%;
+          }
+        }
+        &-name {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-evenly;
+          &-name {
+            font-family: POPPINS-SEMIBOLD;
+            font-size: 32px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+            color: #555555;
+          }
+          &-region {
+            font-family: POPPINS-THIN;
+            font-size: 22px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            color: rgb(155, 155, 155);
+          }
+        }
+      }
+      &-r {
+        height: 80%;
+        width: 30%;
+        display: flex;
+        flex-direction: row;
+        justify-content: end;
+        align-items: center;
+        gap: 10%;
+        &-price {
+          font-family: POPPINS-BOLD;
+          width: 100%;
+          font-size: 27px;
+          font-style: normal;
+          font-weight: 700;
+          line-height: normal;
+          text-align: end;
+          color: #474747;
+        }
+      }
+    }
+  }
 }
 
 .product-order {

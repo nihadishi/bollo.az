@@ -71,6 +71,20 @@ const ProductDetailsPage = () => {
           <div>{productData.productdescription}</div>
           </div>
          </div>
+         <div className="product-info-similar">
+          <div className="product-info-similar-detail">
+            <div className="product-info-similar-detail-l">
+              <div className="product-info-similar-detail-l-img"><img src={`http://localhost:5000/products/${productData.productimage}`} alt="" /></div>
+              <div className="product-info-similar-detail-l-name">
+                <div className="product-info-similar-detail-l-name-name">{productData.productname}</div>
+                <div className="product-info-similar-detail-l-name-region">{productData.region}</div>
+              </div>
+            </div>
+            <div className="product-info-similar-detail-r">
+              <div className="product-info-similar-detail-r-price">{productData.productprice} {productData.productunit}</div>
+            </div>
+          </div>
+         </div>
         </div>
         <div className="product-order">
           <div className="product-order-detail">
