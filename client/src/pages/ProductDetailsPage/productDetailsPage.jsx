@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import "./style.scss";
 import { useParams } from 'react-router-dom';
 
 const ProductDetailsPage = () => {
@@ -19,9 +20,9 @@ const ProductDetailsPage = () => {
   }, []);
 
   return (
-    <div className="product-details m-5 p-5">
+    <div className="product-details">
       <div className="product-image">
-        <img src={productData.productimage} alt={productData.productname} />
+        <img src={`http://localhost:5000/products/${productData.productimage}`} alt={productData.productname} />
       </div>
       <div className="product-info">
         <h2>{productData.productname}</h2>
