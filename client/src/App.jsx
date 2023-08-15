@@ -16,6 +16,7 @@ import { UserContextProvider } from "./assets/context/userContext";
 import Addproduct from "./layouts/Addproduct/Addproduct";
 import {ShoppingContextProvider } from "./assets/context/shoppingContext";
 import Shopping from "./layouts/Shopping/Shopping";
+import PaymentPage from "./pages/PaymentPage/PaymentPage";
 axios.defaults.baseURL = "http://localhost:5000/api/user";
 axios.defaults.withCredentials = true;
 
@@ -96,9 +97,9 @@ function App() {
             }
           />
           <Route
-            path="/mirta"
+            path="/3dsecure.azericard"
             element={
-                <Addproduct/>
+                <PaymentPage/>
             }
           />
           <Route
