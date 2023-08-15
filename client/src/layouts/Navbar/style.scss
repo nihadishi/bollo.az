@@ -1,6 +1,7 @@
 @import "../../assets/fonts/fonts.scss";
 @import "../../assets/fonts/mixin.scss";
 .Navbar {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.007);
   position: fixed;
   transition: top 1s ease-in-out;
   z-index: 10;

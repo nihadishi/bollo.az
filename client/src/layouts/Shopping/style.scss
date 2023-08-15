@@ -119,6 +119,7 @@
                 display: flex;
                 flex-direction: row;
                 &-m{
+                  cursor: pointer;
                     width: 40px;
                     height: 40px;
                     border: 0.5px solid #e4e4e4;
@@ -131,6 +132,7 @@
                 }
                 }
                 &-p{
+                  cursor: pointer;
                     width: 40px;
                     height: 40px;
                     border: 0.5px solid #e4e4e4;
@@ -152,6 +154,7 @@
                 }
               }
               &-delete {
+                cursor: pointer;
                 width: 40px;
                 height: 40px;
                 border: 0.5px solid #e4e4e4;

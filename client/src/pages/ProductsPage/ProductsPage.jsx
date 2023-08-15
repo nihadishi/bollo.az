@@ -31,6 +31,7 @@ const ProductsPage = () => {
     setShoppingItems(updatedShoppingItems);
   };
   useEffect(() => {
+    setLoading(true)
     axios
       .get("/products")
       .then((response) => {

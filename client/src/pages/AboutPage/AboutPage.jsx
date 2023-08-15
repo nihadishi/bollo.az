@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import "./style.scss";
 import infoImg from "./img/info-img.png";
 import box from "./img/box.svg";
@@ -7,6 +7,8 @@ import farm from "./img/farm.svg";
 import arrowSVG from "./img/arrow-up.svg";
 import bg_M from "./img/bg2.png";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../assets/context/userContext";
+import Loading from "../../layouts/Loading/Loading";
 
 
 const OpenAnswer = (id) => {
@@ -19,6 +21,15 @@ const OpenAnswer = (id) => {
 
 const AboutPage = () => {
   const navigate = useNavigate();
+  const {loading, setLoading} = useContext(UserContext);
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setLoading(false);
+    }, 800);
+  
+    
+  }, [])
+  
   const Advantages = [
     {
       svg: delivery,
@@ -80,6 +91,7 @@ const AboutPage = () => {
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sodales lorem quis libero bibendum, non dictum felis ullamcorper. Sed vel suscipit urna, sed semper magna. Morbi vitae ante neque. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec egestas dolor tortor, ac dignissim sem pharetra at. Curabitur gravida ac nulla nec pulvinar. Mauris porttitor tristique faucibus. Duis lobortis magna ac ligula posuere efficitur. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Sed condimentum nisl quis ante condimentum, non bibendum erat ornare. Maecenas erat metus, sodales at scelerisque id, rhoncus sed arcu. Duis id vestibulum nisl. Proin arcu ligula, feugiat sed laoreet at, maximus quis neque. Mauris sed ultricies tortor, quis facilisis elit. Nunc mattis egestas scelerisque.",
     },
   ];
+ if (!loading) {
   return (
     <>
       <div className="Int">
@@ -168,6 +180,11 @@ const AboutPage = () => {
       </div>
     </>
   );
+  
+ }
+ else{
+  return <Loading/>
+ }
 };
 
 export default AboutPage;

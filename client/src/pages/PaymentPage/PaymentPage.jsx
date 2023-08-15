@@ -4,10 +4,12 @@ import { useContext } from "react";
 import { UserContext } from "../../assets/context/userContext";
 import Loading from "../../layouts/Loading/Loading";
 import abblogo from "./img/ABB_Logo.png";
+import CardLoading from "../../layouts/Loading/CardLoading";
 
 const PaymentPage = () => {
   const { loading, setLoading } = useContext(UserContext);
   useEffect(() => {
+    setLoading(true)
     const timeout = setTimeout(() => {
       setLoading(false);
     }, 2800);
@@ -199,7 +201,7 @@ const PaymentPage = () => {
       </div>
     );
   } else {
-    return <Loading />;
+    return <CardLoading />;
   }
 };
 
