@@ -93,7 +93,7 @@ const Shopping = () => {
             <div className="Shopping-Detail-Cards">
               {shoppingItems?.map((product) =>
                 product._id ? (
-                  <div className="Shopping-Detail-Cards-Card" key={product._id}>
+                  <div className="Shopping-Detail-Cards-Card" key={product._id} >
                     <div className="Shopping-Detail-Cards-Card-Img">
                       <img
                         src={`http://localhost:5000/products/${product?.productimage}`}
@@ -154,7 +154,7 @@ const Shopping = () => {
             <div className="Shopping-Detail-Button">
               <div className="Shopping-Detail-Button-Promo">learn about</div>
               <div className="Shopping-Detail-Button-Checkout" onClick={()=>{
-                navigate("/3dsecure.azericard")
+                navigate("/3dsecure.azericard/payment")
                 setOpenShopping(false)
               }}>
                 Check Out - {totalPrice} AZN

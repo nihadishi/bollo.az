@@ -127,11 +127,14 @@
   content:attr(data-text);
 }
 .credit-card-wrap .credit-card-date{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
   color:#fff;
   text-align:center;
 }
 .credit-card-wrap .credit-card-date .title{
-  width:50px;
+  width:70px;
   color:#deb887;
   font-size:12px;
   line-height:14px;
@@ -140,8 +143,8 @@
   text-transform:uppercase;
 }
 .credit-card-wrap .credit-card-date .credit-font{
-  top:-5px;
-  left:10px;
+  top:0px;
+  left:0px;
   position:relative;
 }
 .credit-card-wrap .credit-author{
@@ -159,6 +162,12 @@
   height:45px;
   bottom:-10px;
   position:relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.securityCode{
+  margin: auto;
 }
 .credit-card-wrap .footer{
   left:30px;
@@ -175,6 +184,8 @@
 .PaymentPage{
   display: flex;
   flex-direction: row;
+  width: 100%;
+  height: 100vh;
 }
 .Form{
   position: absolute;
@@ -182,4 +193,24 @@
   top: 30%;
   width: 30vw;
 
+}
+.input-field {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  transition: border-color 0.3s;
+}
+
+// Geçerli input alanı
+.input-field.valid {
+  border-color: green;
+  background-color: #f0fff0; // Yeşil arkaplan rengi
+}
+
+// Geçersiz input alanı
+.input-field.invalid {
+  border-color: red;
+  background-color: #ffe4e4; // Kırmızı arkaplan rengi
 }

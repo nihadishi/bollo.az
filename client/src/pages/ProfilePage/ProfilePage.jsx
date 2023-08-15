@@ -2,7 +2,6 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import React from "react";
 import { UserContext } from "../../assets/context/userContext";
-// import profileImageRoute from "../../../../server/images/profilephotos"
 import defaultProfilePhoto from "../../assets/UploadImage/img/OIP.jpeg";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -45,7 +44,7 @@ const ProfilePage = () => {
   const [adding, setAdding] = useState(false);
   const profileImage = "http://localhost:5000/profilephotos/" + user?.image;
   const [editedUser, setEditedUser] = useState({
-    fullname: user?.fullname || "asdfg",
+    fullname: user?.fullname || "",
     region: user?.region || "",
     city: user?.city || "",
     email: user?.email || "",
@@ -75,7 +74,7 @@ const ProfilePage = () => {
   const handleEditSave = async () => {
     const userID = user?.id;
     try {
-      await axios.put(`profile/${userID}`, editedUser);
+      await axios.put(`user/profile/${userID}`, editedUser);
       setEditing(false);
       toast.success("You edited profile successfully");
       window.location.reload();
@@ -88,7 +87,7 @@ const ProfilePage = () => {
 
   const logoutUser = async () => {
     try {
-      await axios.post("logout");
+      await axios.post("user/logout");
       setUser(null);
       navigate("/login");
     } catch (error) {

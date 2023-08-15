@@ -17,7 +17,8 @@ import Addproduct from "./layouts/Addproduct/Addproduct";
 import {ShoppingContextProvider } from "./assets/context/shoppingContext";
 import Shopping from "./layouts/Shopping/Shopping";
 import PaymentPage from "./pages/PaymentPage/PaymentPage";
-axios.defaults.baseURL = "http://localhost:5000/api/user";
+import ProductDetailsPage from "./pages/ProductDetailsPage/productDetailsPage";
+axios.defaults.baseURL = "http://localhost:5000/api/";
 axios.defaults.withCredentials = true;
 
 function App() {
@@ -66,6 +67,15 @@ function App() {
             }
           />
           <Route
+            path="/products/id/:productID"
+            element={
+              <>
+                <ProductDetailsPage />
+                <Footer />
+              </>
+            }
+          />
+          <Route
             path="/liked"
             element={
               <>
@@ -97,7 +107,19 @@ function App() {
             }
           />
           <Route
-            path="/3dsecure.azericard"
+            path="/3dsecure.azericard/payment"
+            element={
+                <PaymentPage/>
+            }
+          />
+          <Route
+            path="/3dsecure.azericard/onlinepayment"
+            element={
+                <PaymentPage/>
+            }
+          />
+          <Route
+            path="/3dsecure.azericard/auth"
             element={
                 <PaymentPage/>
             }

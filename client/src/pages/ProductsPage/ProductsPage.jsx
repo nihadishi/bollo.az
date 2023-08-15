@@ -9,11 +9,13 @@ import axios from "axios";
 import { UserContext } from "../../assets/context/userContext";
 import Loading from "../../layouts/Loading/Loading";
 import { ShoppingContext } from "../../assets/context/shoppingContext";
+import { useNavigate } from "react-router-dom";
 const ProductsPage = () => {
  
   const [products, setProducts] = useState([]);
   const { user, setUser, loading, setLoading } = useContext(UserContext);
   const {shoppingItems,setShoppingItems} = useContext(ShoppingContext);
+  const navigate = useNavigate();
   const AddShoppingContext = (product) => {
     console.log(product._id);
     console.log(shoppingItems);
@@ -30,7 +32,7 @@ const ProductsPage = () => {
   };
   useEffect(() => {
     axios
-      .get("/product")
+      .get("/products")
       .then((response) => {
         setProducts(response.data);
       })
@@ -51,7 +53,7 @@ const ProductsPage = () => {
               <div className="Products-Product-TypeLike-Type">{product?.producttype === "Fresh"? <div className="Products-Product-TypeLike-Type-Fresh">{product.producttype}</div>: <div className="Products-Product-TypeLike-Type-NotFresh">{product.producttype}</div> }</div>
               <div className="Products-Product-TypeLike-Like"><img src={likeProduct} alt="" /></div>
             </div>
-            <div className="Products-Product-Photo">
+            <div className="Products-Product-Photo" onClick={()=>{navigate(`/products/id/${product._id}`)}}>
               {product?.productimage ? <img src={`http://localhost:5000/products/${product?.productimage}`} alt={product.productname} />:
               <img src={defaultProduct}/>
               }

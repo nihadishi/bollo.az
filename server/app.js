@@ -24,7 +24,7 @@ app.use(cookieParse());
 app.use(express.static(path.join(__dirname, "./images")));
 
 app.use('/api/user', require('./src/routers/userRoutes'));
-app.use('/api/user/product', require('./src/routers/productRoutes'));
+app.use('/api/products', require('./src/routers/productRoutes'));
 
 app.listen(port, () => {
     console.log(`${port} is running... app.js`);//////////

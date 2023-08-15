@@ -27,7 +27,7 @@ const SignupPage = () => {
     formData.append("password", registerData.password);
 
     try {
-      const { data } = await axios.post("register", formData, {
+      const { data } = await axios.post("user/register", formData, {
         headers: {
           "Content-Type": "multipart/form-data", // Set proper content type for file upload
         },

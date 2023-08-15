@@ -85,4 +85,33 @@ const getProducts = async(req,res)=>{
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
-module.exports = { addProduct,uploadProductImage,getProducts };
+const getProductsbyID = async(req,res)=>{
+  const productID = req.params.id;
+  
+  try {
+    const product = await Product.findById(productID); // Tekil bir ürünü ID'ye göre çek
+    if (product) {
+      res.json(product);
+    } else {
+      res.status(404).json({ error: 'Ürün bulunamadı' });
+    }
+  } catch (error) {
+    console.error('Error fetching product:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+const getProductsbyEmail = async(req,res)=>{
+  const productEmail = req.params.email;
+  try{
+    const products = await Product.find({ email: productEmail.toLowerCase() });
+    if (products.length > 0) {
+      res.json(products);
+    } else {
+      res.status(404).json({ error: 'Ürün bulunamadı' });
+    }
+} catch (error) {
+  console.error('Error fetching product:', error);
+  res.status(500).json({ error: 'Internal Server Error' });
+}
+}
+module.exports = { addProduct,uploadProductImage,getProducts,getProductsbyID,getProductsbyEmail };

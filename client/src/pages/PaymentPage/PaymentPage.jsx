@@ -14,11 +14,38 @@ const PaymentPage = () => {
 
     return () => clearTimeout(timeout);
   }, []);
-
   const [cardName, setCardName] = useState("");
   const [cardNumber, setCardNumber] = useState("");
   const [expirationDate, setExpirationDate] = useState("");
   const [securityCode, setSecurityCode] = useState("");
+
+  const isValidCardName = (name) => {
+    // Burada kart sahibinin adının geçerli olup olmadığını kontrol edin
+    // Örneğin, minimum karakter sayısını veya özel karakterleri kontrol edebilirsiniz
+    return name.length >= 3; // Örnek olarak adın en az 3 karakter içermesi gerektiğini varsayalım
+  };
+
+  const isValidCardNumber = (number) => {
+    // Burada kart numarasının geçerli olup olmadığını kontrol edin
+    // Örneğin, Luhn algoritması ile kart numarasını kontrol edebilirsiniz
+    return number.length === 16 && /^\d+$/.test(number);
+  };
+
+  const isValidExpirationDate = (date) => {
+    const [month, year] = date.split("/");
+    const currentYear = new Date().getFullYear() % 100;
+    return (
+      /^\d{2}\/\d{2}$/.test(date) &&
+      parseInt(month) >= 1 &&
+      parseInt(month) <= 12 &&
+      parseInt(year) >= currentYear &&
+      parseInt(year) <= currentYear + 10
+    );
+  };
+
+  const isValidSecurityCode = (code) => {
+    return code.length === 3 && /^\d+$/.test(code);
+  };
 
   const handleCardNameChange = (event) => {
     setCardName(event.target.value);
@@ -70,6 +97,13 @@ const PaymentPage = () => {
               value={cardName}
               onChange={handleCardNameChange}
               required
+              className={`input-field ${
+                cardName
+                  ? isValidCardName(cardName)
+                    ? "valid"
+                    : "invalid"
+                  : ""
+              }`}
             />
           </div>
           <div>
@@ -81,6 +115,13 @@ const PaymentPage = () => {
               onChange={handleCardNumberChange}
               maxLength="16"
               required
+              className={`input-field ${
+                cardNumber
+                  ? isValidCardNumber(cardNumber)
+                    ? "valid"
+                    : "invalid"
+                  : ""
+              }`}
             />
           </div>
           <div>
@@ -93,6 +134,13 @@ const PaymentPage = () => {
               maxLength="5"
               placeholder="MM/YY"
               required
+              className={`input-field ${
+                expirationDate
+                  ? isValidExpirationDate(expirationDate)
+                    ? "valid"
+                    : "invalid"
+                  : ""
+              }`}
             />
           </div>
           <div>
@@ -104,6 +152,13 @@ const PaymentPage = () => {
               onChange={handleSecurityCodeChange}
               maxLength="3"
               required
+              className={`input-field ${
+                securityCode
+                  ? isValidSecurityCode(securityCode)
+                    ? "valid"
+                    : "invalid"
+                  : ""
+              }`}
             />
           </div>
           <button type="submit">Ödeme Yap</button>
@@ -120,7 +175,7 @@ const PaymentPage = () => {
               </div>
             </header>
             <div className="mk-icon-sim"></div>
-            <div className="credit-font credit-card-number" data-text="4716">
+            <div className="credit-font credit-card-number">
               {formattedCardNumber}
             </div>
             <footer className="footer">
@@ -128,12 +183,14 @@ const PaymentPage = () => {
                 <div className="pull-left">
                   <div className="credit-card-date">
                     <span className="title">Expires End</span>
-                    <span className="credit-font">01/018</span>
+                    <span className="credit-font">{expirationDate}</span>
                   </div>
                   <div className="credit-font credit-author">{cardName}</div>
                 </div>
                 <div className="pull-right">
-                  <div className="mk-icon-visa"></div>
+                  <div className="mk-icon-visa">
+                    <span className="securityCode">{securityCode}</span>
+                  </div>
                 </div>
               </div>
             </footer>

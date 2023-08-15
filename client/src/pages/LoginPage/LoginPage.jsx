@@ -17,7 +17,7 @@ const LoginPage = () => {
     e.preventDefault();
     const {email, password} = loginData;
     try {
-      const {data} = await axios.post('login',{
+      const {data} = await axios.post('user/login',{
         email,
         password
       });
