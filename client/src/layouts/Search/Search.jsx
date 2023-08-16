@@ -14,7 +14,11 @@ const Search = ({ onSearch }) => {
 
   useEffect(() => {
     const filtered = products.filter((product) =>
-      product.productname.toLowerCase().includes(searchText.toLowerCase())
+      (product.productname.toLowerCase().includes(searchText.toLowerCase())) ||
+      product.city.toLowerCase().includes(searchText.toLowerCase()) ||
+      product.fullname.toLowerCase().includes(searchText.toLowerCase()) ||
+      product.productcategory.toLowerCase().includes(searchText.toLowerCase()) ||
+      product.producttype.toLowerCase().includes(searchText.toLowerCase())
     );
     setFilteredProducts(filtered);
   }, [searchText]);

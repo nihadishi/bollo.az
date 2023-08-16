@@ -31,16 +31,18 @@ const ProductsPage = () => {
   };
   useEffect(() => {
     setLoading(true);
-    // if (params) {
-    //   const filtered = products.filter((product) =>
-    //     // product.productname.toLowerCase().includes(params.toLowerCase())
-    //       //  product.productname.toLowerCase().includes(params.toLowerCase())
-    //     // product.params.some(param => param.toLowerCase() === params.toLowerCase())
-    //   );
-    //   setFilteredProducts(filtered);
-    // } else {
-    //   setFilteredProducts(products);
-    // }
+    if (params.searchText) {
+      const filtered = products.filter((product) =>
+      (product.productname && product.productname.toLowerCase().includes(params.searchText.toLowerCase())) ||
+      (product.city && product.city.toLowerCase().includes(params.searchText.toLowerCase())) ||
+      (product.fullname && product.fullname.toLowerCase().includes(params.searchText.toLowerCase())) ||
+      (product.productcategory && product.productcategory.toLowerCase().includes(params.searchText.toLowerCase())) ||
+      (product.producttype && product.producttype.toLowerCase().includes(params.searchText.toLowerCase()))
+      );
+      setFilteredProducts(filtered);
+    } else {
+      setFilteredProducts(products);
+    }
     const timeout = setTimeout(() => {
       setLoading(false);
     }, 1800);
