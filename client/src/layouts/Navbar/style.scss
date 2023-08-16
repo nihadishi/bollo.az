@@ -1,5 +1,15 @@
 @import "../../assets/fonts/fonts.scss";
 @import "../../assets/fonts/mixin.scss";
+// $blending: true; 
+// .Navbar{
+//   @if ($blending) {
+//     background-color: blue;
+//   } @else {
+//     background-color: red; 
+//   }
+// }
+
+
 .Navbar {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.007);
   position: fixed;

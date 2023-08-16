@@ -4,26 +4,23 @@ import addicon from "./img/add-icon.png";
 import minusicon from "./img/added-icon.png";
 import defaultProduct from "./img/default_1.jpg";
 import likeProduct from "./img/like.png";
-import { FavoriutesContext } from "../../assets/context/FavoriutesContext";
 import axios from "axios";
 import { UserContext } from "../../assets/context/userContext";
 import Loading from "../../layouts/Loading/Loading";
 import { ShoppingContext } from "../../assets/context/shoppingContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Search from "../../layouts/Search/Search";
 const ProductsPage = () => {
   const { user, setUser, loading, setLoading } = useContext(UserContext);
-  const { shoppingItems, setShoppingItems, products, setProducts } =
-    useContext(ShoppingContext);
+  const { shoppingItems, setShoppingItems, products, setProducts } = useContext(ShoppingContext);
   const navigate = useNavigate();
+  const params = useParams();
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const AddShoppingContext = (product) => {
-    console.log(product._id);
-    console.log(shoppingItems);
     const updatedShoppingItems = [...shoppingItems];
     const index = updatedShoppingItems.findIndex(
       (item) => item._id === product._id
     );
-
     if (index !== -1) {
       updatedShoppingItems.splice(index, 1);
     } else {
@@ -34,17 +31,25 @@ const ProductsPage = () => {
   };
   useEffect(() => {
     setLoading(true);
+    // if (params) {
+    //   const filtered = products.filter((product) =>
+    //     // product.productname.toLowerCase().includes(params.toLowerCase())
+    //       //  product.productname.toLowerCase().includes(params.toLowerCase())
+    //     // product.params.some(param => param.toLowerCase() === params.toLowerCase())
+    //   );
+    //   setFilteredProducts(filtered);
+    // } else {
+    //   setFilteredProducts(products);
+    // }
     const timeout = setTimeout(() => {
       setLoading(false);
     }, 1800);
-  }, []);
-
-  // console.log(shoppingItems);
+  }, [params, products]);
   if (!loading) {
     return (
       <>
         <div className="Products">
-          {products.map((product) => (
+          {filteredProducts.map((product) => (
             <div className="Products-Product" key={product._id}>
               <div className="Products-Product-TypeLike">
                 <div className="Products-Product-TypeLike-Type">
@@ -88,7 +93,6 @@ const ProductsPage = () => {
                   <div className="Products-Product-About-S-Price">
                     {product?.productprice} {product.productunit}
                   </div>
-                  {/* <div className="Products-Product-About-S-Rating">5 5 5 5 5</div> */}
                 </div>
                 <div
                   className="Products-Product-About-L"
@@ -97,9 +101,9 @@ const ProductsPage = () => {
                   }}
                 >
                   {shoppingItems.some((item) => item._id === product._id) ? (
-                    <img src={minusicon} alt="-" /> // Eğer ürün sepette varsa "-" ikonu göster
+                    <img src={minusicon} alt="-" />
                   ) : (
-                    <img src={addicon} alt="+" /> // Eğer ürün sepette yoksa "+" ikonu göster
+                    <img src={addicon} alt="+" />
                   )}
                 </div>
               </div>

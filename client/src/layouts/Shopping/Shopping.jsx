@@ -91,9 +91,9 @@ const Shopping = () => {
         {shoppingItems.length > 1 ? (
           <>
             <div className="Shopping-Detail-Cards">
-              {shoppingItems?.map((product) =>
+              {shoppingItems?.map((product,index) =>
                 product._id ? (
-                  <div className="Shopping-Detail-Cards-Card" key={product._id} >
+                  <div className="Shopping-Detail-Cards-Card" key={index} >
                     <div className="Shopping-Detail-Cards-Card-Img">
                       <img
                         src={`http://localhost:5000/products/${product?.productimage}`}
@@ -145,9 +145,9 @@ const Shopping = () => {
                       </div>
                     </div>
                   </div>
-                ) : (
-                  <></> //productid
-                )
+                ) : 
+                  <></>
+                
               )}
             </div>
 

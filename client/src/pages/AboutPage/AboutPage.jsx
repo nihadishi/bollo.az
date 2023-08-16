@@ -93,7 +93,7 @@ const AboutPage = () => {
   ];
  if (!loading) {
   return (
-    <>
+    <div className="AboutPage">
       <div className="Int">
         <div className="Int-M">
           <img src={bg_M} alt="" />
@@ -178,7 +178,7 @@ const AboutPage = () => {
           })}
         </div>
       </div>
-    </>
+    </div>
   );
   
  }

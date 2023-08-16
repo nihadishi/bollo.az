@@ -6,9 +6,11 @@ import shopicon from "./img/shop-icon.gif";
 import { UserContext } from "../../assets/context/userContext";
 import { ShoppingContext } from "../../assets/context/shoppingContext";
 import Search from "../Search/Search";
+import { BlendingContext } from "../../assets/context/blendContext";
 const Navbar = () => {
   const { user } = useContext(UserContext);
   const { openShopping, setOpenShopping } = useContext(ShoppingContext);
+  const {blending,setBlending} = useContext(BlendingContext);
   const navigate = useNavigate();
   let prevScrollPos = window.pageYOffset;
   window.onscroll = function () {
@@ -23,8 +25,9 @@ const Navbar = () => {
 
     prevScrollPos = currentScrollPos;
   };
+  console.log(blending);
   return (
-    <div className="Navbar">
+    <div className="Navbar" style={{"--blending": blending?"true":"false"}}>
       <div className="Navbar-Nav">
         <div
           className="Navbar-Nav-Logo"

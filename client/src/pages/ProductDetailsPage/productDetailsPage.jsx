@@ -12,53 +12,22 @@ const ProductDetailsPage = () => {
   const { loading, setLoading } = useContext(UserContext);
   const navigate = useNavigate();
   const productID = useParams();
-  const { shoppingItems, setShoppingItems, products, setProducts } = useContext(ShoppingContext);
-    const [selectedProductId, setSelectedProductId] = useState(null);
-    useEffect(() => {
-      if (selectedProductId) {
-        setLoading(true);
-        axios
-          .get(`http://localhost:5000/api/products/id/${selectedProductId}`)
-          .then((response) => {
-            setProductData(response.data);
-          })
-          .catch((error) => {
-            console.error("Error fetching product details:", error);
-          })
-          const timeout = setTimeout(() => {
-            setLoading(false);
-          }, 300);
-      }
-      else{
-        setLoading(true);
-          axios
-            .get(`http://localhost:5000/api/products/id/${productID.productID}`)
-            .then((response) => {
-              setProductData(response.data);
-            })
-            .catch((error) => {
-              console.error("Error fetching product details:", error);
-            });
-          const timeout = setTimeout(() => {
-            setLoading(false);
-          }, 300);
-      }
-    }, [selectedProductId]);
-  // useEffect(() => {
-  //   setLoading(true);
-  //   axios
-  //     .get(`http://localhost:5000/api/products/id/${productID.productID}`)
-  //     .then((response) => {
-  //       setProductData(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error fetching product details:", error);
-  //     });
-  //   const timeout = setTimeout(() => {
-  //     setLoading(false);
-  //   }, 400);
-  // }, []);
-
+  const { shoppingItems, setShoppingItems, products, setProducts } =
+    useContext(ShoppingContext);
+  useEffect(() => {
+    setLoading(true);
+    axios
+      .get(`http://localhost:5000/api/products/id/${productID.productID}`)
+      .then((response) => {
+        setProductData(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching product details:", error);
+      });
+    const timeout = setTimeout(() => {
+      setLoading(false);
+    }, 300);
+  }, [productID]);
   const isInBasket = shoppingItems.some((item) => item._id === productData._id);
 
   const handleAddToBasket = () => {
@@ -167,8 +136,7 @@ const ProductDetailsPage = () => {
                 className="product-similar-detail"
                 key={index}
                 onClick={() => {
-                  navigate(`/products/id/${product._id}`)
-                  setSelectedProductId(product._id);
+                  navigate(`/products/id/${product._id}`);
                 }}
               >
                 <div className="product-similar-detail-l">
