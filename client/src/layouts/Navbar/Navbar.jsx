@@ -22,7 +22,6 @@ const Navbar = () => {
 
     prevScrollPos = currentScrollPos;
   };
-  console.log(openShopping);
   return (
     <div className="Navbar">
       <div className="Navbar-Nav">

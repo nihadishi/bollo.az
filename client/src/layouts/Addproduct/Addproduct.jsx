@@ -74,7 +74,7 @@ const MultiStepForm = () => {
     formData.append("userid", addproductdata.id);
     console.log(addproductdata);
     try {
-      const { data } = await axios.post("product/add", formData, {
+      const { data } = await axios.post("products/add", formData, {
         headers: {
           "Content-Type": "multipart/form-data", // Set proper content type for file upload
         },

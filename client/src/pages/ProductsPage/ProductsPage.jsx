@@ -12,9 +12,8 @@ import { ShoppingContext } from "../../assets/context/shoppingContext";
 import { useNavigate } from "react-router-dom";
 const ProductsPage = () => {
  
-  const [products, setProducts] = useState([]);
   const { user, setUser, loading, setLoading } = useContext(UserContext);
-  const {shoppingItems,setShoppingItems} = useContext(ShoppingContext);
+  const {shoppingItems,setShoppingItems,products, setProducts} = useContext(ShoppingContext);
   const navigate = useNavigate();
   const AddShoppingContext = (product) => {
     console.log(product._id);
@@ -31,20 +30,13 @@ const ProductsPage = () => {
     setShoppingItems(updatedShoppingItems);
   };
   useEffect(() => {
-    setLoading(true)
-    axios
-      .get("/products")
-      .then((response) => {
-        setProducts(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching products:", error);
-      });
+    setLoading(true);
     const timeout = setTimeout(() => {
       setLoading(false);
     }, 1800);
-  }, []);
-  console.log(shoppingItems);
+  }, [])
+  
+  // console.log(shoppingItems);
   if (!loading) {
     return (
       <div className="Products">

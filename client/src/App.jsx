@@ -18,6 +18,7 @@ import {ShoppingContextProvider } from "./assets/context/shoppingContext";
 import Shopping from "./layouts/Shopping/Shopping";
 import PaymentPage from "./pages/PaymentPage/PaymentPage";
 import ProductDetailsPage from "./pages/ProductDetailsPage/productDetailsPage";
+import ScrollToTop from "./assets/ScrollToTop/ScrollToTop.jsx";
 axios.defaults.baseURL = "http://localhost:5000/api/";
 axios.defaults.withCredentials = true;
 
@@ -27,6 +28,7 @@ function App() {
     <UserContextProvider>
       <Toaster position="bottom-right" toastOptions={{ duration: 2000 }} />
       <div className="App">
+        <ScrollToTop/>
         <Navbar/>
         <Shopping/>
         <Routes>
