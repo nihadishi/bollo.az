@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import shopicon from "./img/shop-icon.gif";
 import { UserContext } from "../../assets/context/userContext";
 import { ShoppingContext } from "../../assets/context/shoppingContext";
+import Search from "../Search/Search";
 const Navbar = () => {
   const { user } = useContext(UserContext);
   const { openShopping, setOpenShopping } = useContext(ShoppingContext);
@@ -61,6 +62,7 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
+        <div className="Navbar-Nav-Search"><Search/></div>
         <div
           className="Navbar-Nav-Contact"
           onClick={() => {

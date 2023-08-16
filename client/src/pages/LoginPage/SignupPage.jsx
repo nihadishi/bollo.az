@@ -21,11 +21,10 @@ const SignupPage = () => {
     formData.append("image", registerData.image);
     formData.append("fullname", registerData.fullname);
     formData.append("region", registerData.region);
-    formData.append("city", registerData.city);
+    formData.append("city", registerData.city.toLowerCase());
     formData.append("number", registerData.number);
-    formData.append("email", registerData.email);
+    formData.append("email", registerData.email.toLowerCase());
     formData.append("password", registerData.password);
-
     try {
       const { data } = await axios.post("user/register", formData, {
         headers: {
@@ -217,7 +216,7 @@ const SignupPage = () => {
                 onChange={(e) => {
                   setregisterData({
                     ...registerData,
-                    city: e.target.value,
+                    city: e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1).toLowerCase(),
                   });
                 }}
                 required
@@ -260,7 +259,7 @@ const SignupPage = () => {
                 name="email"
                 value={registerData.email}
                 onChange={(e) => {
-                  setregisterData({ ...registerData, email: e.target.value });
+                  setregisterData({ ...registerData, email: e.target.value.toLowerCase() });
                 }}
                 required
               />

@@ -55,7 +55,6 @@ const uploadUserImage = upload.single('image')
 const registerUser = async (req, res) => {
   try {
     const { fullname, region, city, number, email, password } = req.body;
-    console.log("BODY", req.body);
     console.log(req.file);
     if (!(
       fullname && region && city && number && email && password)) {
@@ -78,9 +77,9 @@ const registerUser = async (req, res) => {
       image: req.file.filename,
       fullname,
       region,
-      city,
+      city: city.toLowerCase().charAt(0).toUpperCase() + city.slice(1).toLowerCase(),
       number,
-      email,
+      email: email.toLowerCase(),
       password: hashedPassword,
     });
     return res.json(user).status(200);
@@ -95,7 +94,6 @@ const getProfile = async (req, res) => {
     if (token) {
       jwt.verify(token, process.env.JWT_KEY, {}, async (err, user) => {
         const send = await User.findOne({ email: user.email }).select('-password')
-        console.log("back", user)
         if (err) throw err;
         res.json(send);
       })

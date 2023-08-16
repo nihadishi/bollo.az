@@ -125,6 +125,7 @@ const MultiStepForm = () => {
                     <input
                       type="file"
                       accept="image/*"
+                      className="Addproduct--file"
                       onChange={handleFileChange}
                     />
 
@@ -132,6 +133,7 @@ const MultiStepForm = () => {
                     <input
                       type="text"
                       placeholder="Name"
+                      className="Addproduct--text"
                       value={addproductdata.productname}
                       onChange={(e) =>
                         setaddproductData({
@@ -144,6 +146,7 @@ const MultiStepForm = () => {
                     <label>Product Description</label>
                     <textarea
                       placeholder="Description"
+                      className="Addproduct--text"
                       value={addproductdata.productdescription}
                       onChange={(e) =>
                         setaddproductData({
@@ -159,6 +162,7 @@ const MultiStepForm = () => {
                     type="number"
                       placeholder="Price (AZN)"
                       value={addproductdata.productprice}
+                      className="Addproduct--number"
                       onChange={(e) =>
                         setaddproductData({
                           ...addproductdata,
@@ -214,19 +218,21 @@ const MultiStepForm = () => {
                     <label>Seller</label>
                     <input
                       type="text"
+                      className="Addproduct--text"
                       value={user.fullname}
                       readOnly
                       required
                     />
                     <label>Region</label>
-                    <input type="text" value={user.region} readOnly required />
+                    <input type="text" value={user.region}  className="Addproduct--text" readOnly required />
                     <label>City</label>
-                    <input type="text" value={user.city} readOnly required />
+                    <input type="text" value={user.city}  className="Addproduct--text" readOnly required />
                     <label>Email</label>
-                    <input type="text" value={user.email} readOnly required />
+                    <input type="text" value={user.email}  className="Addproduct--text" readOnly required />
                     <label>Number</label>
                     <input
                       type="text"
+                      className="Addproduct--text"
                       value={`+994${user.number}`}
                       readOnly
                       required
