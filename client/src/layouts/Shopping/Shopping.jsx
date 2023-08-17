@@ -8,9 +8,11 @@ import minus from "./img/-.png";
 import emptybasket from "./img/emptybasket.jpg";
 import deleteicon from "./img/delete.svg";
 import { Link, useNavigate } from "react-router-dom";
+import { TotalPriceContext } from "../../assets/context/TotalPriceContext";
 const Shopping = () => {
   const { openShopping, setOpenShopping, shoppingItems, setShoppingItems } =
     useContext(ShoppingContext);
+    const {totalPriceCont,setTotalPriceCont} = useContext(TotalPriceContext);
     const navigate = useNavigate();
 
   const handleRemoveProduct = (productId) => {
@@ -156,6 +158,7 @@ const Shopping = () => {
               <div className="Shopping-Detail-Button-Checkout" onClick={()=>{
                 navigate("/3dsecure.azericard/payment")
                 setOpenShopping(false)
+                setTotalPriceCont(totalPrice)
               }}>
                 Check Out - {totalPrice} AZN
               </div>
