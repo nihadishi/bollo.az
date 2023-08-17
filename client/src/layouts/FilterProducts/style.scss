@@ -1,0 +1,63 @@
+.FilterProducts{
+    width: 100%;
+    min-height: 40px;
+    padding-top: 0px; 
+    &-icon{
+        width: 80%;
+        margin: 120px auto 0;
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        & img{
+            width: 36px;
+            height: 36px;
+        }
+    }
+}
+.filter-container {
+    position: absolute;
+    padding: 20px;
+    right: 15%;
+    background-color: #f8f8f8;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    left: 50%;
+    width: 70%;
+    transform: translate(-50%,-60%);
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .filter-input {
+    margin-bottom: 10px;
+  
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+  
+    input,
+    select {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+  }
+  .filter-x{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    & div{
+      width: 24px;
+      height: 24px;
+      background-image: url("./img/xicon.png");
+      &:hover{
+        background-image: url("./img/xicon2.png");
+      }
+    }
+  }
+  

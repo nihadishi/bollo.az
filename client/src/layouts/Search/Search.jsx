@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { BlendingContext } from "../../assets/context/blendContext";
 
-const Search = ({ onSearch }) => {
+const Search = () => {
   const navigate = useNavigate();
   const [searchText, setSearchText] = useState("");
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -21,22 +21,24 @@ const Search = ({ onSearch }) => {
       product.producttype.toLowerCase().includes(searchText.toLowerCase())
     );
     setFilteredProducts(filtered);
-  }, [searchText]);
+  }, [searchText,blending]);
 
   return (
     
     <div className="src">
-        {searchText ? setBlending(true):setBlending(false)}
+        {/* {searchText ? setBlending(true):setBlending(false)} */}
       <input
         type="text"
         className="src-input"
         placeholder="Search..."
         value={searchText}
         onChange={(e) => setSearchText(e.target.value)}
+        onFocus={()=>{setBlending(true)}}
+       
       />
-      {searchText && (
-        <div className="src-products">
-          {filteredProducts.slice(0, 4).map((filtered, index) => (
+      {blending && searchText && (
+        <div className="src-products" onBlur={()=>{setBlending(false)}}>
+          {filteredProducts.slice(0, 3).map((filtered, index) => (
             <div
               className="src-products-product"
               key={index}
@@ -72,11 +74,11 @@ const Search = ({ onSearch }) => {
               </div>
             </div>
           ))}
-          {filteredProducts.length > 4 && (
-            <div className="see-all"><Link to={`/products/search/${searchText}`}>See All</Link></div>
-          )}
+          {/* {filteredProducts.length > 3 && ( */}
+            <div className="see-all"><Link to={`/products/search/${searchText}`} onClick={()=>setBlending(false)}>See All</Link></div>
+          {/* )} */}
         </div>
-      )}
+       )} 
     </div>
   );
 };

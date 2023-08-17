@@ -184,9 +184,9 @@ const ProfilePage = () => {
                           <MDBCardImage
                             src={user?.image ? profileImage : defaultProfilePhoto}
                             alt="Image"
-                            className="mt-4 mb-2 img-thumbnail"
+                            className="mb-2 img-thumbnail overflow-hidden"
                             // fluid
-                            style={{ width: "150px", zIndex: "1" }}
+                            style={{ width: "100%" ,height:"100%", zIndex: "1" }}
                           />
                         </div>
                         <div className="ms-3" style={{ marginTop: "90px" }}>
@@ -213,14 +213,14 @@ const ProfilePage = () => {
                             <MDBModalDialog>
                               <MDBModalContent>
                                 <MDBModalHeader>
-                                  <MDBModalTitle>Modal title</MDBModalTitle>
+                                  <MDBModalTitle style={{color:"black"}} className="d-flex align-items-center justify-content-center">Are you sure you want to log out?</MDBModalTitle>
                                   <MDBBtn
-                                    className="btn-close"
+                                    className="btn-close p-0"
                                     color="none"
                                     onClick={toggleShow}
                                   ></MDBBtn>
                                 </MDBModalHeader>
-                                <MDBModalBody>Are you sure?</MDBModalBody>
+                                <MDBModalBody style={{color:"black"}} className="d-flex align-items-center justify-content-center">If you log out, you will need to log in again.</MDBModalBody>
     
                                 <MDBModalFooter>
                                   <MDBBtn

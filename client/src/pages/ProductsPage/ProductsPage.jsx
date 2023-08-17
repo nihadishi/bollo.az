@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./style.scss";
+import moment from "moment";
 import addicon from "./img/add-icon.png";
 import minusicon from "./img/added-icon.png";
 import defaultProduct from "./img/default_1.jpg";
@@ -10,12 +11,17 @@ import Loading from "../../layouts/Loading/Loading";
 import { ShoppingContext } from "../../assets/context/shoppingContext";
 import { useNavigate, useParams } from "react-router-dom";
 import Search from "../../layouts/Search/Search";
+import { BlendingContext } from "../../assets/context/blendContext";
+import FilterProducts from "../../layouts/FilterProducts/FilterProducts";
 const ProductsPage = () => {
   const { user, setUser, loading, setLoading } = useContext(UserContext);
-  const { shoppingItems, setShoppingItems, products, setProducts } = useContext(ShoppingContext);
+  const { shoppingItems, setShoppingItems, products, setProducts } =
+    useContext(ShoppingContext);
+  const { setBlending } = useContext(BlendingContext);
   const navigate = useNavigate();
   const params = useParams();
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [OnlySearchFilteredOrAllProducts,setOnlySearchFilteredOrAllProducts] = useState([]);
   const AddShoppingContext = (product) => {
     const updatedShoppingItems = [...shoppingItems];
     const index = updatedShoppingItems.findIndex(
@@ -32,27 +38,51 @@ const ProductsPage = () => {
   useEffect(() => {
     setLoading(true);
     if (params.searchText) {
-      const filtered = products.filter((product) =>
-      (product.productname && product.productname.toLowerCase().includes(params.searchText.toLowerCase())) ||
-      (product.city && product.city.toLowerCase().includes(params.searchText.toLowerCase())) ||
-      (product.fullname && product.fullname.toLowerCase().includes(params.searchText.toLowerCase())) ||
-      (product.productcategory && product.productcategory.toLowerCase().includes(params.searchText.toLowerCase())) ||
-      (product.producttype && product.producttype.toLowerCase().includes(params.searchText.toLowerCase()))
+      const filtered = products.filter(
+        (product) =>
+          (product.productname &&
+            product.productname
+              .toLowerCase()
+              .includes(params.searchText.toLowerCase())) ||
+          (product.city &&
+            product.city
+              .toLowerCase()
+              .includes(params.searchText.toLowerCase())) ||
+          (product.fullname &&
+            product.fullname
+              .toLowerCase()
+              .includes(params.searchText.toLowerCase())) ||
+          (product.productcategory &&
+            product.productcategory
+              .toLowerCase()
+              .includes(params.searchText.toLowerCase())) ||
+          (product.producttype &&
+            product.producttype
+              .toLowerCase()
+              .includes(params.searchText.toLowerCase()))
       );
       setFilteredProducts(filtered);
+      setOnlySearchFilteredOrAllProducts(filtered)
     } else {
       setFilteredProducts(products);
+      setOnlySearchFilteredOrAllProducts(products)
     }
     const timeout = setTimeout(() => {
       setLoading(false);
-    }, 1800);
+    }, 1300);
   }, [params, products]);
   if (!loading) {
     return (
       <>
-        <div className="Products">
+        <FilterProducts OnlySearchFilteredOrAllProducts={OnlySearchFilteredOrAllProducts} filteredProducts={filteredProducts} setFilteredProducts={setFilteredProducts}/>
+        <div
+          className="Products"
+          onClick={() => {
+            setBlending(false);
+          }}
+        >
           {filteredProducts.map((product) => (
-            <div className="Products-Product" key={product._id}>
+            <div className={`Products-Product ${product.producttype === "Fresh" ? "fresh" : "not-fresh"}`} key={product._id}>
               <div className="Products-Product-TypeLike">
                 <div className="Products-Product-TypeLike-Type">
                   {product?.producttype === "Fresh" ? (
@@ -66,7 +96,10 @@ const ProductsPage = () => {
                   )}
                 </div>
                 <div className="Products-Product-TypeLike-Like">
-                  <img src={likeProduct} alt="" />
+                  {/* <img src={likeProduct} alt="" /> */}
+                  {/* {new Date(product.createdAt).toLocaleString()} */}
+                  {/* {moment(product.createdAt).format("YYYYMMDD")} */}
+                  {moment(product.createdAt).fromNow()}
                 </div>
               </div>
               <div

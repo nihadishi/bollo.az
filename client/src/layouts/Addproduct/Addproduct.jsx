@@ -192,12 +192,16 @@ const MultiStepForm = () => {
                           productcategory: e.target.value,
                         })}>
                       <option value="">--CHOOSE--</option>
-                      <option value="Fruits & Vegetables">Fruits & Vegetables</option>
-                      <option value="Bakery & Pastry">Bakery & Pastry</option>
-                      <option value="Dairy & Eggs">Dairy & Eggs</option>
+                      <option value="Fruits">Fruits</option>
+                      <option value="Vegetables">Vegetables</option>
+                      <option value="Bakery">Bakery</option>
+                      <option value="Pastry">Pastry</option>
+                      <option value="Dairy">Dairy</option>
+                      <option value="Eggs">Eggs</option>
                       <option value="Delikatessen">Delikatessen</option>
                       <option value="Savoury Grocery">Savoury Grocery</option>
-                      <option value="Meat & Poultry">Meat & Poultry</option>
+                      <option value="Meat">Meat</option>
+                      <option value="Poultry">Poultry</option>
                     </select>
                     <select name="producttype" className="selectinput" onChange={(e) =>
                         setaddproductData({

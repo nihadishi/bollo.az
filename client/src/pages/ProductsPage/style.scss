@@ -1,17 +1,28 @@
 @import "../../assets/fonts/fonts.scss";
 .Products {
   background-color: #fff;
-//   width: 100%;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: start;
-  margin: 0 auto;
-  padding: auto;
+  padding: 35px ;
+  padding-top: 55px;
   gap: 20px;
-  padding: 100px 7% 0; ////////
-
+  margin: 0px 7% 0; ////////
   &-Product {
+    transition:  0.3s;
+    padding: 0 10px;
+    &:hover{
+      scale: 1.05;
+    }
+    &.fresh {
+      box-shadow: 0 0 10px rgba(3, 223, 14, 0.719);
+    }
+  
+    &.not-fresh {
+      box-shadow: 0 0 10px rgba(253, 72, 0, 0.61);
+    }
+    border-radius: 10px;
     background-color: #fff;
     width: 300px;
     max-width: 400px;
@@ -26,6 +37,9 @@
       flex-direction: row;
       justify-content: space-between;
       &-Type {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         &-Fresh {
           background-color: #00ac22;
           color: #fff;
@@ -53,7 +67,8 @@
         }
       }
       &-Like {
-        margin: auto 0;
+        margin: auto 0px auto 0px;
+        text-align: end;
       }
     }
     &-Photo {
