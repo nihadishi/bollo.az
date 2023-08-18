@@ -5,9 +5,15 @@ import { UserContext } from "../../assets/context/userContext";
 import CardLoading from "../../layouts/Loading/CardLoading";
 import { Navigate } from "react-router-dom";
 import ProductsPage from "../ProductsPage/ProductsPage";
+import { TotalPriceContext } from "../../assets/context/TotalPriceContext";
 
 const PaymentPage = ({isAuth}) => {
   const { loading, setLoading } = useContext(UserContext);
+  const {totalPriceCont} = useContext(TotalPriceContext);
+  const [redirect, setRedirect] = useState(false);
+  const minutes = 3
+  const [remainingMinutes, setRemainingMinutes] = useState(minutes);
+  const [remainingSeconds, setRemainingSeconds] = useState(0);
   useEffect(() => {
     setLoading(true);
     const timeout = setTimeout(() => {
@@ -16,6 +22,35 @@ const PaymentPage = ({isAuth}) => {
 
     return () => clearTimeout(timeout);
   }, []);
+
+  useEffect(() => {
+    const redirectTimeout = setTimeout(() => {
+      setRedirect(true);
+    }, minutes * 60 * 1000);
+  
+    const endTime = new Date().getTime() + minutes * 60 * 1000 - 1000; // End time is calculated here
+  
+    const interval = setInterval(() => {
+      const currentTime = new Date().getTime();
+      const remainingTime = endTime - currentTime;
+      const remainingMinutes = Math.floor(remainingTime / (60 * 1000));
+      const remainingSeconds = Math.floor((remainingTime % (60 * 1000)) / 1000);
+      setRemainingMinutes(remainingMinutes);
+      setRemainingSeconds(remainingSeconds);
+  
+      if (remainingTime < 10) {
+        clearInterval(interval);
+      }
+    }, 500);
+  
+    return () => {
+      clearTimeout(redirectTimeout);
+      clearInterval(interval);
+    };
+  }, []);
+ 
+
+
   const [cardName, setCardName] = useState("");
   const [cardNumber, setCardNumber] = useState("");
   const [expirationDate, setExpirationDate] = useState("");
@@ -86,8 +121,12 @@ const PaymentPage = ({isAuth}) => {
 
   if (isAuth) {
     if(!loading){
-      return (
+      return (<>
+        {redirect ? (
+            <Navigate to="/products" replace />
+          ) : (
         <div className="PaymentPage">
+         
           <form onSubmit={handleSubmit} className="Form">
             <div>
               <label htmlFor="cardName">"Cardholder's Name:"</label>
@@ -161,7 +200,10 @@ const PaymentPage = ({isAuth}) => {
                 }`}
               />
             </div>
-            <button type="submit">Pay</button>
+            <button type="submit">Pay {totalPriceCont} AZN</button>
+            <div className="countdown">
+                Remaining Time: {remainingMinutes} min {remainingSeconds} sec
+              </div>
           </form>
           <div className="credit-card-wrap">
             <div className="mk-icon-world-map"></div>
@@ -197,6 +239,8 @@ const PaymentPage = ({isAuth}) => {
             </div>
           </div>
         </div>
+          )
+              }</>
       );
     }
     else{
