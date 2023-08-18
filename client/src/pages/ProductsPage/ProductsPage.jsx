@@ -3,6 +3,7 @@ import "./style.scss";
 import moment from "moment";
 import addicon from "./img/add-icon.png";
 import minusicon from "./img/added-icon.png";
+import notaddedicon from "./img/notaddedicon.png"
 import defaultProduct from "./img/default_1.jpg";
 import likeProduct from "./img/like.png";
 import axios from "axios";
@@ -129,7 +130,9 @@ const ProductsPage = () => {
                     {product?.productprice} {product.productunit}
                   </div>
                 </div>
-                <div
+                {
+                  user && user._id === product.userid ? <div className="Products-Product-About-L"><img src={notaddedicon} alt="Own"/></div>:
+                  <div
                   className="Products-Product-About-L"
                   onClick={() => {
                     AddShoppingContext(product);
@@ -141,6 +144,7 @@ const ProductsPage = () => {
                     <img src={addicon} alt="+" />
                   )}
                 </div>
+                }
               </div>
             </div>
           ))}

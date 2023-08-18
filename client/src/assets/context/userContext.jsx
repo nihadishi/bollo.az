@@ -17,10 +17,9 @@ export function UserContextProvider({children}) {
             }).catch(error =>{}
              )
       }
-      // else{
-      //   user.photo = '../../pages/LoginPage/img/OIP.jpeg'
-      // }
+
     }, [user])
+    console.log("user",user);
     return(
         <UserContext.Provider value={{user,setUser,loading,setLoading}}>
             {children}

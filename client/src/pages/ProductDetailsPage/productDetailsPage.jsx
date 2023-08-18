@@ -14,6 +14,7 @@ const ProductDetailsPage = () => {
   const productID = useParams();
   const { shoppingItems, setShoppingItems, products, setProducts } =
     useContext(ShoppingContext);
+    const {user} = useContext(UserContext);
   useEffect(() => {
     setLoading(true);
     axios
@@ -23,10 +24,10 @@ const ProductDetailsPage = () => {
       })
       .catch((error) => {
         console.error("Error fetching product details:", error);
+      })
+      .finally(() => {
+        setLoading(false)
       });
-    const timeout = setTimeout(() => {
-      setLoading(false);
-    }, 300);
   }, [productID]);
   const isInBasket = shoppingItems.some((item) => item._id === productData._id);
 
@@ -113,16 +114,18 @@ const ProductDetailsPage = () => {
                 <div className="product-order-detail-r-price">
                   {productData.productprice} {productData.productunit}
                 </div>
-                <div
-                  className="product-order-detail-r-addbasket"
-                  onClick={handleAddToBasket}
-                  style={{
-                    backgroundColor: isInBasket ? "#00ac22" : "#000ca8",
-                  }}
-                >
-                  {" "}
-                  {isInBasket ? "Already in Basket" : "Add to Basket"}
-                </div>
+                  {
+                     user && user._id === productData.userid ? <div className="product-order-detail-r-addbasket" style={{backgroundColor:"#7F7F7F"}}>It's your Product</div>:
+                     <div
+                     className="product-order-detail-r-addbasket"
+                     onClick={handleAddToBasket}
+                     style={{
+                       backgroundColor: isInBasket ? "#00ac22" : "#000ca8",
+                     }}
+                   >
+                     {isInBasket ? "Already in Basket" : "Add to Basket"}
+                   </div>
+                  }
               </div>
             </div>
           </div>

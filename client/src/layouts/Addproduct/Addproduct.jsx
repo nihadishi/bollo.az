@@ -10,14 +10,20 @@ const MultiStepForm = () => {
   const { user, setUser, loading, setLoading } = useContext(UserContext);
   const [step, setStep] = useState(1);
   const [isFormOpen, setIsFormOpen] = useState(true);
+  const today = new Date();
+  const maxDate = new Date(today);
+  maxDate.setFullYear(maxDate.getFullYear() + 3);
+  const todayString = today.toISOString().split("T")[0];
+  const maxDateString = maxDate.toISOString().split("T")[0];
   const [addproductdata, setaddproductData] = useState({
     productimage: null,
     productname: "",
     productdescription: "",
     productprice: "",
     productunit: "",
-    productcategory:"",
-    producttype:"",
+    productcategory: "",
+    producttype: "",
+    productexpirationdate:{todayString},
     fullname: user.fullname,
     region: user.region,
     city: user.city,
@@ -33,13 +39,14 @@ const MultiStepForm = () => {
   const handleNext = () => {
     setStep(step + 1);
   };
-
+  
   const handleBack = () => {
     setStep(step - 1);
   };
   const handleCancel = () => {
     setIsFormOpen(false);
   };
+
   const [hasImage, setHasImage] = useState(false);
   const [imageURL, setImageURL] = useState("");
   const handleFileChange = (e) => {
@@ -49,7 +56,7 @@ const MultiStepForm = () => {
     });
     const file = e.target.files[0];
     const reader = new FileReader();
-
+    
     reader.readAsDataURL(file);
     reader.onload = (e) => {
       setImageURL(reader.result);
@@ -57,6 +64,7 @@ const MultiStepForm = () => {
     };
   };
   const addProduct = async (e) => {
+    
     e.preventDefault();
     let formData = new FormData();
     formData.append("productimage", addproductdata.productimage);
@@ -66,20 +74,20 @@ const MultiStepForm = () => {
     formData.append("productunit", addproductdata.productunit);
     formData.append("productcategory", addproductdata.productcategory);
     formData.append("producttype", addproductdata.producttype);
+    formData.append("productexpirationdate", addproductdata.productexpirationdate);
     formData.append("fullname", addproductdata.fullname);
     formData.append("region", addproductdata.region);
     formData.append("city", addproductdata.city);
     formData.append("number", addproductdata.number);
     formData.append("email", addproductdata.email);
     formData.append("userid", addproductdata.id);
-    console.log(addproductdata);
     try {
       const { data } = await axios.post("products/add", formData, {
         headers: {
           "Content-Type": "multipart/form-data", // Set proper content type for file upload
         },
       });
-      console.log("data",data);
+      console.log("data", data);
       if (data.error) {
         toast.error("Can't add the product, please try again ");
       } else {
@@ -89,8 +97,9 @@ const MultiStepForm = () => {
           productdescription: "",
           productprice: "",
           productunit: "",
-          productcategory:"",
-          producttype:"",
+          productcategory: "",
+          producttype: "",
+          productexpirationdate:"",
           fullname: user.fullname,
           region: user.region,
           city: user.city,
@@ -98,17 +107,15 @@ const MultiStepForm = () => {
           email: user.email,
           id: user._id,
         });
-        toast.success("Product added")
-        navigate('/products')
+        toast.success("Product added");
+        navigate("/products");
       }
-    } 
-    catch (error) {
-      toast.error(error.message)
-      toast.error(error.name)
+    } catch (error) {
+      toast.error(error.message);
+      toast.error(error.name);
       console.log(error);
     }
   };
-  console.log(addproductdata);
   return (
     <>
       {isFormOpen ? (
@@ -159,7 +166,7 @@ const MultiStepForm = () => {
 
                     <label>Product Price</label>
                     <input
-                    type="number"
+                      type="number"
                       placeholder="Price (AZN)"
                       value={addproductdata.productprice}
                       className="Addproduct--number"
@@ -171,11 +178,16 @@ const MultiStepForm = () => {
                       }
                       required
                     />
-                    <select className="selectinput" name="productunit" onChange={(e) =>
+                    <select
+                      className="selectinput"
+                      name="productunit"
+                      onChange={(e) =>
                         setaddproductData({
                           ...addproductdata,
                           productunit: e.target.value,
-                        })}>
+                        })
+                      }
+                    >
                       <option value="">--CHOOSE--</option>
                       <option value="AZN/kg">AZN/kg</option>
                       <option value="AZN/gr">AZN/gr</option>
@@ -186,11 +198,16 @@ const MultiStepForm = () => {
                     </select>
 
                     <label>Product Category</label>
-                    <select name="productcategory" className="selectinput" onChange={(e) =>
+                    <select
+                      name="productcategory"
+                      className="selectinput"
+                      onChange={(e) =>
                         setaddproductData({
                           ...addproductdata,
                           productcategory: e.target.value,
-                        })}>
+                        })
+                      }
+                    >
                       <option value="">--CHOOSE--</option>
                       <option value="Fruits">Fruits</option>
                       <option value="Vegetables">Vegetables</option>
@@ -203,16 +220,35 @@ const MultiStepForm = () => {
                       <option value="Meat">Meat</option>
                       <option value="Poultry">Poultry</option>
                     </select>
-                    <select name="producttype" className="selectinput" onChange={(e) =>
+                    <select
+                      name="producttype"
+                      className="selectinput"
+                      onChange={(e) =>
                         setaddproductData({
                           ...addproductdata,
                           producttype: e.target.value,
-                        })}>
+                        })
+                      }
+                    >
                       <option value="">--CHOOSE--</option>
                       <option value="Fresh">Fresh</option>
                       <option value="Greenhouse">Greenhouse</option>
                       <option value="Other">Other</option>
                     </select>
+
+                    <label for="expirationdate">Expiration date:</label>
+                    <input
+                      type="date"
+                      id="start"
+                      name="trip-start"
+                      value={addproductdata.productexpirationdate}
+                      onChange={(e)=>setaddproductData({
+                        ...addproductdata,
+                        productexpirationdate: e.target.value
+                      })}
+                      min={todayString}
+                      max={maxDateString}
+                    />
                   </div>
                 )}
                 {step === 2 && (
@@ -228,11 +264,29 @@ const MultiStepForm = () => {
                       required
                     />
                     <label>Region</label>
-                    <input type="text" value={user.region}  className="Addproduct--text" readOnly required />
+                    <input
+                      type="text"
+                      value={user.region}
+                      className="Addproduct--text"
+                      readOnly
+                      required
+                    />
                     <label>City</label>
-                    <input type="text" value={user.city}  className="Addproduct--text" readOnly required />
+                    <input
+                      type="text"
+                      value={user.city}
+                      className="Addproduct--text"
+                      readOnly
+                      required
+                    />
                     <label>Email</label>
-                    <input type="text" value={user.email}  className="Addproduct--text" readOnly required />
+                    <input
+                      type="text"
+                      value={user.email}
+                      className="Addproduct--text"
+                      readOnly
+                      required
+                    />
                     <label>Number</label>
                     <input
                       type="text"
@@ -257,9 +311,21 @@ const MultiStepForm = () => {
                   </div>
                 )}
                 <div className="buttons">
-                  {step === 1 && <button type="button" onClick={handleCancel}>Cancel</button>}
-                  {step > 1 && <button type="button" onClick={handleBack}>Back</button>}
-                  {step < 3 && <button type="button" onClick={handleNext}>Next</button>}
+                  {step === 1 && (
+                    <button type="button" onClick={handleCancel}>
+                      Cancel
+                    </button>
+                  )}
+                  {step > 1 && (
+                    <button type="button" onClick={handleBack}>
+                      Back
+                    </button>
+                  )}
+                  {step < 3 && (
+                    <button type="button" onClick={handleNext}>
+                      Next
+                    </button>
+                  )}
                   {step === 3 && <button type="submit">Submit</button>}
                 </div>
               </form>

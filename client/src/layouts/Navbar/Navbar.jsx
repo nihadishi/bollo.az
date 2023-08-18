@@ -16,7 +16,6 @@ const Navbar = () => {
   window.onscroll = function () {
     const navbar = document.querySelector(".Navbar");
     let currentScrollPos = window.pageYOffset;
-    // console.log(prevScrollPos, currentScrollPos);
     if (prevScrollPos > currentScrollPos) {
       navbar.style.top = "0";
     } else {
@@ -25,7 +24,6 @@ const Navbar = () => {
 
     prevScrollPos = currentScrollPos;
   };
-  console.log(blending);
   return (
     <div className="Navbar" style={{"--blending": blending?"true":"false"}}>
       <div className="Navbar-Nav">
