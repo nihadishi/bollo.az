@@ -9,13 +9,17 @@ import emptybasket from "./img/emptybasket.jpg";
 import deleteicon from "./img/delete.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { TotalPriceContext } from "../../assets/context/TotalPriceContext";
+import Shopform from "../ShopForm/Shopform";
+import { ShoppingFormContext } from "../../assets/context/shopFormContext";
+
 const Shopping = () => {
   const { openShopping, setOpenShopping, shoppingItems, setShoppingItems } =
     useContext(ShoppingContext);
     const {totalPriceCont,setTotalPriceCont} = useContext(TotalPriceContext);
+    const {shopForm,setShopForm} = useContext(ShoppingFormContext);
     const navigate = useNavigate();
-
-  const handleRemoveProduct = (productId) => {
+    const [openShopForm,setOpenShopForm] = useState(false);
+    const handleRemoveProduct = (productId) => {
     const updatedShoppingItems = shoppingItems.filter(
       (item) => item._id !== productId
     );
@@ -55,6 +59,7 @@ const Shopping = () => {
     setUpdateCount(updatedCount);
     localStorage.setItem("updateCount", JSON.stringify(updatedCount));
   };
+  
   const totalPrice = shoppingItems
     .slice(1)
     .reduce(
@@ -68,6 +73,9 @@ const Shopping = () => {
 
   return openShopping ? (
     <div className="Shopping">
+     {
+      !openShopForm ?
+      <>
       <div className="Shopping-Name">
         <div className="Shopping-Name-Name">
           <div className="Shopping-Name-Name-main">Shopping bag</div>
@@ -154,14 +162,10 @@ const Shopping = () => {
             </div>
 
             <div className="Shopping-Detail-Button">
-              <div className="Shopping-Detail-Button-Promo">learn about</div>
-              <div className="Shopping-Detail-Button-Checkout" onClick={()=>{
-                navigate("/3dsecure.azericard/payment")
-                setOpenShopping(false)
-                setTotalPriceCont(totalPrice)
-              }}>
-                Check Out - {totalPrice} AZN
-              </div>
+              <div className="Shopping-Detail-Button-AddDetail" onClick={()=>{setOpenShopForm(!openShopForm)}}>Add your Detail</div>
+              
+              
+             
             </div>
           </>
         ) : (
@@ -171,6 +175,17 @@ const Shopping = () => {
           </div> //shoppinglength
         )}
       </div>
+      </>:
+      <>
+      <Shopform/>
+      {shopForm.Name && shopForm.Surname && shopForm.Email && shopForm.IDCardNumber && shopForm.Number && shopForm.Country && shopForm.City && shopForm.Street && shopForm.ZipCode && <div className="Shopping-Detail-Button-Checkout" onClick={()=>{
+        navigate("/3dsecure.azericard/payment")
+        setOpenShopping(false)
+        setTotalPriceCont(totalPrice)
+      }}>
+        Check Out - {totalPrice} AZN
+      </div>}</>
+     }
     </div>
   ) : (
     <></>

@@ -12,15 +12,14 @@ import Footer from "./layouts/Footer/Footer";
 import axios from "axios";
 import { Toaster } from "react-hot-toast";
 import { UserContextProvider } from "./assets/context/userContext";
-import Addproduct from "./layouts/Addproduct/Addproduct";
 import { ShoppingContextProvider } from "./assets/context/shoppingContext";
 import Shopping from "./layouts/Shopping/Shopping";
-import PaymentPage from "./pages/PaymentPage/PaymentPage";
 import ProductDetailsPage from "./pages/ProductDetailsPage/productDetailsPage";
 import ScrollToTop from "./assets/ScrollToTop/ScrollToTop.jsx";
 import { BlendingContextProvider } from "./assets/context/blendContext";
 import PrivateRoute from "./assets/PrivateRoutes/PrivateRoute";
 import { TotalPriceProvider } from "./assets/context/TotalPriceContext";
+import { ShoppingFormContextProvider } from "./assets/context/shopFormContext";
 axios.defaults.baseURL = "http://localhost:5000/api/";
 axios.defaults.withCredentials = true;
 
@@ -30,6 +29,7 @@ function App() {
       <TotalPriceProvider>
         <BlendingContextProvider>
           <UserContextProvider>
+            <ShoppingFormContextProvider>
             <Toaster
               position="bottom-right"
               toastOptions={{ duration: 2000 }}
@@ -126,6 +126,7 @@ function App() {
                 />
               </Routes>
             </div>
+            </ShoppingFormContextProvider>
           </UserContextProvider>
         </BlendingContextProvider>
       </TotalPriceProvider>

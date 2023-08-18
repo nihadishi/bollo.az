@@ -9,6 +9,7 @@
         justify-content: end;
         align-items: center;
         & img{
+          cursor: pointer;
             width: 36px;
             height: 36px;
         }
@@ -55,6 +56,7 @@
       width: 24px;
       height: 24px;
       background-image: url("./img/xicon.png");
+      cursor: pointer;
       &:hover{
         background-image: url("./img/xicon2.png");
       }
