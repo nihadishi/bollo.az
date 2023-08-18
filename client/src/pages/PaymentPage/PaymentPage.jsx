@@ -202,7 +202,7 @@ const PaymentPage = ({isAuth}) => {
                 }`}
               />
             </div>
-            <button type="submit">Pay {totalPriceCont} AZN</button>
+            <button type="submit" className="Payment-submit">Pay {totalPriceCont} AZN</button>
             <div className="countdown">
                 Remaining Time: {remainingMinutes} min {remainingSeconds} sec
               </div>

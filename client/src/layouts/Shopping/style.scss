@@ -43,6 +43,12 @@
       justify-content: center;
       & img {
         cursor: pointer;
+        width: 30px;
+        height: 30px;
+        &:hover{
+          background-color: #ff453f;
+          border-radius: 20px;
+        }
       }
     }
   }
@@ -191,6 +197,7 @@
         font-weight: 400;
         line-height: normal;
         color: black;
+        box-shadow: 0 0 10px rgba(1, 63, 25, 0.3);
         &:hover{
           background-color: #009c68;
           color: #fff;
@@ -212,6 +219,9 @@
         font-style: normal;
         font-weight: 600;
         line-height: normal;
+        &:hover{
+          background-color: #009c68;
+        }
       }
     }
   }
