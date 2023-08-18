@@ -69,7 +69,6 @@ const Shopping = () => {
       0
     )
     .toFixed(2);
-  console.log(updateCount);
 
   return openShopping ? (
     <div className="Shopping">
@@ -156,16 +155,13 @@ const Shopping = () => {
                     </div>
                   </div>
                 ) : 
-                  <></>
+                  <div key={index}></div>
                 
               )}
             </div>
 
             <div className="Shopping-Detail-Button">
-              <div className="Shopping-Detail-Button-AddDetail" onClick={()=>{setOpenShopForm(!openShopForm)}}>Add your Detail</div>
-              
-              
-             
+              <div className="Shopping-Detail-Button-AddDetail" onClick={()=>{setOpenShopForm(!openShopForm)}}>Add your Detail</div>     
             </div>
           </>
         ) : (
@@ -177,7 +173,7 @@ const Shopping = () => {
       </div>
       </>:
       <>
-      <Shopform/>
+      <Shopform setOpenShopForm={setOpenShopForm}/>
       {shopForm.Name && shopForm.Surname && shopForm.Email && shopForm.IDCardNumber && shopForm.Number && shopForm.Country && shopForm.City && shopForm.Street && shopForm.ZipCode && <div className="Shopping-Detail-Button-Checkout" onClick={()=>{
         navigate("/3dsecure.azericard/payment")
         setOpenShopping(false)

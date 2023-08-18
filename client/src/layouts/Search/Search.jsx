@@ -13,6 +13,7 @@ const Search = () => {
   const {blending, setBlending} = useContext(BlendingContext);
 
   useEffect(() => {
+    setSearchText(searchText.trim())
     const filtered = products.filter((product) =>
       (product.productname.toLowerCase().includes(searchText.toLowerCase())) ||
       product.city.toLowerCase().includes(searchText.toLowerCase()) ||
@@ -22,20 +23,20 @@ const Search = () => {
     );
     setFilteredProducts(filtered);
   }, [searchText,blending]);
-
+  
   return (
     
     <div className="src">
-        {/* {searchText ? setBlending(true):setBlending(false)} */}
       <input
         type="text"
         className="src-input"
-        placeholder="Search..."
+        placeholder="  Search..."
         value={searchText}
         onChange={(e) => setSearchText(e.target.value)}
         onFocus={()=>{setBlending(true)}}
        
       />
+
       {blending && searchText && (
         <div className="src-products" onBlur={()=>{setBlending(false)}}>
           {filteredProducts.slice(0, 3).map((filtered, index) => (

@@ -6,10 +6,12 @@ import CardLoading from "../../layouts/Loading/CardLoading";
 import { Navigate } from "react-router-dom";
 import ProductsPage from "../ProductsPage/ProductsPage";
 import { TotalPriceContext } from "../../assets/context/TotalPriceContext";
+import { ShoppingFormContext } from "../../assets/context/shopFormContext";
 
 const PaymentPage = ({isAuth}) => {
   const { loading, setLoading } = useContext(UserContext);
   const {totalPriceCont} = useContext(TotalPriceContext);
+  const {shopForm,setShopForm} = useContext(ShoppingFormContext);
   const [redirect, setRedirect] = useState(false);
   const minutes = 3
   const [remainingMinutes, setRemainingMinutes] = useState(minutes);
@@ -51,7 +53,7 @@ const PaymentPage = ({isAuth}) => {
  
 
 
-  const [cardName, setCardName] = useState("");
+  const [cardName, setCardName] = useState(shopForm?.Name + " " + shopForm?.Surname);
   const [cardNumber, setCardNumber] = useState("");
   const [expirationDate, setExpirationDate] = useState("");
   const [securityCode, setSecurityCode] = useState("");
@@ -129,7 +131,7 @@ const PaymentPage = ({isAuth}) => {
          
           <form onSubmit={handleSubmit} className="Form">
             <div>
-              <label htmlFor="cardName">"Cardholder's Name:"</label>
+              <label htmlFor="cardName">Cardholder's Name:</label>
               <input
                 type="text"
                 id="cardName"
@@ -146,7 +148,7 @@ const PaymentPage = ({isAuth}) => {
               />
             </div>
             <div>
-              <label htmlFor="cardNumber">"Card Number:"</label>
+              <label htmlFor="cardNumber">Card Number:</label>
               <input
                 type="text"
                 id="cardNumber"
@@ -164,7 +166,7 @@ const PaymentPage = ({isAuth}) => {
               />
             </div>
             <div>
-              <label htmlFor="expirationDate">"Expiration Date (MM/YY):"</label>
+              <label htmlFor="expirationDate">Expiration Date (MM/YY):</label>
               <input
                 type="text"
                 id="expirationDate"

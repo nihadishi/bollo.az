@@ -1,9 +1,9 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 
 export const ShoppingFormContext = createContext();
 
 export const ShoppingFormContextProvider = ({ children }) => {
-  const [shopForm, setShopForm] = useState({
+  const initialForm = {
     Name: "",
     Surname: "",
     IDCardNumber: "",
@@ -13,7 +13,14 @@ export const ShoppingFormContextProvider = ({ children }) => {
     City: "",
     Street: "",
     ZipCode: "",
-  });
+  };
+
+  const storedForm = JSON.parse(localStorage.getItem('shopForm')) || initialForm;
+  const [shopForm, setShopForm] = useState(storedForm);
+
+  useEffect(() => {
+    localStorage.setItem('shopForm', JSON.stringify(shopForm));
+  }, [shopForm]);
 
   return (
     <ShoppingFormContext.Provider value={{ shopForm, setShopForm }}>

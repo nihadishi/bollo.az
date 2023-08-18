@@ -1,12 +1,16 @@
 import React, { useContext, useState } from 'react';
 import "./style.scss";
 import { ShoppingFormContext } from '../../assets/context/shopFormContext';
-
-const ShopForm = () => {
+import xicon3 from "./img/xicon3.png"
+import xicon4 from "./img/xicon4.png"
+import backicon from "./img/backicon.png"
+const ShopForm = ({setOpenShopForm}) => {
 const{shopForm,setShopForm} = useContext(ShoppingFormContext);
 
   return (
+    
     <div className="ShopForm">
+        <div className="ShopForm-X" onClick={()=>{setOpenShopForm(false)}}><img src={backicon} width={"36px"} height={"36px"} alt='X'/></div>
       <form className="ShopForm-Form">
         <div>
           <label htmlFor="Name">Name:</label>
@@ -108,7 +112,6 @@ const{shopForm,setShopForm} = useContext(ShoppingFormContext);
             required
           />
         </div>
-        <button type="submit">Submit</button>
       </form>
     </div>
   );
