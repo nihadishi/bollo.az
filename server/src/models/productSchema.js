@@ -24,6 +24,9 @@ const productSchema = new Schema({
   producttype:{
     type: String,
   },
+  productexpirationdate:{
+    type: String,
+  },
   fullname: {
     type: String,
     unique: false,

@@ -57,7 +57,7 @@ const{shopForm,setShopForm} = useContext(ShoppingFormContext);
           />
         </div>
         <div>
-          <label htmlFor="Number">Number:</label>
+          <label htmlFor="Number">Phone Number:</label>
           <input
             type="text"
             id="Number"

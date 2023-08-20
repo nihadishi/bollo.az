@@ -1,7 +1,7 @@
 .FilterProducts{
     width: 100%;
     min-height: 40px;
-    padding-top: 0px; 
+    padding-top: 30px; 
     &-icon{
         width: 80%;
         margin: 120px auto 0;
@@ -19,18 +19,23 @@
     position: absolute;
     padding: 20px;
     right: 15%;
-    background-color: #f8f8f8;
-    border: 1px solid #e0e0e0;
+    background-color: #ffffff;
+    border: 1px solid #ffffff;
     border-radius: 5px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     left: 50%;
     width: 70%;
     transform: translate(-50%,-60%);
     display: flex;
     justify-content: space-between;
   }
-  
+  .filter-inputs{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+  }
   .filter-input {
     margin-bottom: 10px;
   

@@ -86,6 +86,9 @@ const ProductDetailsPage = () => {
                 >
                   {productData.city}, {productData.region}
                 </div>
+                <div>
+                  {productData.productexpirationdate}
+                </div>
               </div>
               <div className="product-info-details-description">
                 <div>{productData.productdescription}</div>

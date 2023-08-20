@@ -6,6 +6,7 @@ export const ShoppingContext = createContext({});
 export function ShoppingContextProvider({ children }) {
   const [openShopping, setOpenShopping] = useState(false);
   const [products, setProducts] = useState([]);
+  const [AllProductsFromDatabase, setAllProductsFromDatabase] = useState([]);
   const [shoppingItems, setShoppingItems] = useState(() => {
     const storedItems = localStorage.getItem("shoppingItems");
 
@@ -19,6 +20,7 @@ export function ShoppingContextProvider({ children }) {
       .get("/products")
       .then((response) => {
         setProducts(response.data);
+        setAllProductsFromDatabase(response.data);
       })
       .catch((error) => {
         console.error("Error fetching products:", error);
@@ -33,6 +35,7 @@ export function ShoppingContextProvider({ children }) {
         setShoppingItems,
         products,
         setProducts,
+        AllProductsFromDatabase
       }}
     >
       {children}

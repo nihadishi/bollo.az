@@ -3,7 +3,7 @@ import "./style.scss";
 import { useContext } from "react";
 import { UserContext } from "../../assets/context/userContext";
 import CardLoading from "../../layouts/Loading/CardLoading";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import ProductsPage from "../ProductsPage/ProductsPage";
 import { TotalPriceContext } from "../../assets/context/TotalPriceContext";
 import { ShoppingFormContext } from "../../assets/context/shopFormContext";
@@ -16,6 +16,13 @@ const PaymentPage = ({isAuth}) => {
   const minutes = 3
   const [remainingMinutes, setRemainingMinutes] = useState(minutes);
   const [remainingSeconds, setRemainingSeconds] = useState(0);
+  
+
+  const [cardName, setCardName] = useState(shopForm?.Name + " " + shopForm?.Surname);
+  const [cardNumber, setCardNumber] = useState("");
+  const [expirationDate, setExpirationDate] = useState("");
+  const [securityCode, setSecurityCode] = useState("");
+ const navigate = useNavigate();
   useEffect(() => {
     setLoading(true);
     const timeout = setTimeout(() => {
@@ -51,12 +58,6 @@ const PaymentPage = ({isAuth}) => {
     };
   }, []);
  
-
-
-  const [cardName, setCardName] = useState(shopForm?.Name + " " + shopForm?.Surname);
-  const [cardNumber, setCardNumber] = useState("");
-  const [expirationDate, setExpirationDate] = useState("");
-  const [securityCode, setSecurityCode] = useState("");
 
   const isValidCardName = (name) => {
     return name.length >= 3; 
@@ -115,7 +116,7 @@ const PaymentPage = ({isAuth}) => {
       securityCode.length === 3 &&
       /^([01][0-9]|2[0-3])\/[2-9][0-9]$/.test(expirationDate)
     ) {
-      alert("Kart bilgileri geçerli!");
+      navigate("/3dsecure.azericard/auth")
     } else {
       alert("Lütfen geçerli kart bilgileri girin.");
     }

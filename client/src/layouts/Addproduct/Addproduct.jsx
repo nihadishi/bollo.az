@@ -23,7 +23,7 @@ const MultiStepForm = () => {
     productunit: "",
     productcategory: "",
     producttype: "",
-    productexpirationdate:{todayString},
+    productexpirationdate: { todayString },
     fullname: user.fullname,
     region: user.region,
     city: user.city,
@@ -39,7 +39,7 @@ const MultiStepForm = () => {
   const handleNext = () => {
     setStep(step + 1);
   };
-  
+
   const handleBack = () => {
     setStep(step - 1);
   };
@@ -56,7 +56,7 @@ const MultiStepForm = () => {
     });
     const file = e.target.files[0];
     const reader = new FileReader();
-    
+
     reader.readAsDataURL(file);
     reader.onload = (e) => {
       setImageURL(reader.result);
@@ -64,7 +64,6 @@ const MultiStepForm = () => {
     };
   };
   const addProduct = async (e) => {
-    
     e.preventDefault();
     let formData = new FormData();
     formData.append("productimage", addproductdata.productimage);
@@ -74,7 +73,10 @@ const MultiStepForm = () => {
     formData.append("productunit", addproductdata.productunit);
     formData.append("productcategory", addproductdata.productcategory);
     formData.append("producttype", addproductdata.producttype);
-    formData.append("productexpirationdate", addproductdata.productexpirationdate);
+    formData.append(
+      "productexpirationdate",
+      addproductdata.productexpirationdate
+    );
     formData.append("fullname", addproductdata.fullname);
     formData.append("region", addproductdata.region);
     formData.append("city", addproductdata.city);
@@ -99,7 +101,7 @@ const MultiStepForm = () => {
           productunit: "",
           productcategory: "",
           producttype: "",
-          productexpirationdate:"",
+          productexpirationdate: "",
           fullname: user.fullname,
           region: user.region,
           city: user.city,
@@ -236,16 +238,21 @@ const MultiStepForm = () => {
                       <option value="Other">Other</option>
                     </select>
 
-                    <label for="expirationdate">Expiration date:</label>
+                    <label for="expirationdate" class="form-label">
+                      Expiration date:
+                    </label>
                     <input
                       type="date"
-                      id="start"
-                      name="trip-start"
+                      id="expirationdate"
+                      name="expirationdate"
+                      class="form-control"
                       value={addproductdata.productexpirationdate}
-                      onChange={(e)=>setaddproductData({
-                        ...addproductdata,
-                        productexpirationdate: e.target.value
-                      })}
+                      onChange={(e) =>
+                        setaddproductData({
+                          ...addproductdata,
+                          productexpirationdate: e.target.value,
+                        })
+                      }
                       min={todayString}
                       max={maxDateString}
                     />

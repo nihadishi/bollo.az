@@ -6,7 +6,7 @@
   flex-direction: row;
   justify-content: start;
   padding: 35px ;
-  padding-top: 55px;
+  padding-top: 75px;
   gap: 20px;
   margin: 0px 7% 0; ////////
   &-Product {
@@ -15,11 +15,11 @@
     &:hover{
       scale: 1.05;
     }
-    &.fresh {
+    &.validProduct {
       box-shadow: 0 0 10px rgba(3, 223, 14, 0.719);
     }
   
-    &.not-fresh {
+    &.invalidProduct {
       box-shadow: 0 0 10px rgba(253, 72, 0, 0.61);
     }
     border-radius: 10px;

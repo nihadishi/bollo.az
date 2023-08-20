@@ -15,6 +15,7 @@ import Search from "../../layouts/Search/Search";
 import { BlendingContext } from "../../assets/context/blendContext";
 import FilterProducts from "../../layouts/FilterProducts/FilterProducts";
 const ProductsPage = () => {
+  const today = new Date();
   const { user, setUser, loading, setLoading } = useContext(UserContext);
   const { shoppingItems, setShoppingItems, products, setProducts } =
     useContext(ShoppingContext);
@@ -82,8 +83,13 @@ const ProductsPage = () => {
             setBlending(false);
           }}
         >
-          {filteredProducts.map((product) => (
-            <div className={`Products-Product ${product.producttype === "Fresh" ? "fresh" : "not-fresh"}`} key={product._id}>
+          {filteredProducts.map((product) => {
+            const expirationDate = new Date(product.productexpirationdate);
+            const freshnessClass = expirationDate < today ? "invalidProduct" : "validProduct";
+            
+            return(
+            <div className={`Products-Product ${freshnessClass}`} key={product._id}>
+             
               <div className="Products-Product-TypeLike">
                 <div className="Products-Product-TypeLike-Type">
                   {product?.producttype === "Fresh" ? (
@@ -147,7 +153,7 @@ const ProductsPage = () => {
                 }
               </div>
             </div>
-          ))}
+          )})}
         </div>
       </>
     );

@@ -1,0 +1,32 @@
+/* Stillemek için istediğiniz CSS kodunu burada kullanabilirsiniz */
+.otp-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+  }
+  
+  .otp-input {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+ .otp-input-text {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    transition: border-color 0.3s ease-in-out;
+  }
+  
+ .otp-input-text:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+  

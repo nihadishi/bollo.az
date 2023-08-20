@@ -17,9 +17,10 @@ import Shopping from "./layouts/Shopping/Shopping";
 import ProductDetailsPage from "./pages/ProductDetailsPage/productDetailsPage";
 import ScrollToTop from "./assets/ScrollToTop/ScrollToTop.jsx";
 import { BlendingContextProvider } from "./assets/context/blendContext";
-import PrivateRoute from "./assets/PrivateRoutes/PrivateRoute";
 import { TotalPriceProvider } from "./assets/context/TotalPriceContext";
 import { ShoppingFormContextProvider } from "./assets/context/shopFormContext";
+import PaymentPrivate from "./assets/PrivateRoutes/PaymentPrivate";
+import OTPPrivate from "./assets/PrivateRoutes/OTPPrivate";
 axios.defaults.baseURL = "http://localhost:5000/api/";
 axios.defaults.withCredentials = true;
 
@@ -113,7 +114,13 @@ function App() {
                 <Route
                   path="/3dsecure.azericard/payment"
                   element={
-                    <PrivateRoute/>
+                    <PaymentPrivate/>
+}
+                />
+                <Route
+                  path="/3dsecure.azericard/auth"
+                  element={
+                    <OTPPrivate/>
 }
                 />
                 <Route
