@@ -13,19 +13,23 @@
             width: 36px;
             height: 36px;
         }
+        & h5{
+          margin: auto 0;
+        }
     }
 }
 .filter-container {
     position: absolute;
     padding: 20px;
+    padding-left: 120px;
     right: 15%;
     background-color: #ffffff;
     border: 1px solid #ffffff;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
-    left: 50%;
-    width: 70%;
+    left: 45%;
+    width: 80%;
     transform: translate(-50%,-60%);
     display: flex;
     justify-content: space-between;
