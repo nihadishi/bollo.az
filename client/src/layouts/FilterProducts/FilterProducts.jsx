@@ -5,6 +5,8 @@ import filtericon from "./img/filter.png";
 import filtericon2 from "./img/filter2.png";
 import xicon from "./img/xicon.png";
 import xicon2 from "./img/xicon2.png";
+import greenicon from "./img/greenicon.png"
+import redicon from "./img/redicon.png"
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 const FilterProducts = ({
@@ -79,7 +81,11 @@ const FilterProducts = ({
   ]);
   return (
     <div className="FilterProducts">
-      <div className="FilterProducts-icon">
+      <div className="FilterProducts-icon ml-5">
+        <div className=" d-flex flex-row gap-1 align-items-center ">
+          <img src={greenicon} alt="" width={"18px"} height={"18px"}/>Not experied date
+          <img src={redicon} alt="" width={"18px"} height={"18px"} />Experied date
+        </div>
         <img
           src={showFilter ? filtericon2 : filtericon}
           alt="filter"

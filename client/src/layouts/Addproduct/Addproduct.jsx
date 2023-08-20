@@ -235,6 +235,7 @@ const MultiStepForm = () => {
                       <option value="">--CHOOSE--</option>
                       <option value="Fresh">Fresh</option>
                       <option value="Greenhouse">Greenhouse</option>
+                      <option value="Imported">Imported</option>
                       <option value="Other">Other</option>
                     </select>
 
