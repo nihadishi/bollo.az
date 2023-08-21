@@ -20,6 +20,7 @@ export const ShoppingFormContextProvider = ({ children }) => {
 
   useEffect(() => {
     localStorage.setItem('shopForm', JSON.stringify(shopForm));
+    localStorage.setItem('shopFormEmail',JSON.stringify(shopForm.Email))
   }, [shopForm]);
 
   return (

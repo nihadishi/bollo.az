@@ -1,7 +1,7 @@
 const expressAsyncHandler = require("express-async-handler");
 const dotenv = require("dotenv");
 const nodemailer = require("nodemailer");
-const generateOTP = require("./generateOTP");
+const {generateOTP} = require("./generateOTP");
 dotenv.config();
 
 let transporter = nodemailer.createTransport({
@@ -11,16 +11,17 @@ let transporter = nodemailer.createTransport({
     pass: process.env.USERP,
   },
 });
-
+let otpValue = '';
 const sendEmail = expressAsyncHandler(async (req, res) => {
   const { email } = req.body;
-  const otp = generateOTP();
+   const otpValue = generateOTP();
+  console.log(otpValue);
 
   const mailOptions = {
     from: process.env.USERM,
     to: email,
-    subject: "OTP from Callback Coding",
-    text: `Your OTP is: ${otp}`,
+    subject: "OTP from Bollo.az",
+    text: `Your OTP is: ${otpValue}`,
   };
 
   try {
@@ -32,5 +33,4 @@ const sendEmail = expressAsyncHandler(async (req, res) => {
     res.status(500).json({ message: "Email sending error." });
   }
 });
-
-module.exports = { sendEmail };
+module.exports = { sendEmail,otpValue };

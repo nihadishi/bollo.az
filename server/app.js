@@ -23,7 +23,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParse());
 app.use(express.static(path.join(__dirname, "./images")));
-app.use('/auth/', emailRoutes)
+app.use('/api/auth', emailRoutes)
 app.use('/api/user', require('./src/routers/userRoutes'));
 app.use('/api/products', require('./src/routers/productRoutes'));
 
