@@ -41,13 +41,13 @@
   color: #fff;
 }
 ///
-
+///
+///
 .RecentProduct {
-
-  &:hover{
+  &:hover {
     filter: brightness(100%);
   }
-  
+
   &::after {
     position: absolute;
     top: 50%;
@@ -61,7 +61,7 @@
     content: attr(product-name);
     transition: opacity 0.3s; /* Smooth transition for opacity change */
   }
-  
+
   &:hover::after {
     opacity: 1; /* Show the content when parent is hovered */
   }

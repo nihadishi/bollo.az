@@ -14,6 +14,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Search from "../../layouts/Search/Search";
 import { BlendingContext } from "../../assets/context/blendContext";
 import FilterProducts from "../../layouts/FilterProducts/FilterProducts";
+import ProductLoading from "../../layouts/Loading/ProductLoading";
 const ProductsPage = () => {
   const today = new Date();
   const { user, setUser, loading, setLoading } = useContext(UserContext);
@@ -85,8 +86,9 @@ const ProductsPage = () => {
         >
           {filteredProducts.map((product) => {
             const expirationDate = new Date(product.productexpirationdate);
-            const freshnessClass = expirationDate < today ? "invalidProduct" : "validProduct";
-            
+            const freshnessClass = (expirationDate == "Invalid Date") || (expirationDate < today) ? "invalidProduct" : "validProduct";
+            console.log(product);
+            // console.log(freshnessClass);
             return(
             <div className={`Products-Product ${freshnessClass}`} key={product._id}>
              
@@ -103,9 +105,6 @@ const ProductsPage = () => {
                   )}
                 </div>
                 <div className="Products-Product-TypeLike-Like">
-                  {/* <img src={likeProduct} alt="" /> */}
-                  {/* {new Date(product.createdAt).toLocaleString()} */}
-                  {/* {moment(product.createdAt).format("YYYYMMDD")} */}
                   {moment(product.createdAt).fromNow()}
                 </div>
               </div>
@@ -158,7 +157,7 @@ const ProductsPage = () => {
       </>
     );
   } else {
-    return <Loading />;
+    return <ProductLoading />;
   }
 };
 export default ProductsPage;

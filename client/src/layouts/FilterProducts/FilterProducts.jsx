@@ -24,7 +24,7 @@ const FilterProducts = ({
     city: "",
   });
   const [showFilter, setShowFilter] = useState(false);
-  console.log(filterProducts);
+  // console.log(filterProducts);
   useEffect(() => {
     const filtered = OnlySearchFilteredOrAllProducts.filter(
       (

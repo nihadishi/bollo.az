@@ -1,0 +1,64 @@
+.editing {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    background-image: url("../AboutPage/img/bg1.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center top;
+    background-blend-mode: darken;
+    background-color: rgba(0, 0, 0, 0.644);
+    z-index: 9;
+  }
+  
+  .editing-inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    width: 700px;
+    height: 100%;
+    margin: 0 auto;
+  }
+  
+  .editinput {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+
+    &-button{
+      width: 50%;
+      height: 100%;
+    }
+  }
+  .editinput-b{
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    &-button{
+      width: 40%;
+      height: 100%;
+    }
+  }
+  
+  .editinput[type="tel"]:invalid {
+    background-color: rgb(250, 137, 137);
+  }
+  
+  .editinput[type="tel"]:valid {
+    background-color: rgb(171, 255, 171);
+  }
+  
+  .save-button {
+    height: 36px;
+    overflow: visible;
+  }

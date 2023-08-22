@@ -21,6 +21,8 @@ import { TotalPriceProvider } from "./assets/context/TotalPriceContext";
 import { ShoppingFormContextProvider } from "./assets/context/shopFormContext";
 import PaymentPrivate from "./assets/PrivateRoutes/PaymentPrivate";
 import OTPPrivate from "./assets/PrivateRoutes/OTPPrivate";
+import EditProfilePage from "./pages/EditProfilePage/EditProfilePage";
+import { EditingIsOpenProvider } from "./assets/context/editinIsOpenContext";
 axios.defaults.baseURL = "http://localhost:5000/api/";
 axios.defaults.withCredentials = true;
 
@@ -30,110 +32,109 @@ function App() {
       <TotalPriceProvider>
         <BlendingContextProvider>
           <UserContextProvider>
-            <ShoppingFormContextProvider>
-            <Toaster
-              position="bottom-right"
-              toastOptions={{ duration: 2000 }}
-            />
-            <div className="App">
-              <ScrollToTop />
-              <Navbar />
-              <Shopping />
-              <Routes>
-                <Route
-                  path="/"
-                  element={
-                    <>
-                      <HomePage />
-                      <Footer />
-                    </>
-                  }
+            <EditingIsOpenProvider>
+              <ShoppingFormContextProvider>
+                <Toaster
+                  position="bottom-right"
+                  toastOptions={{ duration: 2000 }}
                 />
-                <Route
-                  path="/home"
-                  element={
-                    <>
-                      <HomePage />
-                      <Footer />
-                    </>
-                  }
-                />
-                <Route
-                  path="/about"
-                  element={
-                    <>
-                      <AboutPage />
-                      <Footer />
-                    </>
-                  }
-                />
-                <Route
-                  path="/products"
-                  element={
-                    <>
-                      <ProductsPage />
-                      <Footer />
-                    </>
-                  }
-                />
-                <Route
-                  path="/products/id/:productID"
-                  element={
-                    <>
-                      <ProductDetailsPage />
-                      <Footer />
-                    </>
-                  }
-                />
-                <Route
-                  path="/products/search/:searchText"
-                  element={
-                    <>
-                      <ProductsPage />
-                      <Footer />
-                    </>
-                  }
-                />
-                <Route
-                  path="/login"
-                  element={
-                    <>
-                      <LoginPage />
-                    </>
-                  }
-                />
-                <Route
-                  path="/register"
-                  element={
-                    <>
-                      <SignupPage />
-                    </>
-                  }
-                />
-                <Route path="/profile" element={<ProfilePage />} />
-                <Route
-                  path="/3dsecure.azericard/payment"
-                  element={
-                    <PaymentPrivate/>
-}
-                />
-                <Route
-                  path="/3dsecure.azericard/auth"
-                  element={
-                    <OTPPrivate/>
-}
-                />
-                <Route
-                  path="*"
-                  element={
-                    <>
-                      <ErrorPage />
-                    </>
-                  }
-                />
-              </Routes>
-            </div>
-            </ShoppingFormContextProvider>
+                <div className="App">
+                  <ScrollToTop />
+                  <Navbar />
+                  <Shopping />
+                  <Routes>
+                    <Route
+                      path="/"
+                      element={
+                        <>
+                          <HomePage />
+                          <Footer />
+                        </>
+                      }
+                    />
+                    <Route
+                      path="/home"
+                      element={
+                        <>
+                          <HomePage />
+                          <Footer />
+                        </>
+                      }
+                    />
+                    <Route
+                      path="/about"
+                      element={
+                        <>
+                          <AboutPage />
+                          <Footer />
+                        </>
+                      }
+                    />
+                    <Route
+                      path="/products"
+                      element={
+                        <>
+                          <ProductsPage />
+                          <Footer />
+                        </>
+                      }
+                    />
+                    <Route
+                      path="/products/id/:productID"
+                      element={
+                        <>
+                          <ProductDetailsPage />
+                          <Footer />
+                        </>
+                      }
+                    />
+                    <Route
+                      path="/products/search/:searchText"
+                      element={
+                        <>
+                          <ProductsPage />
+                          <Footer />
+                        </>
+                      }
+                    />
+                    <Route
+                      path="/login"
+                      element={
+                        <>
+                          <LoginPage />
+                        </>
+                      }
+                    />
+                    <Route
+                      path="/register"
+                      element={
+                        <>
+                          <SignupPage />
+                        </>
+                      }
+                    />
+                    <Route path="/profile" element={<ProfilePage />} />
+                    <Route path="/profile-edit" element={<EditProfilePage />} />
+                    <Route
+                      path="/3dsecure.azericard/payment"
+                      element={<PaymentPrivate />}
+                    />
+                    <Route
+                      path="/3dsecure.azericard/auth"
+                      element={<OTPPrivate />}
+                    />
+                    <Route
+                      path="*"
+                      element={
+                        <>
+                          <ErrorPage />
+                        </>
+                      }
+                    />
+                  </Routes>
+                </div>
+              </ShoppingFormContextProvider>
+            </EditingIsOpenProvider>
           </UserContextProvider>
         </BlendingContextProvider>
       </TotalPriceProvider>

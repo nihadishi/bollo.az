@@ -12,14 +12,14 @@ export function UserContextProvider({children}) {
       if(!user){
         axios.get('user/profile')
             .then(({data})=>{
-                console.log("contex",data)
+                // console.log("contex",data)
                 setUser(data)
             }).catch(error =>{}
              )
       }
 
     }, [user])
-    console.log("user",user);
+    // console.log("user",user);
     return(
         <UserContext.Provider value={{user,setUser,loading,setLoading}}>
             {children}
