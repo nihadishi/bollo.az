@@ -1,7 +1,7 @@
 import "./style.scss";
 import { useContext, useEffect, useState } from "react";
 import Logo from "./img/bollo-logo-gr.png";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import shopicon from "./img/shop-icon.gif";
 import { UserContext } from "../../assets/context/userContext";
 import { ShoppingContext } from "../../assets/context/shoppingContext";
@@ -9,6 +9,7 @@ import Search from "../Search/Search";
 import { BlendingContext } from "../../assets/context/blendContext";
 const Navbar = () => {
   const { user } = useContext(UserContext);
+  const params = useLocation(); 
   const { openShopping, setOpenShopping } = useContext(ShoppingContext);
   const {blending,setBlending} = useContext(BlendingContext);
   const navigate = useNavigate();
@@ -24,8 +25,9 @@ const Navbar = () => {
 
     prevScrollPos = currentScrollPos;
   };
+  console.log(params);
   return (
-    <div className="Navbar" style={{"--blending": blending?"true":"false"}}>
+    <div className={params.pathname == "" || "home" ? "Navbar navbar-home" : "Navbar"} style={{"--blending": blending?"true":"false"}}>
       <div className="Navbar-Nav">
         <div
           className="Navbar-Nav-Logo"

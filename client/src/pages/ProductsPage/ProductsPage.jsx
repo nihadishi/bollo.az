@@ -87,7 +87,7 @@ const ProductsPage = () => {
           {filteredProducts.map((product) => {
             const expirationDate = new Date(product.productexpirationdate);
             const freshnessClass = (expirationDate == "Invalid Date") || (expirationDate < today) ? "invalidProduct" : "validProduct";
-            console.log(product);
+            // console.log(product);
             // console.log(freshnessClass);
             return(
             <div className={`Products-Product ${freshnessClass}`} key={product._id}>

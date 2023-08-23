@@ -58,7 +58,7 @@
     font-weight: bold;
     text-align: center;
     opacity: 0; /* Initial opacity to hide the content */
-    content: attr(product-name);
+    content: 'see details';
     transition: opacity 0.3s; /* Smooth transition for opacity change */
   }
 

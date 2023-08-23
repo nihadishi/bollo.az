@@ -12,10 +12,9 @@ const OTPPage = () => {
   const { shopForm } = useContext(ShoppingFormContext);
   const completeOTP = otp.join(""); // Diziyi birleştirerek tek bir string oluştur
   const numericOTP = parseInt(completeOTP, 10); // String'i tam sayıya dönüştür
-    console.log(numericOTP);
   useEffect(() => {
     const email = localStorage.getItem('shopFormEmail');
-    console.log(email);
+    console.log(otp);
     if (email) {
         axios.post('/auth/sendEmail', { email })
           .then(response => {
@@ -45,6 +44,21 @@ const OTPPage = () => {
       inputRefs[index + 1].current.focus();
     }
   };
+  console.log(numericOTP);
+ useEffect(() => {
+  if(numericOTP>100000){
+    axios.post('/auth/verify', { numericOTP })
+    .then(response => {
+      console.log(response.data.message); // E-posta gönderildi mesajını yazdır
+      setloading(false);
+    })
+    .catch(error => {
+      console.error(error);
+      setloading(false);
+    });
+  }
+ }, [numericOTP])
+ 
 
   return !loading ? (
     <div className="otp-container">
@@ -67,7 +81,6 @@ const OTPPage = () => {
     </div>
   ) : (
     <div className="d-flex align-items-center justify-content-center vh-100 vw-100">
-      {" "}
       <img src={processingloading} />
     </div>
   );

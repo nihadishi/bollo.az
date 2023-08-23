@@ -291,7 +291,7 @@ const ProfilePage = () => {
                                     className="w-100 rounded-3"
                                   />
                                 </div>
-                                <div className="product-name">{product.productname}</div>
+                                {/* <div className="product-name">{product.productname}</div> */}
                               </MDBCol>
                             ))}
                         </MDBRow>
