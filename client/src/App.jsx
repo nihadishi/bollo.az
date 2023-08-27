@@ -48,7 +48,6 @@ function App() {
                       element={
                         <>
                           <HomePage />
-                          <Footer />
                         </>
                       }
                     />
@@ -57,7 +56,6 @@ function App() {
                       element={
                         <>
                           <HomePage />
-                          <Footer />
                         </>
                       }
                     />
@@ -75,7 +73,6 @@ function App() {
                       element={
                         <>
                           <ProductsPage />
-                          <Footer />
                         </>
                       }
                     />
@@ -84,7 +81,6 @@ function App() {
                       element={
                         <>
                           <ProductDetailsPage />
-                          <Footer />
                         </>
                       }
                     />
@@ -93,7 +89,6 @@ function App() {
                       element={
                         <>
                           <ProductsPage />
-                          <Footer />
                         </>
                       }
                     />

@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./style.scss";
+import Footer from "../../layouts/Footer/Footer";
 import moment from "moment";
 import addicon from "./img/add-icon.png";
 import minusicon from "./img/added-icon.png";
@@ -225,6 +226,7 @@ const ProductsPage = () => {
             );
           })}
         </div>
+        <Footer/>
       </>
     );
   } else {

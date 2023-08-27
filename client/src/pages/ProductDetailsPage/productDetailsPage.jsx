@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import "./style.scss";
+import Footer from "../../layouts/Footer/Footer";
 import { useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "../../assets/context/userContext";
 import back from "./img/back.png";
@@ -50,6 +51,7 @@ const ProductDetailsPage = () => {
   };
   if (!loading) {
     return (
+      <>
       <div className="product">
         <div className="product-details">
           <div className="product-image">
@@ -65,7 +67,7 @@ const ProductDetailsPage = () => {
                 navigate("/products");
               }}
             >
-              <img src={back} alt="<--" /> Back to Products
+              <img src={back} alt="<--" /><p>Back to Products</p>
             </div>
             <div className="product-info-head">
               <p
@@ -240,6 +242,8 @@ const ProductDetailsPage = () => {
             ))}
         </div>
       </div>
+      <Footer/>
+      </>
     );
   } else {
     return <Loading />;

@@ -127,12 +127,18 @@
     font-weight: 600;
     line-height: normal;
     cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     &:hover {
       color: rgb(10, 13, 137);
     }
     & img {
       width: 30px;
       height: 30px;
+    }
+    & p{
+      margin: auto 10px;
     }
   }
   &-head {
