@@ -225,25 +225,8 @@
       }
     }
   }
-
-  .categorygallery {
-    padding-top: 80px;
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-
-    &slide {
-      width: 100%;
-      height: 100%;
-      & img {
-        width: 100%;
-        height: 100%;
-        scale: 1.2;
-      }
-    }
-  }
-
-  //
+}
+//
   .bestfarmer {
     background-color: #e5e1e2;
     font-family: "Open Sans", sans-serif;
@@ -377,6 +360,26 @@
     33.33%,
     66.66% {
       transform: translateX(-100%);
+    }
+  }
+
+
+
+//slide
+.categorygallery {
+  background-color: #e5e1e2;
+  width: 100vw;
+  .carousel{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+    width: 100vw !important;
+    & ul{
+      height: 100%;
+      width: 100vw !important;
+      & li{
+        width: 50vw !important;
+      }
     }
   }
 }

@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./style.scss";
 import "../../index.css";
-import firstslide from "./img/slide1.png";
-import secondslide from "./img/fruits&vegetables.jpg";
-import thirdslide from "./img/thirdslide.png";
+import slide1 from "./img/slide1.png";
+import slide2 from "./img/fruits&vegetables.jpg";
+import slide3 from "./img/thirdslide.png";
 import liveslide from "./img/fruitsgif.gif";
 import bs from "./img/1s.png";
 import is from "./img/2s.png";
@@ -14,10 +14,37 @@ import firstgirl from "./img/girl.png";
 import secondgirl from "./img/girl2.png";
 import thirdgirl from "./img/girl3.png";
 import probrect from "./img/prob-rect.png";
-import { Carousel, initTE } from "tw-elements";
 import { Zoom } from "react-slideshow-image";
-initTE({ Carousel });
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from "react-responsive-carousel";
+import HoverCarousel from "hover-carousel";
 const HomePage = () => {
+  // const [slideIndex, setSlideIndex] = useState(0);
+
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setSlideIndex((prevIndex) => (prevIndex + 1) % 3);
+  //   }, 2000);
+
+  //   return () => {
+  //     clearInterval(interval);
+  //   };
+  // }, []);
+  const images = [
+    slide1,
+    slide2,
+    slide3,
+    slide1,
+    slide2,
+    slide3,
+    slide1,
+    slide2,
+    slide3,
+    slide1,
+    slide2,
+    slide3,
+    // Add more image URLs here
+  ];
   return (
     <div className="Home">
       <div className="Home-intro">
@@ -36,7 +63,7 @@ const HomePage = () => {
       <div className="Home-prob">
         <div className="Home-prob-l">
           <h1 className="Home-prob-l-h1">
-            <h2 className="Home-prob-l-h1-h2">what is our problem?</h2>
+            <div className="Home-prob-l-h1-h2">what is our problem?</div>
             <img src={secondgirl} alt="" className="Home-prob-l-h1-img" />
           </h1>
         </div>
@@ -48,10 +75,10 @@ const HomePage = () => {
         </div>
       </div>
       <div className="Home-sol">
-      <div className="Home-sol-l">
+        <div className="Home-sol-l">
           <h1 className="Home-sol-l-h1">
-            <h2 className="Home-sol-l-h1-h2">the solution</h2>
-            <img src={thirdgirl} alt="" className="Home-sol-l-h1-img"/>
+            <div className="Home-sol-l-h1-h2">the solution</div>
+            <img src={thirdgirl} alt="" className="Home-sol-l-h1-img" />
           </h1>
         </div>
         <div className="Home-sol-r">
@@ -62,11 +89,8 @@ const HomePage = () => {
         </div>
       </div>
       <div className="categorygallery">
-        <div className="categorygalleryslide">
-          <img src={firstslide} alt="" />
-        </div>
-        <div className="categorygallerytext"></div>
-      </div>
+      <HoverCarousel images={images}/>
+    </div>
       <div className="bestfarmer">
         <div className="bestfarmer-container">
           {[1, 2, 3, 4].map((number) => (

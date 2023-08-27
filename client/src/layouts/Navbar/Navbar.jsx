@@ -25,7 +25,7 @@ const Navbar = () => {
 
     prevScrollPos = currentScrollPos;
   };
-  console.log(params);
+  // console.log(params);
   return (
     <div className={params.pathname == "" || "home" ? "Navbar navbar-home" : "Navbar"} style={{"--blending": blending?"true":"false"}}>
       <div className="Navbar-Nav">

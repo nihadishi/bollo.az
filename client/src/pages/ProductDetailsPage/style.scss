@@ -185,6 +185,8 @@
       gap: 10px;
       width: 50%;
       & div {
+        display: flex;
+        flex-direction: row;
         font-size: 32px;
         font-style: normal;
         font-weight: 700;
@@ -192,7 +194,7 @@
       }
     }
     &-description {
-      width: 50%;
+      width: 40%;
       overflow-y: scroll;
       & div {
         font-size: 24px;

@@ -54,6 +54,7 @@ const LoginPage = () => {
                 value={loginData?.email}
                 onChange={(e)=>{setloginData({...loginData,email: e.target.value})}}
                 required
+                autoComplete=""
               />
             </div>
             <div className="mb-3">
@@ -67,11 +68,13 @@ const LoginPage = () => {
                 value={loginData?.password}
                 onChange={(e)=>{setloginData({...loginData,password: e.target.value})}}
                 required
+                autoComplete=""
               />
             </div>
             <button className="btn btn-success w-100">
               <strong>Log in</strong>
             </button>
+            <Link to="/forgot">Forgot password</Link>
             <p>Do you haven't account?</p>
             <Link
               to="/register"

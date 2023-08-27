@@ -83,7 +83,7 @@ const FilterProducts = ({
     <div className="FilterProducts">
       <div className="FilterProducts-icon ml-5">
         <div className=" d-flex flex-row gap-1 align-items-center justify-content-center">
-          <img src={greenicon} alt="" width={"18px"} height={"18px"}/><h5>Not experied date</h5>
+          {/* <img src={greenicon} alt="" width={"18px"} height={"18px"}/><h5>Not experied date</h5> */}
           <img src={redicon} alt="" width={"18px"} height={"18px"} /><h5>Experied date</h5>
         </div>
         <img
