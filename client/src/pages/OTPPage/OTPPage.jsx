@@ -4,34 +4,34 @@ import processingloading from "./img/procesaing.gif";
 import { ShoppingFormContext } from "../../assets/context/shopFormContext";
 import { LoaderIcon } from "react-hot-toast";
 import axios from "axios";
+import OTPLoading from "../../layouts/Loading/OTPLoading";
 
 const OTPPage = () => {
   const [otp, setOTP] = useState([, , , , , ]);
-  const [loading, setloading] = useState(true);
   const inputRefs = Array.from({ length: 6 }, () => React.createRef());
-  const { shopForm } = useContext(ShoppingFormContext);
-  const completeOTP = otp.join(""); // Diziyi birleştirerek tek bir string oluştur
-  const numericOTP = parseInt(completeOTP, 10); // String'i tam sayıya dönüştür
+  const { shopForm,loading,setLoading } = useContext(ShoppingFormContext);
+  const completeOTP = otp.join(""); 
+  const numericOTP = parseInt(completeOTP, 10); 
   useEffect(() => {
+    setLoading(true);
     const email = localStorage.getItem('shopFormEmail');
-    console.log(otp);
     if (email) {
         axios.post('/auth/sendEmail', { email })
           .then(response => {
-            console.log(response.data.message); // E-posta gönderildi mesajını yazdır
-            setloading(false);
+            console.log(response.data.message);
+            setLoading(false);
           })
           .catch(error => {
             console.error(error);
-            setloading(false);
+            setLoading(false);
           });
       } else {
-        console.log('E-posta is not defined LocalStorage');
-        setloading(false);
+        console.log('Email is not defined LocalStorage');
+        setLoading(false);
       }
   
     const timeout = setTimeout(() => {
-      setloading(false);
+      setLoading(false);
     }, 4300);
   }, []);
 
@@ -49,11 +49,11 @@ const OTPPage = () => {
     axios.post('/auth/verify', { numericOTP })
     .then(response => {
       console.log(response.data.message); // E-posta gönderildi mesajını yazdır
-      setloading(false);
+      setLoading(false);
     })
     .catch(error => {
       console.error(error);
-      setloading(false);
+      setLoading(false);
     });
   }
  }, [numericOTP])
@@ -79,9 +79,7 @@ const OTPPage = () => {
       </div>
     </div>
   ) : (
-    <div className="d-flex align-items-center justify-content-center vh-100 vw-100">
-      <img src={processingloading} />
-    </div>
+    <OTPLoading/>
   );
 };
 

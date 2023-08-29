@@ -17,6 +17,8 @@ export const ShoppingFormContextProvider = ({ children }) => {
 
   const storedForm = JSON.parse(localStorage.getItem('shopForm')) || initialForm;
   const [shopForm, setShopForm] = useState(storedForm);
+  const [loading,setLoading] = useState(false);
+
 
   useEffect(() => {
     localStorage.setItem('shopForm', JSON.stringify(shopForm));
@@ -24,7 +26,7 @@ export const ShoppingFormContextProvider = ({ children }) => {
   }, [shopForm]);
 
   return (
-    <ShoppingFormContext.Provider value={{ shopForm, setShopForm }}>
+    <ShoppingFormContext.Provider value={{ shopForm, setShopForm,loading,setLoading }}>
       {children}
     </ShoppingFormContext.Provider>
   );

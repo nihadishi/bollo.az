@@ -99,11 +99,8 @@ const ProductsPage = () => {
       sortedProducts.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
   }
   setFilteredProducts(sortedProducts);
-  console.log("sorted",sortedProducts);
   }, [sortType])
   
-  console.log("filtered",filteredProducts);
-
   if (!loading) {
     return (
       <>
