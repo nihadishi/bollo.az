@@ -49,8 +49,8 @@ const ProductsPage = () => {
     if (params.searchText) {
       const filtered = products.filter(
         (product) =>
-          (product.productname &&
-            product.productname
+        (product.productname &&
+          product.productname
               .toLowerCase()
               .includes(params.searchText.toLowerCase())) ||
           (product.city &&
@@ -72,49 +72,38 @@ const ProductsPage = () => {
       );
       setFilteredProducts(filtered);
       setOnlySearchFilteredOrAllProducts(filtered);
-      let sortedProducts = [...filteredProducts];
-
-      if (sortType === "name-asc") {
-        sortedProducts.sort((a, b) => a.productname.localeCompare(b.productname));
-      } else if (sortType === "name-desc") {
-        sortedProducts.sort((a, b) => b.productname.localeCompare(a.productname));
-      } else if (sortType === "price-asc") {
-        sortedProducts.sort((a, b) => a.productprice - b.productprice);
-      } else if (sortType === "price-desc") {
-        sortedProducts.sort((a, b) => b.productprice - a.productprice);
-      }  else if (sortType === "oldest") {
-        sortedProducts.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
-    } else if (sortType === "newest") {
-        sortedProducts.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-    }
-      setFilteredProducts(sortedProducts);
+     
       
     } else {
       setFilteredProducts(products);
       setOnlySearchFilteredOrAllProducts(products);
-      let sortedProducts = [...filteredProducts];
-
-      if (sortType === "name-asc") {
-        sortedProducts.sort((a, b) => a.productname.localeCompare(b.productname));
-      } else if (sortType === "name-desc") {
-        sortedProducts.sort((a, b) => b.productname.localeCompare(a.productname));
-      } else if (sortType === "price-asc") {
-        sortedProducts.sort((a, b) => a.productprice - b.productprice);
-      } else if (sortType === "price-desc") {
-        sortedProducts.sort((a, b) => b.productprice - a.productprice);
-      }  else if (sortType === "oldest") {
-        sortedProducts.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
-    } else if (sortType === "newest") {
-        sortedProducts.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-    }
-      setFilteredProducts(sortedProducts); // Sıralanmış ürünleri set et
-
       
     }
     const timeout = setTimeout(() => {
       setLoading(false);
     }, 1300);
-  }, [params, products,sortType]);
+  }, [params, products]);
+  useEffect(() => {
+    let sortedProducts = [...filteredProducts];
+    if (sortType === "name-asc") {
+      sortedProducts.sort((a, b) => a.productname.localeCompare(b.productname));
+    } else if (sortType === "name-desc") {
+      sortedProducts.sort((a, b) => b.productname.localeCompare(a.productname));
+    } else if (sortType === "price-asc") {
+      sortedProducts.sort((a, b) => a.productprice - b.productprice);
+    } else if (sortType === "price-desc") {
+      sortedProducts.sort((a, b) => b.productprice - a.productprice);
+    }  else if (sortType === "oldest") {
+      sortedProducts.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
+  } else if (sortType === "newest") {
+      sortedProducts.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+  }
+  setFilteredProducts(sortedProducts);
+  console.log("sorted",sortedProducts);
+  }, [sortType])
+  
+  console.log("filtered",filteredProducts);
+
   if (!loading) {
     return (
       <>
@@ -136,13 +125,13 @@ const ProductsPage = () => {
               value={sortType}
               onChange={handleSortChange}
             >
-              <option value="">Seçiniz</option>
-              <option value="name-asc">İsme Göre (A-Z)</option>
-              <option value="name-desc">İsme Göre (Z-A)</option>
-              <option value="price-asc">Fiyata Göre Artan</option>
-              <option value="price-desc">Fiyata Göre Azalan</option>
-              <option value="oldest">Eskiden Yeniye</option>
-              <option value="newest">Yeniden Eskiye</option>
+              <option value="">No choosen</option>
+              <option value="name-asc">Product name (A-Z)</option>
+              <option value="name-desc">Product name (Z-A)</option>
+              <option value="price-asc">Price increase</option>
+              <option value="price-desc">Price decrease</option>
+              <option value="oldest">Old to new products</option>
+              <option value="newest">New to old products</option>
             </select>
           </div>
           {filteredProducts.map((product) => {

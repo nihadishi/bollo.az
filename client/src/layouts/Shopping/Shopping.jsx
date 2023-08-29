@@ -7,7 +7,7 @@ import plus from "./img/+.png";
 import minus from "./img/-.png";
 import emptybasket from "./img/emptybasket.jpg";
 import deleteicon from "./img/delete.svg";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { TotalPriceContext } from "../../assets/context/TotalPriceContext";
 import Shopform from "../ShopForm/Shopform";
 import { ShoppingFormContext } from "../../assets/context/shopFormContext";
@@ -70,6 +70,11 @@ const Shopping = () => {
     )
     .toFixed(2);
 
+  const handleShoppingClick = () => {
+    navigate("/3dsecure.azericard/payment")
+    setOpenShopping(false)
+    setTotalPriceCont(totalPrice)
+  }
   return openShopping ? (
     <div className="Shopping">
      {
@@ -174,11 +179,7 @@ const Shopping = () => {
       </>:
       <>
       <Shopform setOpenShopForm={setOpenShopForm}/>
-      {shopForm.Name && shopForm.Surname && shopForm.Email && shopForm.IDCardNumber && shopForm.Number && shopForm.Country && shopForm.City && shopForm.Street && shopForm.ZipCode && <div className="Shopping-Detail-Button-Checkout" onClick={()=>{
-        navigate("/3dsecure.azericard/payment")
-        setOpenShopping(false)
-        setTotalPriceCont(totalPrice)
-      }}>
+      {shopForm.Name && shopForm.Surname && shopForm.Email && shopForm.IDCardNumber && shopForm.Number && shopForm.Country && shopForm.City && shopForm.Street && shopForm.ZipCode && <div className="Shopping-Detail-Button-Checkout" onClick={handleShoppingClick}>
         Check Out - {totalPrice} AZN
       </div>}</>
      }

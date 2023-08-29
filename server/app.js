@@ -6,7 +6,7 @@ const cookieParse = require("cookie-parser");
 const port = process.env.PORT || 5000;
 const app = express();
 const cors = require('cors')
-const emailRoutes = require('./src/routers/emailRoutes')
+
 app.use(
     cors({
         credentials: true,
@@ -23,9 +23,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParse());
 app.use(express.static(path.join(__dirname, "./images")));
-app.use('/api/auth', emailRoutes)
+app.use('/api/auth', require('./src/routers/emailRoutes'))
 app.use('/api/user', require('./src/routers/userRoutes'));
 app.use('/api/products', require('./src/routers/productRoutes'));
+app.use("/api/customer", require("./src/routers/customerRoutes"));
 
 app.listen(port, () => {
     console.log(`${port} is running... app.js`);//////////

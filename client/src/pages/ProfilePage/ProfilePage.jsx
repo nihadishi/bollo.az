@@ -212,7 +212,7 @@ const ProfilePage = () => {
                               }
                             </MDBCardText>
                             <MDBCardText className="small text-muted mb-0">
-                              Rating
+                              Active Products
                             </MDBCardText>
                           </div>
                           <div>

@@ -44,7 +44,6 @@ const OTPPage = () => {
       inputRefs[index + 1].current.focus();
     }
   };
-  console.log(numericOTP);
  useEffect(() => {
   if(numericOTP>100000){
     axios.post('/auth/verify', { numericOTP })
