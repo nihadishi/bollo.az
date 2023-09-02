@@ -1,4 +1,5 @@
 @import "../../assets/fonts/fonts.scss";
+@import "../../assets/fonts/mixin.scss";
 .Products {
   position: relative;
   background-color: #fff;
@@ -79,16 +80,18 @@
       }
     }
     &-Photo {
-      cursor: pointer;
+      // cursor: pointer;
       width: 100%;
       height: 250px;
       margin: auto;
       background-image: url("./img/default_1.jpg");
       background-size: cover;
+      cursor: url(./img/icons8-natural-user-interface-2-30.png),auto;
       background-position: center center;
       & img {
         height: 100%;
         width: 100%;
+        // @include aspect-ratio(1,1)
         // border-radius: 20px;
       }
     }

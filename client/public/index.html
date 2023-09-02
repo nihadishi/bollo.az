@@ -5,10 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <link rel="stylesheet" href="../src/index.css">
+    <link rel="icon" href="./icons/icons8-b-67.png"/>
     
     <title>Bollo</title>
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      const link = document.querySelector("link[rel = 'icon']")
+      let i = 0;
+      setInterval(() =>link.href = `./icons/${++i % 5}.png`, 500);
+    </script>
   </body>
 </html>

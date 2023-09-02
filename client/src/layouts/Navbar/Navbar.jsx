@@ -9,9 +9,10 @@ import Search from "../Search/Search";
 import { BlendingContext } from "../../assets/context/blendContext";
 const Navbar = () => {
   const { user } = useContext(UserContext);
-  const params = useLocation(); 
+  
+  const params = useLocation();
   const { openShopping, setOpenShopping } = useContext(ShoppingContext);
-  const {blending,setBlending} = useContext(BlendingContext);
+  const { blending, setBlending } = useContext(BlendingContext);
   const navigate = useNavigate();
   let prevScrollPos = window.pageYOffset;
   window.onscroll = function () {
@@ -27,7 +28,12 @@ const Navbar = () => {
   };
   // console.log(params);
   return (
-    <div className={params.pathname == "" || "home" ? "Navbar navbar-home" : "Navbar"} style={{"--blending": blending?"true":"false"}}>
+    <div
+      className={
+        params.pathname == "" || "home" ? "Navbar navbar-home" : "Navbar"
+      }
+      style={{ "--blending": blending ? "true" : "false" }}
+    >
       <div className="Navbar-Nav">
         <div
           className="Navbar-Nav-Logo"
@@ -37,6 +43,7 @@ const Navbar = () => {
         >
           <img src={Logo} alt="Bollo" width={"180px"} />
         </div>
+        
         <div className="Navbar-Nav-Navbar">
           <ul className="Navbar-Nav-Navbar-ul">
             <li
@@ -55,6 +62,17 @@ const Navbar = () => {
             >
               About us
             </li>
+            <div className="Navbar-Nav-Search" >
+              <Search />
+            </div>
+            <div
+              className="Navbar-Nav-Contact"
+              onClick={() => {
+                navigate("/profile");
+              }}
+            >
+              <li className="Navbar-Nav-Contact-li">My Account</li>
+            </div>
             <li
               className="Navbar-Nav-Navbar-ul-li"
               onClick={() => {
@@ -64,15 +82,6 @@ const Navbar = () => {
               <img src={shopicon} alt="Liked" />
             </li>
           </ul>
-        </div>
-        <div className="Navbar-Nav-Search"><Search/></div>
-        <div
-          className="Navbar-Nav-Contact"
-          onClick={() => {
-            navigate("/profile");
-          }}
-        >
-          <li className="Navbar-Nav-Contact-li">My Account</li>
         </div>
       </div>
     </div>

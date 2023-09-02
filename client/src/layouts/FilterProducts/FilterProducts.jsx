@@ -9,12 +9,14 @@ import greenicon from "./img/greenicon.png"
 import redicon from "./img/redicon.png"
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
+import { BlendingContext } from "../../assets/context/blendContext";
 const FilterProducts = ({
   OnlySearchFilteredOrAllProducts,
   filteredProducts,
   setFilteredProducts,
 }) => {
   const { products } = useContext(ShoppingContext);
+  const {setBlending} = useContext(BlendingContext);
   const [filterProducts, setFilterProducts] = useState({
     minPrice: 0,
     maxPrice: 1000,
@@ -80,7 +82,7 @@ const FilterProducts = ({
     filterProducts.city,
   ]);
   return (
-    <div className="FilterProducts">
+    <div className="FilterProducts" onClick={()=>{setBlending(false)}}>
       <div className="FilterProducts-icon ml-5">
         <div className=" d-flex flex-row gap-1 align-items-center justify-content-center">
           {/* <img src={greenicon} alt="" width={"18px"} height={"18px"}/><h5>Not experied date</h5> */}

@@ -85,7 +85,8 @@ const ProductsPage = () => {
   }, [params, products]);
   useEffect(() => {
     let sortedProducts = [...filteredProducts];
-    if (sortType === "name-asc") {
+    
+     if (sortType === "name-asc") {
       sortedProducts.sort((a, b) => a.productname.localeCompare(b.productname));
     } else if (sortType === "name-desc") {
       sortedProducts.sort((a, b) => b.productname.localeCompare(a.productname));
@@ -99,6 +100,10 @@ const ProductsPage = () => {
       sortedProducts.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
   }
   setFilteredProducts(sortedProducts);
+
+  if (sortType === "default") {
+    setFilteredProducts(products);
+  }
   }, [sortType])
   
   if (!loading) {
@@ -109,6 +114,7 @@ const ProductsPage = () => {
           filteredProducts={filteredProducts}
           setFilteredProducts={setFilteredProducts}
         />
+        {console.log(products)}
         <div
           className="Products"
           onClick={() => {
@@ -122,7 +128,7 @@ const ProductsPage = () => {
               value={sortType}
               onChange={handleSortChange}
             >
-              <option value="">No choosen</option>
+              <option defaultValue="default" >No choosen</option>
               <option value="name-asc">Product name (A-Z)</option>
               <option value="name-desc">Product name (Z-A)</option>
               <option value="price-asc">Price increase</option>
