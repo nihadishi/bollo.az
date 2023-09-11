@@ -244,7 +244,7 @@ const ProfilePage = () => {
                             </MDBCardText>
                           </div>
                         </div>
-                        <MDBCardText className="lead fw-normal m-5">
+                        <MDBCardText className="lead fw-normal productAdding">
                           <button className="addbutton" onClick={handleAddClick}>
                             Add your product
                           </button>
@@ -269,12 +269,12 @@ const ProfilePage = () => {
                         <MDBRow className="g-2">
                           {AllProductsFromDatabase.filter(
                             (product) => product.userid === user._id
-                          ) // Kullanıcıya ait ürünleri filtrele
+                          ) 
                             .sort(
                               (a, b) =>
                                 new Date(b.createdAt) - new Date(a.createdAt)
-                            ) // Oluşturulma tarihine göre sırala
-                            .slice(0, 4) // İlk 4 ürünü al
+                            ) 
+                            .slice(0, 4)
                             .map((product, index) => (
                               <MDBCol
                                 key={index}

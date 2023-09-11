@@ -19,21 +19,22 @@
     }
 }
 .filter-container {
-    position: absolute;
+    // position: absolute;
     z-index: 9;
-    padding: 20px;
-    padding-left: 120px;
-    right: 15%;
+    // padding: 20px;
+    // padding-left: 120px;
+    // right: 15%;
     background-color: #ffffff;
     border: 1px solid #ffffff;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
-    left: 45%;
+    margin: auto;
+    // left: 45%;
     width: 80%;
-    transform: translate(-50%,-60%);
+    // transform: translate(-50%,-60%);
     display: flex;
-    justify-content: space-between;
+    justify-content: end;
   }
   .filter-inputs{
     display: flex;
@@ -72,4 +73,4 @@
       }
     }
   }
-  
+  @import "../../assets/media-screen/tablet.scss";

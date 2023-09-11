@@ -1,6 +1,22 @@
 @import "../fonts/mixin.scss";
 @import "../fonts/fonts.scss";
 @media (max-width: 768px) {
+  .Navbar-Nav{
+    display: none;
+  }
+  .Shopping{
+    width: 100%;
+    overflow-y: scroll;
+  }
+  .editing-inputs{
+    width: 80%;
+  }
+  .Addproduct{
+    margin: 0%;
+  }
+  .productAdding{
+    margin: 0%;
+  }
   .Nav {
     background-color: #ffffff;
     height: 80px;
@@ -12,18 +28,23 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 17px 34px 17px 34px;
+      padding: 17px;
       &-Logo {
         display: flex;
         justify-content: center;
         align-items: center;
-        scale: 1.2;
+        scale: 1;
+        width: 13vw;
+        & img{
+          width: 100%;
+          height: 100%;
+        }
       }
       &-menuLogo {
         display: flex;
         justify-content: center;
         align-items: center;
-        scale: 1.2;
+        scale: 1;
       }
     }
     &-Lang {
@@ -244,11 +265,23 @@
     }
   }
 }
+@media (max-width: 1200px){
+  .filter-inputs{
+    width: 100%;
+    display: block;
+  }
+}
+@media(max-width:1000px){
+  .Navbar-Nav-Navbar-ul{
+    gap: 3vw;
+  }
+}
 @media (min-width: 769px) {
-  .OpenMenu {
+  .Nav-M {
     display: none;
   }
-  .Nav {
+  .Navbar-Nav {
     display: flex;
   }
 }
+

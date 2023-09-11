@@ -1,6 +1,6 @@
 @import "../../assets/fonts/mixin.scss";
 @import "../../assets/fonts/fonts.scss";
-@import "../../assets/media-screen/tablet.scss";
+
 .Int{
   background-image: url("./img/bg1.png");
   background-repeat: no-repeat;
@@ -216,3 +216,4 @@
     }
   }
 }
+@import "../../assets/media-screen/tablet.scss";

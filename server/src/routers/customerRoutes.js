@@ -7,4 +7,4 @@ const {
 
 router.post("/add", addCustomer);
 // router.put("/update:id", updateProfile)
-module.exports = router;
+module.exports = router;//

@@ -43,7 +43,8 @@ const Search = () => {
         const result = event.results[event.resultIndex];
         if (result.isFinal) {
           setTranscript(result[0].transcript);
-          setSearchText((prevSearchText) => prevSearchText + transcript);
+          setSearchText(result[0].transcript);
+          // setSearchText(transcript);
         }
       };
       recognition.start();

@@ -100,7 +100,7 @@ const FilterProducts = ({
       {showFilter && (
         <div className="filter-container">
          <div className="filter-inputs">
-        <div className="w-25 d-flex align-items-center justify-content-center"> Price range</div>
+        <div className="w-25 d-flex align-items-center justify-content-start"> Price range</div>
           <Box sx={{ width: 300 }} className="w-100">
             <Slider
               getAriaLabel={() => "Price Range"}
