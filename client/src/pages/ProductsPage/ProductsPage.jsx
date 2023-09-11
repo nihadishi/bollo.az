@@ -114,7 +114,6 @@ const ProductsPage = () => {
           filteredProducts={filteredProducts}
           setFilteredProducts={setFilteredProducts}
         />
-        {console.log(products)}
         <div
           className="Products"
           onClick={() => {

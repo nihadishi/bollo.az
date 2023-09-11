@@ -2,6 +2,7 @@ import "./style.scss";
 import { useContext, useEffect, useState } from "react";
 import Logo from "./img/bollo-logo-gr.png";
 import menuLogo_M from "./img/menuLogo-M.png";
+import menuLogo_M_X from "./img/cancel_130887.png";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import shopicon from "./img/shop-icon.gif";
 import { UserContext } from "../../assets/context/userContext";
@@ -116,7 +117,7 @@ const Navbar = () => {
                 setIsOpen(!isOpen);
               }}
             >
-              <img src={menuLogo_M} alt="Menu" />
+              <img src={menuLogo_M_X} alt="Menu" />
             </div>
           </div>
           <div className="OpenMenu-AllItems">
