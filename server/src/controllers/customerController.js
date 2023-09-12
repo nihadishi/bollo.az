@@ -1,3 +1,4 @@
+const { log } = require("console");
 const Customer = require("../models/customerSchema.js");
 const multer = require("multer");
 const path = require("path");
@@ -41,8 +42,45 @@ const addCustomer = (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
-const updateCustomer = (req, res) => {
-    
+const updateCustomer = async (req, res) => {
+  const customerId = req.params.id;
+  const { shopForm } = req.body;
+
+  try {
+    const customer = await Customer.findById(customerId);
+
+    if (!customer) {
+      return res.status(404).json({ error: "Müşteri bulunamadı" });
+    }
+
+    customer.name = shopForm.Name;
+    customer.surname = shopForm.Surname;
+    customer.email = shopForm.Email;
+    customer.number = shopForm.Number;
+    customer.country = shopForm.Country;
+    customer.city = shopForm.City;
+    customer.street = shopForm.Street;
+    customer.zipcode = shopForm.ZipCode;
+    customer.otpcode = "123";
+
+    await customer.save();
+
+    return res.status(200).json(customer);
+  } catch (error) {
+    return res.status(500).json({ error: "Internal Server Error" });
+  }
 };
 
-module.exports = { addCustomer, updateCustomer };
+const getCustomer = async (req, res) => {
+  const customerId = req.params.idcard;
+  try {
+    const idCardNumbers = await Customer.findOne({ idcard: customerId });
+    if (!idCardNumbers) {
+      return res.status(200).json(0);
+    }
+    return res.status(200).json(idCardNumbers);
+  } catch (error) {
+    return res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+module.exports = { addCustomer, updateCustomer,getCustomer };

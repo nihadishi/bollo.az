@@ -12,27 +12,28 @@ const OTPPage = () => {
   const { shopForm,loading,setLoading } = useContext(ShoppingFormContext);
   const completeOTP = otp.join(""); 
   const numericOTP = parseInt(completeOTP, 10); 
+  const IDCardNumber = shopForm.IDCardNumber
   useEffect(() => {
     setLoading(true);
     const email = localStorage.getItem('shopFormEmail');
+   
     if (email) {
-        axios.post('/auth/sendEmail', { email })
-          .then(response => {
-            console.log(response.data.message);
-            setLoading(false);
-          })
-          .catch(error => {
-            console.error(error);
-            setLoading(false);
-          });
-      } else {
-        console.log('Email is not defined LocalStorage');
-        setLoading(false);
-      }
-  
+      axios.post('/auth/sendEmail', { email, IDCardNumber})
+        .then(response => {
+          setLoading(false);
+        })
+        .catch(error => {
+          console.error(error);
+          setLoading(false);
+        });
+
+      
+    }
     const timeout = setTimeout(() => {
       setLoading(false);
     }, 4300);
+    
+    return () => clearTimeout(timeout);
   }, []);
 
   const handleOTPChange = (index, value) => {
@@ -44,20 +45,24 @@ const OTPPage = () => {
       inputRefs[index + 1].current.focus();
     }
   };
- useEffect(() => {
-  if(numericOTP>100000){
-    axios.post('/auth/verify', { numericOTP })
-    .then(response => {
-      console.log(response.data.message); // E-posta gönderildi mesajını yazdır
-      setLoading(false);
-    })
-    .catch(error => {
-      console.error(error);
-      setLoading(false);
-    });
-  }
- }, [numericOTP])
- 
+  
+  useEffect(() => {
+    const verifyOTP = async () => {
+      if (numericOTP > 100000) {
+        try {
+          const response = await axios.post('/auth/verify', { numericOTP, IDCardNumber });
+          console.log(response.data.verified);
+          setLoading(false);
+        } catch (error) {
+          console.error(error);
+          setLoading(false);
+        }
+      }
+    };
+  
+    verifyOTP();
+  }, [numericOTP, IDCardNumber]);
+
 
   return !loading ? (
     <div className="otp-container">

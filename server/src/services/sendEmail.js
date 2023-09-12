@@ -1,5 +1,6 @@
 const expressAsyncHandler = require("express-async-handler");
 const dotenv = require("dotenv");
+const Customer = require("../models/customerSchema.js");
 const nodemailer = require("nodemailer");
 let {generateOTP,otpValue} = require("./generateOTP");
 dotenv.config();
@@ -12,10 +13,8 @@ let transporter = nodemailer.createTransport({
   },
 });
 const sendEmail = expressAsyncHandler(async (req, res) => {
-  const { email } = req.body;
+  const { email,IDCardNumber } = req.body;
    otpValue = generateOTP();
-  console.log(otpValue);
-
   const mailOptions = {
     from: process.env.USERM,
     to: email,
@@ -27,6 +26,16 @@ const sendEmail = expressAsyncHandler(async (req, res) => {
     const info = await transporter.sendMail(mailOptions);
     console.log("Email sent successfully!");
     res.json({ message: "Email sent successfully!" });
+    const customer = await Customer.findOne({ idcard: IDCardNumber });
+
+    if (!customer) {
+      return res.status(404).json({ error: "Müşteri bulunamadı" });
+    }
+    customer.otpcode = otpValue;
+
+    await customer.save();
+
+    return res.status(200).json(customer);
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Email sending error." });

