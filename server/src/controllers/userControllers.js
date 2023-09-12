@@ -1,5 +1,5 @@
 const User = require("../models/userSchema.js");
-const { hashPassword, comparePassword } = require('../auth/Auth.js');
+const { hashPassword, comparePassword } = require("../auth/Auth.js");
 const jwt = require("jsonwebtoken");
 const multer = require("multer");
 const path = require("path");
@@ -14,25 +14,29 @@ const loginUser = async (req, res) => {
     const { email, password } = req.body;
 
     //Check user's existing
-    const user = await User.findOne({ email })
+    const user = await User.findOne({ email });
     if (!user) {
       return res.json({
-        error: 'No user aviable, please sign up'
-      })
+        error: "No user aviable, please sign up",
+      });
     }
 
     //Check password
-    const compPassword = await comparePassword(password, user.password)
+    const compPassword = await comparePassword(password, user.password);
     if (compPassword) {
-      jwt.sign({ email: user.email, id: user._id, fullname: user.fullname }, process.env.JWT_KEY, {}, (err, token) => {
-        if (err) throw err;
-        res.cookie('token', token).json(user)
-      });
-    }
-    else {
+      jwt.sign(
+        { email: user.email, id: user._id, fullname: user.fullname },
+        process.env.JWT_KEY,
+        {},
+        (err, token) => {
+          if (err) throw err;
+          res.cookie("token", token).json(user);
+        }
+      );
+    } else {
       res.json({
-        error: "Password is not same with changed token"
-      })
+        error: "Password is not same with changed token",
+      });
     }
   } catch (error) {
     console.log(error);
@@ -41,26 +45,26 @@ const loginUser = async (req, res) => {
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     console.log(req.body);
-    return cb(null, 'images/profilephotos')
+    return cb(null, "images/profilephotos");
   },
   filename: (req, file, cb) => {
     console.log(file);
-    return cb(null, Date.now() + path.extname(file.originalname))
-  }
-})
+    return cb(null, Date.now() + path.extname(file.originalname));
+  },
+});
 const upload = multer({ storage: storage });
 
-const uploadUserImage = upload.single('image')
+const uploadUserImage = upload.single("image");
 //register
 const registerUser = async (req, res) => {
   try {
     const { fullname, region, city, number, email, password } = req.body;
     console.log(req.file);
-    if (!(
-      fullname && region && city && number && email && password)) {
-      return res.json({
-        error: "Invalid Input",
-      })
+    if (!(fullname && region && city && number && email && password)) {
+      return res
+        .json({
+          error: "Invalid Input",
+        })
         .status(400);
     }
     //password validation yazacam
@@ -71,13 +75,15 @@ const registerUser = async (req, res) => {
         error: "Email is taken already",
       });
     }
-    const hashedPassword = await hashPassword(password)
+    const hashedPassword = await hashPassword(password);
 
     const user = await User.create({
       image: req.file.filename,
       fullname,
       region,
-      city: city.toLowerCase().charAt(0).toUpperCase() + city.slice(1).toLowerCase(),
+      city:
+        city.toLowerCase().charAt(0).toUpperCase() +
+        city.slice(1).toLowerCase(),
       number,
       email: email.toLowerCase(),
       password: hashedPassword,
@@ -89,76 +95,75 @@ const registerUser = async (req, res) => {
 };
 ////////
 const getProfile = async (req, res) => {
-  const { token } = req.cookies
+  const { token } = req.cookies;
   try {
     if (token) {
       jwt.verify(token, process.env.JWT_KEY, {}, async (err, user) => {
-        const send = await User.findOne({ email: user.email }).select('-password')
+        const send = await User.findOne({ email: user.email }).select(
+          "-password"
+        );
         if (err) throw err;
         res.json(send);
-      })
-    }
-    else {
+      });
+    } else {
       res.json(null);
     }
-  }
-  catch (error) {
+  } catch (error) {
     res.status(401).json({
-      status: 'fail',
-      message: 'Invalid token'
+      status: "fail",
+      message: "Invalid token",
     });
   }
-}
+};
 
-const updateProfile = async (req,res) =>{
+const updateProfile = async (req, res) => {
   const { token } = req.cookies;
   try {
-    console.log(token);
+    // console.log(token);
     if (token) {
       jwt.verify(token, process.env.JWT_KEY, {}, async (err, user) => {
         if (err) {
           return res.status(401).json({
-            status: 'fail',
-            message: 'Invalid token'
+            status: "fail",
+            message: "Invalid token",
           });
         }
 
         const userId = user.id;
-        const { fullname, city,number } = req.body;
+        const { fullname, city, number } = req.body;
         const updatedUser = await User.findByIdAndUpdate(
           userId,
           { fullname, city, number },
-          { new: true } 
-        ).select('-password');
+          { new: true }
+        ).select("-password");
 
         res.status(200).json(updatedUser);
       });
-    } 
-    else {
+    } else {
       res.status(401).json({
-        status: 'fail',
-        message: 'Token not found'
+        status: "fail",
+        message: "Token not found",
       });
     }
   } catch (error) {
-    res.status(500).json({ error: 'An error occurred' });
+    res.status(500).json({ error: "An error occurred" });
   }
+};
+const addOrderProduct = async (req, res) => {
+
+  
 };
 const logoutProfile = async (req, res) => {
   try {
-    res.cookie('token', '');
+    res.cookie("token", "");
 
-    res.status(200).json(
-      {
-        status: 'sucess'
-      }
-    )
+    res.status(200).json({
+      status: "sucess",
+    });
   } catch (error) {
     console.log(error);
   }
-
-
-}
+};
 module.exports = {
   test,
   registerUser,
@@ -166,5 +171,6 @@ module.exports = {
   getProfile,
   logoutProfile,
   uploadUserImage,
-  updateProfile
+  updateProfile,
+  addOrderProduct,
 };

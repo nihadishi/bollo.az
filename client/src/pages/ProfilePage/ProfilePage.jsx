@@ -23,7 +23,6 @@ import {
   MDBModalTitle,
   MDBModalBody,
   MDBModalFooter,
-  MDBInputGroup,
 } from "mdb-react-ui-kit";
 import bg1 from "./img/bgrandom/1.jpg";
 import bg2 from "./img/bgrandom/2.jpg";
@@ -244,6 +243,17 @@ const ProfilePage = () => {
                             </MDBCardText>
                           </div>
                         </div>
+                        <div style={{ transition: "1s" ,margin:"20px 0", width:"100%"}} className="d-flex align-items-center justify-content-center">
+                            {/* <MDBBtn
+                              outline
+                              color="secondary"
+                              style={{ height: "36px", overflow: "visible", width:"50%"}}
+                              onClick={()=>{navigate("/profile-orders")}}
+                              tabIndex="2"
+                            >
+                              Your Orders
+                            </MDBBtn> */}
+                          </div>
                         <MDBCardText className="lead fw-normal productAdding">
                           <button className="addbutton" onClick={handleAddClick}>
                             Add your product
@@ -255,6 +265,7 @@ const ProfilePage = () => {
                           ) : (
                             <></>
                           )}
+                          
                         </MDBCardText>
                         <div className="d-flex justify-content-between align-items-center mb-4">
                           <MDBCardText className="lead fw-normal mb-0">

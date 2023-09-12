@@ -71,7 +71,7 @@ const addProduct = async (req, res) => {
       email,
       userid
     });
-    return res.json(product).status(200);
+    return res.json(product).status(200);//
   } catch (error) {
     console.log(error);
     return res.status(500).json({ error: "Internal Server Error" });

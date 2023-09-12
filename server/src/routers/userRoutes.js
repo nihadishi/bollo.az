@@ -7,7 +7,8 @@ const {
   getProfile,
   logoutProfile,
   uploadUserImage,
-  updateProfile
+  updateProfile,
+  addOrderProduct
 } = require("../controllers/userControllers");
 
 
@@ -18,4 +19,5 @@ router.post("/logout",logoutProfile);
 router.get("/profile", getProfile);
 // router.get("/profile/:id", getProfile);
 router.put("/profile/:id", updateProfile)
+router.put("/profile/order/:id", addOrderProduct)
 module.exports = router;

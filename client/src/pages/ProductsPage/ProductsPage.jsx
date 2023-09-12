@@ -21,6 +21,7 @@ const ProductsPage = () => {
   const { user, loading, setLoading } = useContext(UserContext);
   const { shoppingItems, setShoppingItems, products } =
     useContext(ShoppingContext);
+    // console.log(products);
   const { setBlending } = useContext(BlendingContext);
   const navigate = useNavigate();
   const params = useParams();

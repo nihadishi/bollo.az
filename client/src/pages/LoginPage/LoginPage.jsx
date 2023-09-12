@@ -74,7 +74,7 @@ const LoginPage = () => {
             <button className="btn btn-success w-100">
               <strong>Log in</strong>
             </button>
-            <Link to="/forgot">Forgot password</Link>
+            {/* <Link to="/forgot">Forgot password</Link> */}
             <p>Do you haven't account?</p>
             <Link
               to="/register"

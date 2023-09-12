@@ -29,5 +29,5 @@ app.use('/api/products', require('./src/routers/productRoutes'));
 app.use("/api/customer", require("./src/routers/customerRoutes"));
 
 app.listen(port, () => {
-    console.log(`${port} is running... app.js`);//////////
+    console.log(`${port} is running... app.js`);
 })

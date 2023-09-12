@@ -23,6 +23,7 @@ import PaymentPrivate from "./assets/PrivateRoutes/PaymentPrivate";
 import OTPPrivate from "./assets/PrivateRoutes/OTPPrivate";
 import EditProfilePage from "./pages/EditProfilePage/EditProfilePage";
 import { EditingIsOpenProvider } from "./assets/context/editinIsOpenContext";
+import OrderPageFromCustomers from "./pages/OrderPageFromCustomers/OrderPageFromCustomers";
 axios.defaults.baseURL = "http://localhost:5000/api/";
 axios.defaults.withCredentials = true;
 
@@ -109,6 +110,7 @@ function App() {
                       }
                     />
                     <Route path="/profile" element={<ProfilePage />} />
+                    <Route path="/profile-orders" element={<OrderPageFromCustomers />} />
                     <Route path="/profile-edit" element={<EditProfilePage />} />
                     <Route
                       path="/3dsecure.azericard/payment"
