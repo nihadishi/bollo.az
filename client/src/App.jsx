@@ -24,7 +24,7 @@ import OTPPrivate from "./assets/PrivateRoutes/OTPPrivate";
 import EditProfilePage from "./pages/EditProfilePage/EditProfilePage";
 import { EditingIsOpenProvider } from "./assets/context/editinIsOpenContext";
 import OrderPageFromCustomers from "./pages/OrderPageFromCustomers/OrderPageFromCustomers";
-axios.defaults.baseURL = "http://localhost:5000/api/";
+axios.defaults.baseURL = "https://bollo-az-api.vercel.app/api/";
 axios.defaults.withCredentials = true;
 
 function App() {
