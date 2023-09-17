@@ -11,12 +11,13 @@ import { useNavigate } from "react-router-dom";
 import { TotalPriceContext } from "../../assets/context/TotalPriceContext";
 import Shopform from "../ShopForm/Shopform";
 import { ShoppingFormContext } from "../../assets/context/shopFormContext";
-
+import { BackendUrlContext} from "../../assets/context/backendUrlContext";
 const Shopping = () => {
   const { openShopping, setOpenShopping, shoppingItems, setShoppingItems } =
     useContext(ShoppingContext);
     const {totalPriceCont,setTotalPriceCont} = useContext(TotalPriceContext);
     const {shopForm,setShopForm} = useContext(ShoppingFormContext);
+    const {baseUrl} = useContext(BackendUrlContext);
     const navigate = useNavigate();
     const [openShopForm,setOpenShopForm] = useState(false);
     const handleRemoveProduct = (productId) => {
@@ -110,7 +111,7 @@ const Shopping = () => {
                   <div className="Shopping-Detail-Cards-Card" key={index} >
                     <div className="Shopping-Detail-Cards-Card-Img">
                       <img
-                        src={`http://localhost:5000/products/${product?.productimage}`}
+                        src={`${baseUrl}/products/${product?.productimage}`}
                         alt={product.productname}
                       />
                     </div>

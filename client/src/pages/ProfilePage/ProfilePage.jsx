@@ -34,20 +34,23 @@ import Loading from "../../layouts/Loading/Loading";
 import Footer from "../../layouts/Footer/Footer";
 import Addproduct from "../../layouts/Addproduct/Addproduct";
 import { ShoppingContext } from "../../assets/context/shoppingContext";
-import { EditingIsOpen} from "../../assets/context/editinIsOpenContext"
+import { EditingIsOpen } from "../../assets/context/editinIsOpenContext";
 import EditProfilePage from "../EditProfilePage/EditProfilePage";
+import { BackendUrlContext } from "../../assets/context/backendUrlContext";
 
 const ProfilePage = () => {
   let currentDate = new Date();
   const { user, setUser, loading, setLoading } = useContext(UserContext);
-  const {editing,setEditing} = useContext(EditingIsOpen);
+  const { editing, setEditing } = useContext(EditingIsOpen);
   const { AllProductsFromDatabase } = useContext(ShoppingContext);
+  const { baseUrl } = useContext(BackendUrlContext);
+
   const navigate = useNavigate();
   const [basicModal, setBasicModal] = useState(false);
   const [backgroundImage, setBackgroundImage] = useState("");
-  
+
   const [adding, setAdding] = useState(false);
-  const profileImage = "http://localhost:5000/profilephotos/" + user?.image;
+  const profileImage = `${baseUrl}/profilephotos/` + user?.image;
 
   useEffect(() => {
     const randomImage = () => {
@@ -71,8 +74,6 @@ const ProfilePage = () => {
     setAdding(!adding);
   };
 
- 
-
   const logoutUser = async () => {
     try {
       await axios.post("user/logout");
@@ -86,10 +87,9 @@ const ProfilePage = () => {
   const toggleShow = () => setBasicModal(!basicModal);
   if (!loading) {
     if (user) {
-      if(editing){
-        navigate("/profile-edit")
-      }
-      else{
+      if (editing) {
+        navigate("/profile-edit");
+      } else {
         return (
           <>
             <div className="gradient-custom-2 profile">
@@ -111,20 +111,28 @@ const ProfilePage = () => {
                           style={{ width: "150px" }}
                         >
                           <MDBCardImage
-                            src={user?.image ? profileImage : defaultProfilePhoto}
+                            src={
+                              user?.image ? profileImage : defaultProfilePhoto
+                            }
                             alt="Image"
                             className="mb-2 img-thumbnail overflow-hidden"
                             // fluid
-                            style={{ width: "100%", height: "100%", zIndex: "1" }}
+                            style={{
+                              width: "100%",
+                              height: "100%",
+                              zIndex: "1",
+                            }}
                           />
                         </div>
                         <div className="ms-3" style={{ marginTop: "90px" }}>
-                          <MDBTypography tag="h2">{user?.fullname}</MDBTypography>
+                          <MDBTypography tag="h2">
+                            {user?.fullname}
+                          </MDBTypography>
                           <MDBCardText tag="h4">
                             ({user?.city}) {user?.region}
                           </MDBCardText>
                         </div>
-  
+
                         {/* logout */}
                         <div style={{ position: "absolute", right: "0" }}>
                           <MDBBtn
@@ -160,7 +168,7 @@ const ProfilePage = () => {
                                 >
                                   If you log out, you will need to log in again.
                                 </MDBModalBody>
-  
+
                                 <MDBModalFooter>
                                   <MDBBtn
                                     color="secondary"
@@ -203,10 +211,11 @@ const ProfilePage = () => {
                               {
                                 AllProductsFromDatabase.filter(
                                   (product) => product.userid === user._id
-                
-                                ).filter((product)=>{
-                                  const expirationDate = new Date(product.productexpirationdate);
-                                  return(currentDate < expirationDate)
+                                ).filter((product) => {
+                                  const expirationDate = new Date(
+                                    product.productexpirationdate
+                                  );
+                                  return currentDate < expirationDate;
                                 }).length
                               }
                             </MDBCardText>
@@ -243,8 +252,15 @@ const ProfilePage = () => {
                             </MDBCardText>
                           </div>
                         </div>
-                        <div style={{ transition: "1s" ,margin:"20px 0", width:"100%"}} className="d-flex align-items-center justify-content-center">
-                            {/* <MDBBtn
+                        <div
+                          style={{
+                            transition: "1s",
+                            margin: "20px 0",
+                            width: "100%",
+                          }}
+                          className="d-flex align-items-center justify-content-center"
+                        >
+                          {/* <MDBBtn
                               outline
                               color="secondary"
                               style={{ height: "36px", overflow: "visible", width:"50%"}}
@@ -253,9 +269,12 @@ const ProfilePage = () => {
                             >
                               Your Orders
                             </MDBBtn> */}
-                          </div>
+                        </div>
                         <MDBCardText className="lead fw-normal productAdding">
-                          <button className="addbutton" onClick={handleAddClick}>
+                          <button
+                            className="addbutton"
+                            onClick={handleAddClick}
+                          >
                             Add your product
                           </button>
                           {adding ? (
@@ -265,7 +284,6 @@ const ProfilePage = () => {
                           ) : (
                             <></>
                           )}
-                          
                         </MDBCardText>
                         <div className="d-flex justify-content-between align-items-center mb-4">
                           <MDBCardText className="lead fw-normal mb-0">
@@ -280,11 +298,11 @@ const ProfilePage = () => {
                         <MDBRow className="g-2">
                           {AllProductsFromDatabase.filter(
                             (product) => product.userid === user._id
-                          ) 
+                          )
                             .sort(
                               (a, b) =>
                                 new Date(b.createdAt) - new Date(a.createdAt)
-                            ) 
+                            )
                             .slice(0, 4)
                             .map((product, index) => (
                               <MDBCol
@@ -297,7 +315,7 @@ const ProfilePage = () => {
                               >
                                 <div className="RecentProduct-img">
                                   <MDBCardImage
-                                    src={`http://localhost:5000/products/${product.productimage}`}
+                                    src={`${baseUrl}/products/${product.productimage}`}
                                     alt={`Product ${index}`}
                                     className="w-100 rounded-3"
                                   />

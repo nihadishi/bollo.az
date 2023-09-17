@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { BlendingContext } from "../../assets/context/blendContext";
 import startvoiceicon from "./img/icons8-voice-recorder-b.png";
 import stopvoiceicon from "./img/icons8-voice-recorder-red.png";
+import { BackendUrlContext } from "../../assets/context/backendUrlContext";
 
 const Search = () => {
   const navigate = useNavigate();
@@ -16,6 +17,7 @@ const Search = () => {
   let recognition = null;
   const [filteredProducts, setFilteredProducts] = useState([]);
   const { products } = useContext(ShoppingContext);
+  const {baseUrl} = useContext(BackendUrlContext);
   const { blending, setBlending } = useContext(BlendingContext);
 
   useEffect(() => {
@@ -107,7 +109,7 @@ const Search = () => {
                   <div className="src-products-product-detail-l">
                     <div className="src-products-product-detail-l-img">
                       <img
-                        src={`http://localhost:5000/products/${filtered.productimage}`}
+                        src={`${baseUrl}/products/${filtered.productimage}`}
                         alt=""
                       />
                     </div>

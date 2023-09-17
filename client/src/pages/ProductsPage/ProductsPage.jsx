@@ -16,6 +16,7 @@ import Search from "../../layouts/Search/Search";
 import { BlendingContext } from "../../assets/context/blendContext";
 import FilterProducts from "../../layouts/FilterProducts/FilterProducts";
 import ProductLoading from "../../layouts/Loading/ProductLoading";
+import { BackendUrlContext } from "../../assets/context/backendUrlContext";
 const ProductsPage = () => {
   const today = new Date();
   const { user, loading, setLoading } = useContext(UserContext);
@@ -23,6 +24,8 @@ const ProductsPage = () => {
     useContext(ShoppingContext);
     // console.log(products);
   const { setBlending } = useContext(BlendingContext);
+    const {baseUrl} = useContext(BackendUrlContext);
+
   const navigate = useNavigate();
   const params = useParams();
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -143,8 +146,6 @@ const ProductsPage = () => {
               expirationDate == "Invalid Date" || expirationDate < today
                 ? "invalidProduct"
                 : "validProduct";
-            // console.log(product);
-            // console.log(freshnessClass);
             return (
               <div
                 className={`Products-Product ${freshnessClass}`}
@@ -174,7 +175,7 @@ const ProductsPage = () => {
                 >
                   {product?.productimage ? (
                     <img
-                      src={`http://localhost:5000/products/${product?.productimage}`}
+                      src={`${baseUrl}/products/${product?.productimage}`}
                       alt={product.productname}
                     />
                   ) : (
