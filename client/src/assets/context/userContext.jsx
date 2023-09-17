@@ -15,7 +15,7 @@ export function UserContextProvider({children}) {
             try {
                 const response = await axios.get('user/profile');
                 setUser(response.data);
-                localStorage.setItem("userDatas", response.data);
+                
             } catch (error) {
                 console.error(error);
             } 
@@ -27,7 +27,7 @@ export function UserContextProvider({children}) {
         if (!user) {
             fetchData();
         }
-
+        localStorage.setItem("userDatas", user);
     }, [user])
     // console.log("user",user);
     return(
