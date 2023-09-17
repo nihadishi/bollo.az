@@ -96,6 +96,7 @@ const registerUser = async (req, res) => {
 ////////
 const getProfile = async (req, res) => {
   const { token } = req.cookies;
+  console.log(token);
   try {
     if (token) {
       jwt.verify(token, process.env.JWT_KEY, {}, async (err, user) => {
