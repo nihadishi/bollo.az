@@ -5,7 +5,7 @@ export const UserContext = createContext({})
 
 export function UserContextProvider({children}) {
     const initialState = localStorage.getItem("userDatas");
-    const [user,setUser] = useState(initialState);
+    const [user,setUser] = useState(JSON.parse(initialState));
     console.log("user",user)
     const [loading,setLoading] = useState(true);
     
@@ -27,9 +27,7 @@ export function UserContextProvider({children}) {
         if (!user) {
             fetchData();
         }
-        localStorage.setItem("userDatas", {
-            
-        });
+        localStorage.setItem("userDatas", JSON.stringify(user));
     }, [user])
     // console.log("user",user);
     return(
