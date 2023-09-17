@@ -11,6 +11,7 @@ app.use(
     cors({
         credentials: true,
         origin: "http://localhost:3000",
+        //front teref bilinmir helellik
     })
 );
 //db
