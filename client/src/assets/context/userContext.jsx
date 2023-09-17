@@ -4,13 +4,8 @@ import { createContext, useState, useEffect } from "react";
 export const UserContext = createContext({})
 
 export function UserContextProvider({children}) {
-    // const initialState = axios.get('user/profile')
-    // .then(({data})=>{
-    //     console.log("contex",data)
-    //     setUser(data)
-    // }).catch(error =>{}
-    //  )
-    const [user,setUser] = useState(null);
+    const initialState = localStorage.getItem("userDatas");
+    const [user,setUser] = useState(initialState);
     console.log("user",user)
     const [loading,setLoading] = useState(true);
     
@@ -20,6 +15,7 @@ export function UserContextProvider({children}) {
             try {
                 const response = await axios.get('user/profile');
                 setUser(response.data);
+                localStorage.setItem("userDatas", response.data);
             } catch (error) {
                 console.error(error);
             } 
