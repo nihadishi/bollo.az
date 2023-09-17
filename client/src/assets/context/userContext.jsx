@@ -6,14 +6,7 @@ export const UserContext = createContext({});
 export function UserContextProvider({ children }) {
   const initialState = localStorage.getItem("userDatas");
 
-  const [user, setUser] = useState(initialState);
-  const kullaniciVerileri = {};
-
-  for (const key in user) {
-    if (user.hasOwnProperty(key)) {
-      kullaniciVerileri[key] = user[key];
-    }
-  }
+  const [user, setUser] = useState(JSON.parse(initialState));
 
   console.log("user", user);
   const [loading, setLoading] = useState(true);
@@ -34,8 +27,21 @@ export function UserContextProvider({ children }) {
     if (!user) {
       fetchData();
     }
-    console.log("userData",kullaniciVerileri);
-    localStorage.setItem("userDatas", kullaniciVerileri);
+    localStorage.setItem(
+      "userDatas",
+      JSON.stringify({
+        city: user.city,
+        createdAt: user.createdAt,
+        email: user.email,
+        fullname: user.fullname,
+        image: user.image,
+        number: user.number,
+        password: user.password,
+        region: user.region,
+        __v: 0,
+        _id: user._id,
+      })
+    );
   }, [user]);
   // console.log("user",user);
   return (
