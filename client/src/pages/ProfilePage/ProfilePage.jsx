@@ -86,7 +86,7 @@ const ProfilePage = () => {
 
   const toggleShow = () => setBasicModal(!basicModal);
   if (!loading) {
-    if (localStorage.getItem("isLogin")) {
+    if (user) {
       if (editing) {
         navigate("/profile-edit");
       } else {
