@@ -27,6 +27,7 @@ const EditProfilePage = () => {
 
   const handleEditSave = async () => {
     const userID = user?.id;
+    console.log(user.id);
     try {
       await axios.put(`user/profile/${userID}`, editedUser);
       setEditing(false);
