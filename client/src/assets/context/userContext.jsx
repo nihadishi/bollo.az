@@ -27,7 +27,7 @@ export function UserContextProvider({children}) {
         if (!user) {
             fetchData();
         }
-        localStorage.setItem("userDatas", JSON.stringify(user));
+        localStorage.setItem("userDatas", JSON.stringify(user[0]));
     }, [user])
     // console.log("user",user);
     return(
