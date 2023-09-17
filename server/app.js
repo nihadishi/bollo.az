@@ -10,7 +10,7 @@ const cors = require('cors')
 app.use(
     cors({
         credentials: true,
-        origin: "http://localhost:3000",
+        origin: "https://bollo-az.vercel.app",
         //front teref bilinmir helellik
     })
 );
