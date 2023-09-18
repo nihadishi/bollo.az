@@ -89,7 +89,6 @@ const MultiStepForm = () => {
           "Content-Type": "multipart/form-data", // Set proper content type for file upload
         },
       });
-      console.log("data", data);
       if (data.error) {
         toast.error("Can't add the product, please try again ");
       } else {

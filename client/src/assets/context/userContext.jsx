@@ -27,7 +27,6 @@ const [user, setUser] = useState(initialState);
             }).catch(error =>{}
              )
       }
-    console.log("userr",user);
   }, [user]);
   return (
     <UserContext.Provider value={{ user, setUser, loading, setLoading }}>

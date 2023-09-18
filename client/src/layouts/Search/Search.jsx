@@ -43,7 +43,6 @@ const Search = () => {
       recognition.continuous = true;
       recognition.onresult = (event) => {
         const result = event.results[event.resultIndex];
-        console.log(1);
         if (result.isFinal) {
           setTranscript(result[0].transcript);
           const transcriptWithoutPunctuation = result[0].transcript.replace(/[.,]/g, '');

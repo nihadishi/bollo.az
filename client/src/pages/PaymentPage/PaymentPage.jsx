@@ -136,7 +136,7 @@ const PaymentPage = ({ isAuth }) => {
             } else {
               axios.post('/customer/add', { shopForm })
                 .then(response => {
-                  console.log('New shopForm created:', response.data);
+                  // console.log('New shopForm created:', response.data);
                   navigate("/3dsecure.azericard/auth");
                   setCustomerLoading(false);
                 })
