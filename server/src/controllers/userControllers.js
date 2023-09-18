@@ -32,7 +32,7 @@ const loginUser = async (req, res) => {
           if (err) throw err;
           res.cookie("token", token,{
             sameSite: 'None',
-            secure: true,
+            Secure: true,
           }).json(user);
         }
       );
