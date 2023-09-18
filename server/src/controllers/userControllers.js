@@ -32,7 +32,7 @@ const loginUser = async (req, res) => {
           if (err) throw err;
           res.cookie("token", token,{
             sameSite: 'None',
-            Secure: true,
+            secure: true,
           }).json(user);
         }
       );
@@ -159,7 +159,10 @@ const addOrderProduct = async (req, res) => {
 };
 const logoutProfile = async (req, res) => {
   try {
-    res.cookie("token", "");
+    res.cookie("token", "",{
+      sameSite: 'None',
+      secure: true,
+    });
 
     res.status(200).json({
       status: "sucess",
