@@ -32,12 +32,13 @@ const loginUser = async (req, res) => {
           if (err) throw err;
           res.cookie("token", token,{
             sameSite: 'None',
+            secure: true,
           }).json(user);
         }
       );
     } else {
       res.json({
-        error: "Password is not same with changed token",
+        error: "Password is wrong",
       });
     }
   } catch (error) {
