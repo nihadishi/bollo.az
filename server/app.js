@@ -6,15 +6,16 @@ const cookieParse = require("cookie-parser");
 const port = process.env.PORT || 5000;
 const app = express();
 const cors = require('cors')
-
+const frontAdress = "https://bollo-az.vercel.app";
+// const frontAdress = "http://localhost:3000";
 app.use(
     cors({
         credentials: true,
-        origin: "https://bollo-az.vercel.app",
+        origin: frontAdress,
     })
 );
 app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "https://bollo-az.vercel.app");
+    res.header("Access-Control-Allow-Origin", frontAdress);
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });

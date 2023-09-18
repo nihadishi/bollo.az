@@ -26,6 +26,7 @@ const [user, setUser] = useState(initialState);
     if (!user) {
       fetchData();
     }
+    console.log("userr",user);
     // localStorage.setItem(
     //   "userDatas",
     //   JSON.stringify({

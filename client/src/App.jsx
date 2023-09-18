@@ -26,6 +26,7 @@ import { EditingIsOpenProvider } from "./assets/context/editinIsOpenContext";
 import OrderPageFromCustomers from "./pages/OrderPageFromCustomers/OrderPageFromCustomers";
 import { BackendUrlContextProvider } from "./assets/context/backendUrlContext";
 axios.defaults.baseURL = "https://bollo-az-api.vercel.app/api/";
+// axios.defaults.baseURL = "http://localhost:5000/api/";
 axios.defaults.withCredentials = true;
 
 function App() {
