@@ -28,18 +28,19 @@ export function UserContextProvider({ children }) {
       fetchData();
     }
     localStorage.setItem(
-      "userDatas",{
-        city: user.city,
-        createdAt: user.createdAt,
-        email: user.email,
-        fullname: user.fullname,
-        image: user.image,
-        number: user.number,
-        password: user.password,
-        region: user.region,
+      "userDatas",
+      JSON.stringify({
+        city: user?.city,
+        createdAt: user?.createdAt,
+        email: user?.email,
+        fullname: user?.fullname,
+        image: user?.image,
+        number: user?.number,
+        password: user?.password,
+        region: user?.region,
         __v: 0,
-        _id: user._id,
-      }
+        _id: user?._id,
+      })
     );
   }, [user]);
   // console.log("user",user);
