@@ -1,8 +1,69 @@
 @import "../fonts/mixin.scss";
 @import "../fonts/fonts.scss";
 @media (max-width: 768px) {
-  .sections{
-    
+  .product-info-details{
+    height: auto;
+  }
+  .product-order-detail{
+    &-l{
+      width: 35%;
+    &-name{
+      &-name{
+        font-size: 19px;
+      }
+      &-region{
+        font-size: 14px;
+      }
+    }
+  }
+  &-r{
+    width: 60%;
+    flex-direction: column;
+    align-items: end;
+    &-price{
+      width: 100%;
+      text-align: end;
+      font-size: 20px;
+    }
+    &-add{
+      width: auto;
+      display: flex;
+      justify-content: end;
+      
+    }
+    &-addbasket{
+      padding: 5px;
+      height: 30px;
+      font-size: 12px;
+    }
+  }
+  }
+  .product-similar-detail{
+    flex-direction: column;
+    &-r{
+      width: 100%;
+    }
+  }
+  .PaymentPage{
+    flex-direction: column-reverse;
+    gap: 0;
+    align-items: center;
+  }
+  .credit-card-wrap{
+    position: relative;
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto;
+    top: 0%;
+    right: 0%;
+    margin: 0%;
+  }
+  .Form{
+    position: relative;
+    width: 90%;
+    top: 5%;
+    left: 0%;
+    bottom: 10%;
   }
   .features{
     display: flex;
@@ -284,6 +345,16 @@
 @media(max-width:1000px){
   .Navbar-Nav-Navbar-ul{
     gap: 3vw;
+  }
+  .product-info-details{
+    flex-direction: column;
+    width: 100%;
+    &-general{
+      width: 100%;
+    }
+    &-description{
+      width: 100%;
+    }
   }
 }
 @media (min-width: 769px) {

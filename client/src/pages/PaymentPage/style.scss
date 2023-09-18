@@ -73,7 +73,7 @@
   background-size: 20px 20px;
 }
 .credit-card-wrap .credit-card-inner{
-  z-index:100;
+  z-index:5;
   padding:30px;
   width:inherit;
   height:inherit;
@@ -223,3 +223,4 @@
   border: 1px solid #ccc;
   border-radius: 4px;
 }
+@import "../../assets/media-screen/tablet.scss";

@@ -219,6 +219,7 @@
   position: fixed;
   bottom: 100px;
   width: 90%;
+  margin: 0 auto;
   height: 120px;
   &-detail {
     display: flex;
@@ -292,6 +293,10 @@
         line-height: normal;
         color: #474747;
       }
+      &-add{
+        width: 70%;
+
+      }
       &-addbasket {
         cursor: pointer;
         font-family: POPPINS-THIN;
@@ -305,9 +310,10 @@
         font-weight: 700;
         line-height: normal;
         height: 60px;
-        width: 70%;
+        width: 100%;
         text-align: center;
       }
     }
   }
 }
+@import "../../assets/media-screen/tablet.scss";

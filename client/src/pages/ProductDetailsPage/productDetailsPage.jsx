@@ -186,13 +186,16 @@ const ProductDetailsPage = () => {
                   {productData.productprice} {productData.productunit}
                 </div>
                 {user && user._id === productData.userid ? (
+                  <div className="product-order-detail-r-add">
                   <div
                     className="product-order-detail-r-addbasket"
                     style={{ backgroundColor: "#7F7F7F" }}
                   >
                     It's your Product
                   </div>
+                  </div>
                 ) : (
+                  <div className="product-order-detail-r-add">
                   <div
                     className="product-order-detail-r-addbasket"
                     onClick={handleAddToBasket}
@@ -201,6 +204,7 @@ const ProductDetailsPage = () => {
                     }}
                   >
                     {isInBasket ? "Already in Basket" : "Add to Basket"}
+                  </div>
                   </div>
                 )}
               </div>
