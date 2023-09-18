@@ -4,11 +4,13 @@
   background-size: cover;
   background-position: center top;
   width: 100%;
-  min-width: 374px;
   height: 100vh;
   margin: 0;
   &-in{
   padding-top: 100px;
+    &-in{
+      width: 90%;
+    }
     
   }
 }
@@ -18,8 +20,14 @@
   background-size: cover;
   background-position: center top;
   width: 100%;
-  min-width: 374px;
   height: 100vh;
+  &-in{
+    padding-top: 100px;
+      &-in{
+        width: 90%;
+      }
+      
+    }
 }
 
 

@@ -37,8 +37,8 @@ const LoginPage = () => {
   }
   return (
     <div className="Login">
-      <div className="d-flex justify-content-center align-items-center vh-100">
-        <div className="bg-white p-3 rounded w-25">
+      <div className="d-flex justify-content-center align-items-center vh-100 Login-in">
+        <div className="bg-white p-3 rounded Login-in-in">
           <form onSubmit={loginUser}>
             <div className="mb-3 d-flex justify-content-center">
                   <img src={nouser} alt="Avatar" className="w-50 h-50  nouser" />      

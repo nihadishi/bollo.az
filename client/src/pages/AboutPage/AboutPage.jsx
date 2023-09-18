@@ -94,28 +94,7 @@ const AboutPage = () => {
  if (!loading) {
   return (
     <div className="AboutPage">
-      <div className="Int">
-        <div className="Int-M">
-          <img src={bg_M} alt="" />
-        </div>
-        <div className="Intro">
-          <div className="Intro-About">
-            <div className="Intro-About-Text">
-              Make health life with Fresh grocery
-            </div>
-            <div className="Intro-About-Order">
-              <button
-                className="Intro-About-Order-button"
-                onClick={() => {
-                  navigate("/products");
-                }}
-              >
-                Order now
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+      
       <div className="Ab">
         <div className="About">
           <div className="About-Advantages">

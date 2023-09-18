@@ -96,7 +96,7 @@ const SignupPage = () => {
   return (
     <div className="Signup">
       <div className="d-flex justify-content-center align-items-center vh-100 opacity-80 Signup-in">
-        <div className="bg-white p-3 rounded w-50 " >
+        <div className="bg-white p-3 rounded Signup-in-in " >
           <form onSubmit={registerUser} encType="multipart/form-data">
               <div
                 id="profile"

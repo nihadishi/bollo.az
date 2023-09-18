@@ -29,44 +29,73 @@ import slide10 from "./img/10.jpg";
 import slide11 from "./img/11.jpg";
 import slide12 from "./img/12.jpg";
 import slide13 from "./img/13.jpg";
+import bg_M from "./img/bg2.png";
 import { UserContext } from "../../assets/context/userContext";
 import Loading from "../../layouts/Loading/Loading";
 import { useNavigate } from "react-router-dom";
 const HomePage = () => {
-  const categoryslideimage = [
-    { src: fruits, category: "fruits" },
-    { src: vegetables, category: "vegetables" },
-    { src: bakery, category: "bakery" },
-    { src: dairy, category: "dairy" },
-    { src: delikatessen, category: "delikatessen" },
-    { src: eggs, category: "eggs" },
-    { src: meat, category: "meat" },
-    { src: pastry, category: "pastry" },
-    { src: poultry, category: "poultry" },
-    { src: savourygrocery, category: "savourygrocery" },
-  ];
-  const slideimage = [
-    { src: slide1, category: "" },
-    { src: slide2, category: "" },
-    { src: slide3, category: "" },
-    { src: slide4, category: "" },
-    { src: slide5, category: "" },
-    { src: slide6, category: "" },
-    { src: slide7, category: "" },
-    { src: slide8, category: "" },
-    { src: slide9, category: "" },
-    { src: slide10, category: "" },
-    { src: slide11, category: "" },
-    { src: slide12, category: "" },
-    { src: slide13, category: "" },
-  ];
-  const featuresSlide = [
-    {number:1, text:"Farm products"},
-    {number:2, text:"High quality"},
-    {number:3, text:"Free delivery"},
-    {number:4, text:"Easy to use"},
-  ]
+  // const categoryslideimage = [
+  //   { src: fruits, category: "fruits" },
+  //   { src: vegetables, category: "vegetables" },
+  //   { src: bakery, category: "bakery" },
+  //   { src: dairy, category: "dairy" },
+  //   { src: delikatessen, category: "delikatessen" },
+  //   { src: eggs, category: "eggs" },
+  //   { src: meat, category: "meat" },
+  //   { src: pastry, category: "pastry" },
+  //   { src: poultry, category: "poultry" },
+  //   { src: savourygrocery, category: "savourygrocery" },
+  // ];
+  // const slideimage = [
+  //   { src: slide1, category: "" },
+  //   { src: slide2, category: "" },
+  //   { src: slide3, category: "" },
+  //   { src: slide4, category: "" },
+  //   { src: slide5, category: "" },
+  //   { src: slide6, category: "" },
+  //   { src: slide7, category: "" },
+  //   { src: slide8, category: "" },
+  //   { src: slide9, category: "" },
+  //   { src: slide10, category: "" },
+  //   { src: slide11, category: "" },
+  //   { src: slide12, category: "" },
+  //   { src: slide13, category: "" },
+  // ];
+  // const featuresSlide = [
+  //   { number: 1, text: "Farm products" },
+  //   { number: 2, text: "High quality" },
+  //   { number: 3, text: "Free delivery" },
+  //   { number: 4, text: "Easy to use" },
+  // ];
   const { loading, setLoading } = useContext(UserContext);
+  const [backgroundImage, setBackgroundImage] = useState(0);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // Arka plan resmini değiştirmek için yeni bir resim indeksi oluşturun
+      const newImageIndex = (backgroundImage + 1) % 13; // Örnek olarak 3 farklı resim kullanıyoruz
+      setBackgroundImage(newImageIndex);
+    }, 2000); 
+
+    return () => clearInterval(interval);
+  }, [backgroundImage]);
+
+  const backgroundImages = [
+    slide1,
+    slide2,
+    slide3,
+    slide4,
+    slide5,
+    slide6,
+    slide7,
+    slide8,
+    slide9,
+    slide10,
+    slide11,
+    slide12,
+    slide13,
+    
+    
+  ];
   const navigate = useNavigate();
   useEffect(() => {
     setLoading(true);
@@ -80,7 +109,59 @@ const HomePage = () => {
     return (
       <>
         <div className="Home">
-          <div className="Home-slides">
+          <div className="Int">
+            <div className="Int-M">
+              <img src={bg_M} alt="" />
+            </div>
+            <div className="Intro">
+              <div className="Intro-About">
+                <div className="Intro-About-Text">
+                  Make health life with Fresh grocery
+                </div>
+                <div className="Intro-About-Order">
+                  <button
+                    className="Intro-About-Order-button"
+                    onClick={() => {
+                      navigate("/products");
+                    }}
+                  >
+                    Order now
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="sections">
+            <section className="hero" style={{ backgroundImage: `url(${backgroundImages[backgroundImage]})` }}>
+              <h1>Welcome to Our Website</h1>
+              <p>
+                Your one-stop destination for amazing products and services.
+              </p>
+              <a  className="cta-button" onClick={()=>{navigate("/about")}}>
+                Learn More
+              </a>
+            </section>
+
+            <section className="features">
+              <div className="feature">
+                <h2>Farm products</h2>
+                <p>We work with many farms to provide you with natural products grown with love and care with no GMO or pesticides.</p>
+              </div>
+              <div className="feature">
+                <h2>High quality</h2>
+                <p>
+                We stand for providing the most fresh organic products which will serve your health and be a source of vitamins.
+                </p>
+              </div>
+              <div className="feature">
+                <h2>Free delivery</h2>
+                <p>
+                We want our client to receive their fresh products as soon as possible, so we process and ship the order at once.
+                </p>
+              </div>
+            </section>
+          </div>
+          {/* <div className="Home-slides">
             <div style={{ animationDelay: "0s" }}>
               <img src={slideimage[0].src} />
             </div>
@@ -93,8 +174,8 @@ const HomePage = () => {
             <div style={{ animationDelay: "12s" }}>
               <img src={slideimage[3].src} />
             </div>
-          </div>
-          <div className="Home-intro">
+          </div> */}
+          {/* <div className="Home-intro">
             <div className="Home-intro-div">
               <div className="Home-intro-div-left">
                 <h1>Tired of spoiled food?</h1>
@@ -109,8 +190,8 @@ const HomePage = () => {
                 <img src={statistics} alt="" />
               </div>
             </div>
-          </div>
-          <div className="Home-prob">
+          </div> */}
+          {/* <div className="Home-prob">
             <div className="Home-prob-l">
               <h1 className="Home-prob-l-h1">
                 <div className="Home-prob-l-h1-h2">what is our problem?</div>
@@ -123,8 +204,8 @@ const HomePage = () => {
                 bucket that contains 7 gallons, how many buckets do you have?
               </p>
             </div>
-          </div>
-          <div className="Home-sol">
+          </div> */}
+          {/* <div className="Home-sol">
             <div className="Home-sol-l">
               <h1 className="Home-sol-l-h1">
                 <div className="Home-sol-l-h1-h2">the solution</div>
@@ -137,9 +218,9 @@ const HomePage = () => {
                 grown with love and care with no GMO or pesticides.
               </p>
             </div>
-          </div>
-          <HoverCarousel images={categoryslideimage} />
-          <div className="bestfarmer">
+          </div> */}
+          {/* <HoverCarousel images={categoryslideimage} /> */}
+          {/* <div className="bestfarmer">
             <div className="bestfarmer-container">
               {featuresSlide.map((number) => (
                 <div key={number.number} className="bestfarmer-card">
@@ -163,7 +244,7 @@ const HomePage = () => {
                 </div>
               ))}
             </div>
-          </div>
+          </div> */}
         </div>
         <Footer />
       </>

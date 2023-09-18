@@ -1,6 +1,15 @@
 @import "../fonts/mixin.scss";
 @import "../fonts/fonts.scss";
 @media (max-width: 768px) {
+  .sections{
+    
+  }
+  .features{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 0 10% ;
+  }
   .Navbar-Nav{
     display: none;
   }
@@ -109,6 +118,7 @@
   }
   .Int {
     margin-top: 80px;
+    padding-bottom: 80px;
     background-color: #ffffff;
     background-image: none;
     height: max-content;

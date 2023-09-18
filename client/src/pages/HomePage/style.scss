@@ -1,5 +1,169 @@
 @import "../../assets/fonts/fonts.scss";
 @import "../../assets/fonts/mixin.scss";
+.Int{
+  background-image: url("./img/bg1.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center top;
+  width: 100%;
+  height: 100vh;
+  &-M{
+      width: 100%;
+      display: none;
+  }
+      &ro {
+          position: relative;
+          width: 85%;
+          height: 100%;
+          margin: 0 auto;
+          &-Nav {
+          padding: 27px 0;
+          max-height: 118px; //64 + 2*padding(27)
+          display: flex;
+          flex-direction: row;
+          @include CENTER;
+          justify-content: space-between;
+          &-Logo {
+              height: 100%;
+          }
+          &-Navbar {
+              justify-content: space-between;
+              &-ul {
+              display: flex;
+              flex-direction: row;
+              justify-content: space-between;
+              // gap: 82px;
+              gap: 6vw;
+              padding: 0 41px;
+              &-li {
+                  text-align: center;
+                  cursor: pointer;
+                  text-decoration: none;
+                  list-style-type: none;
+                  color: var(--text-10, #fff);
+                  font-size: 20px;
+                  font-weight: 500;
+                  line-height: 22px;
+              }
+              }
+          }
+          &-Contact {
+              text-align: center;
+              width: auto 129px;
+              height: auto 22px;
+              border: 27px;
+              background-color: #ffa217;
+              border-radius: 27px;
+              padding: 10px 24px;
+              cursor: pointer;
+              &-li {
+              text-decoration: none;
+              list-style-type: none;
+              color: var(--text-10, #fff);
+              font-size: 20px;
+              font-weight: 500;
+              line-height: 22px;
+              }
+          }
+          }
+
+          &-About {
+              position: absolute;
+              top: 45%;
+              width: 480px;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              gap: 39px;
+              &-Text {
+                  color: var(--text-10, #fff);
+                  font-size: 36px;
+                  font-family: "POPPINS-SEMIBOLD";
+                  font-weight: 600;
+                  line-height: 45px;
+              }
+              &-Order {
+                  display: flex;
+                  padding: 14px 0;
+                  gap: 10px;
+                  &-button {
+                      width: 246.857px;
+                      height: 59.388px;
+                      border-radius: 27px;
+                      background: var(--button-500, #ffa217);
+                      color: var(--text-10, #fff);
+                      font-size: 20px;
+                      font-weight: 500;
+                      line-height: 22px;
+                      letter-spacing: -0.408px;
+                      border-style: none;
+                  }
+              }
+          }
+  }
+}
+
+.hero {
+  text-align: center;
+  background-blend-mode: darken;
+  // animation: fadeIn 5s ease-in-out infinite;s
+  background-color: #00000060;
+  background-size: cover;
+  background-position: center;
+  padding: 100px 0;
+  color: #fff;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+    background-color: #00000060;
+
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+.hero h1 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #ff5733;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.features {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  padding: 50px 0;
+}
+
+.feature {
+  text-align: center;
+}
+
+.feature h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.feature p {
+  font-size: 16px;
+}
+
+
+
 .Home {
   width: 100%;
   background-color: #f9f9f9;
@@ -387,3 +551,4 @@ svg {
   transition: 0.6s ease-out;
 }
 //
+@import "../../assets/media-screen/tablet.scss";
